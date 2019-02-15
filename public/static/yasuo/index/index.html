@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../jquery.js"></script>
+    <script src="dist/lrz.bundle.js?v=7687367"></script>
+</head>
+<body>
+<img src="" alt="">
+<span class="file">上传照片
+    <input type="file" required>
+</span>
+
+</body>
+<script>
+function base(imgObj){
+imgObj.change(function(event){
+    var that=this;
+var img = event.target.files[0];
+console.log(img);
+    lrz(img)
+        .then(function (rst) {
+            // 处理成功会执行
+            // 判断图片格式
+            var img=rst;
+            console.log(img);
+            $(that).prev("img").attr("src", img.base64);
+        })
+        .catch(function (err) {
+            // 处理失败会执行
+        })
+        .always(function () {
+            // 不管是成功失败，都会执行
+        });
+
+})
+}
+base($(".file"));
+</script>
+</html>

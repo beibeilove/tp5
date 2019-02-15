@@ -1,0 +1,187 @@
+/*公共头部，侧边栏*/
+.top{
+    width:100%;
+    height:150px;
+    position: fixed;
+    top:0;left:0;
+    padding-top: 30px;
+    border-bottom:1px solid #ccc;
+    box-sizing: border-box;
+    box-shadow: 1px 1px 10px rgba(45,45,45,0.6);
+    z-index: 2;
+    background:url("http://localhost/tp5/public/static/img/bg_top1.jpg") center no-repeat;
+    background-size:cover;
+}
+.top h4{
+    text-align: center;
+    font-size: 38px;
+    line-height: 50px;
+}
+.top .personal{
+    float: right;
+    padding:20px 40px 0 0;
+}
+.top .personal a{
+    padding-right: 10px;
+}
+
+.top .parent_menu{
+    max-width:1000px;
+    min-width: 800px;
+    display: flex;
+    justify-content: flex-start;
+    margin:auto;
+}
+.top .parent_menu li{
+    padding:20px;
+}
+.top .parent_menu li.on a{
+    color:#E64759;
+}
+.top .parent_menu li a{
+    color: #333;
+}
+
+.bottom{
+    width:100%;
+    height:100%;
+    padding-top: 150px;
+    box-sizing: border-box;
+    position: relative;
+}
+.bottom .left{
+    width:200px;
+    height:100%;
+    border-right:1px solid #ccc;
+    box-sizing: border-box;
+    position: fixed;
+    top:150px;
+    left:0;
+    z-index: 1;
+    background:url("http://localhost/tp5/public/static/img/bg_top1.jpg") no-repeat;
+    background-size:cover;
+}
+.bottom .right{
+    padding-left: 200px;
+    width:100%;
+    height:100%;
+    box-sizing: border-box;
+}
+
+/*左侧导航栏*/
+.left .son_menu{
+    margin-top: 40px;
+    display: none;
+}
+.left .son_menu.active{
+    display: block;
+}
+.left .son_menu>li{
+    text-align: center;
+    line-height: 30px;
+}
+.left .son_menu>li a{
+    color: #666;
+}
+.left .son_menu>li.on a{
+    color:#E64759;
+}
+.bottom .right iframe{
+    width:100%;
+    height:100%;
+}
+
+.page{
+    padding:30px;
+    box-sizing: border-box;
+    background-size: cover;
+}
+table.table tr,table.table tr th,table.table tr td{
+    text-align: center;
+}
+.page .table>tbody>tr>td, .page .table>tbody>tr>th, .page .table>tfoot>tr>td, .page .table>tfoot>tr>th, .page .table>thead>tr>td, .page .table>thead>tr>th{
+    vertical-align: middle;
+}
+/*———————————————————————————————————————————————————————————————————————*/
+/*用户*/
+/*新增*/
+.page .form-control{display: inline-block;width:350px;}
+.page .form-control-big{width:700px;}
+.page .vertical{vertical-align: middle;}
+.page label{width:100px;text-align: right;}
+.page .btn-default{margin-left: 100px;}
+/*———————————————————————————————————————————————————————————————————————*/
+/*文章
+新增*/
+.page .file_add_box{
+    position: relative;
+    width:150px;
+    height:40px;
+    display: inline-block;
+    vertical-align: bottom;
+}
+.page .file_add_box .file_add,.page .file_add_box input{
+    position: absolute;
+    width:150px;
+    height:40px;
+    top:0;
+    left:0;
+    line-height: 40px;
+    text-align: center;
+}
+.page .file_add_box .file_add{
+    color: #fff;
+    background: #f0ad4e;
+}
+.page .file_add_box input{
+    opacity: 0;
+    cursor: pointer;
+}
+.page .input_img{
+    width:150px;
+    height:150px;
+    display: inline-block;
+    border:1px solid #ccc;
+    text-align: center;
+    line-height: 150px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+/*富文本框*/
+.ke-container.ke-container-default{
+    display: inline-block;
+    vertical-align: middle;
+}
+/*文章列表*/
+.page .limit{
+    width:20%;
+    height:60px;
+    overflow:hidden;
+}
+.page .limitcon{
+    height:60px;
+    overflow-y: hidden;
+}
+/*文章展示*/
+.page.page1{
+    padding:30px 150px;
+}
+.page.page2 label{
+    width:auto;
+}
+.page.page1 h4.title{
+    font-size: 30px;
+    text-align: center;
+    margin: 20px auto;
+}
+.page.page1 .content p{
+    font-size: 16px;
+}
+.page .copyfrom {
+    text-align: center;
+}
+.page .copyfrom span{
+    padding-right: 20px;
+}

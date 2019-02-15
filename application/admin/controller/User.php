@@ -27,7 +27,7 @@ class User extends Controller
         }else{
             $condition['password'] = Md5($password);
         }
-        $terminal = 1;
+//        $terminal = 1;
         $user = $this->userRepeat($condition['username'], $terminal);
         if(!$user){
             $this->error("用户已存在",'User/add');
