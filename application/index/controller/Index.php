@@ -12,7 +12,7 @@ class Index extends Controller
 
     public function index(){
         if (!@include(dirname(dirname(__FILE__)) . '/menu.php')) exit('menu.php isn\'t exists!');
-        $user_id=session('userId');
+        $user_id=session('frontUserId');
         $username=session("userName");
         if(!$user_id){
             $this->redirect("login/index");

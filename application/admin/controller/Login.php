@@ -29,12 +29,12 @@ class Login extends Controller
         }else{
             return $this->error('请填写密码', url('Login/index'));
         }
-//        $condition['terminal'] = 1;
+        $condition['terminal'] = 1;
         $data = model('User')->show($condition);
         if(empty($data)){
             return $this->error('用户名或密码不正确', url('Login/index'));
         }else{
-            session::set("userId","1");
+            session::set("adminUserId","1");
             session::set('userName',$condition['username']);
             return $this->success('登录成功', url('index/index'));
         }

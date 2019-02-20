@@ -8,26 +8,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3b0b66fb-f18a-48aa-b4de-cae2d8a68456" name="默认的" comment="">
-      <change afterPath="$PROJECT_DIR$/application/index/controller/Reg.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application/index/view/reg/reg.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/admin/controller/Reg.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/admin/controller/Reg.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/admin/controller/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/admin/controller/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/admin/view/index/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/admin/view/index/layout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/admin/view/index/welcome.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/admin/view/index/welcome.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/admin/view/login/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/admin/view/login/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/admin/view/reg/reg.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/admin/view/reg/reg.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/admin/view/user/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/admin/view/user/show.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/index/controller/Index.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/index/controller/Index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/index/model/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/index/model/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/index/view/index/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/index/view/index/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/index/view/login/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/index/view/login/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runtime/temp/43662d0d104e43bd7b400bf53a2bed7b.php" beforeDir="false" afterPath="$PROJECT_DIR$/runtime/temp/43662d0d104e43bd7b400bf53a2bed7b.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runtime/temp/56d87387f6aac4678ac6c7740e279ce2.php" beforeDir="false" afterPath="$PROJECT_DIR$/runtime/temp/56d87387f6aac4678ac6c7740e279ce2.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runtime/temp/5d2dc17b7a6d18b724d2ca98cf938b27.php" beforeDir="false" afterPath="$PROJECT_DIR$/runtime/temp/5d2dc17b7a6d18b724d2ca98cf938b27.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runtime/temp/b0964c11cabe4b1a52271829d49d93bd.php" beforeDir="false" afterPath="$PROJECT_DIR$/runtime/temp/b0964c11cabe4b1a52271829d49d93bd.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runtime/temp/b41c74d090b595efcf249f4edb8d0799.php" beforeDir="false" afterPath="$PROJECT_DIR$/runtime/temp/b41c74d090b595efcf249f4edb8d0799.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runtime/temp/c539d5b7d1ae3bdb19d6c80eb508b91b.php" beforeDir="false" afterPath="$PROJECT_DIR$/runtime/temp/c539d5b7d1ae3bdb19d6c80eb508b91b.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -73,7 +54,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="gitignore" value="2" />
+          <entry key="gitignore" value="3" />
           <entry key="html" value="27" />
           <entry key="php" value="54" />
         </counts>
@@ -82,19 +63,21 @@
         <counts>
           <entry key="HTML" value="27" />
           <entry key="PHP" value="54" />
-          <entry key="PLAIN_TEXT" value="2" />
+          <entry key="PLAIN_TEXT" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="576" />
+          <entry key="gitignore" value="50" />
+          <entry key="html" value="591" />
           <entry key="php" value="528" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="576" />
+          <entry key="HTML" value="591" />
           <entry key="PHP" value="528" />
+          <entry key="PLAIN_TEXT" value="50" />
         </counts>
       </usages-collector>
     </session>
@@ -104,8 +87,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/admin/view/user/show.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="577">
-              <caret line="35" column="41" selection-start-line="35" selection-start-column="41" selection-end-line="35" selection-end-column="41" />
+            <state relative-caret-position="602">
+              <caret line="36" column="16" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -185,7 +168,6 @@
         <option value="$PROJECT_DIR$/application/admin/controller/Index.php" />
         <option value="$PROJECT_DIR$/application/index/menu.php" />
         <option value="$PROJECT_DIR$/application/index/view/index/layout.html" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/application/admin/controller/Login.php" />
         <option value="$PROJECT_DIR$/application/admin/view/login/login.html" />
         <option value="$PROJECT_DIR$/application/index/controller/Index.php" />
@@ -200,6 +182,7 @@
         <option value="$PROJECT_DIR$/application/admin/view/index/layout.html" />
         <option value="$PROJECT_DIR$/application/admin/view/index/welcome.html" />
         <option value="$PROJECT_DIR$/application/admin/controller/User.php" />
+        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/application/admin/view/user/show.html" />
       </list>
     </option>
@@ -230,7 +213,7 @@
       <path value="$PROJECT_DIR$/vendor/topthink/think-migration" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1936" />
@@ -263,35 +246,7 @@
             <path>
               <item name="tp5" type="b2602c69:ProjectViewProjectNode" />
               <item name="tp5" type="462c0819:PsiDirectoryNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tp5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tp5" type="462c0819:PsiDirectoryNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tp5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tp5" type="462c0819:PsiDirectoryNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tp5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tp5" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tp5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tp5" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="runtime" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -382,18 +337,18 @@
       <workItem from="1550232612777" duration="1719000" />
       <workItem from="1550320938995" duration="536000" />
       <workItem from="1550491244831" duration="5502000" />
-      <workItem from="1550656453613" duration="4206000" />
+      <workItem from="1550656453613" duration="5486000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="172847000" />
+    <option name="totallyTimeSpent" value="174127000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1933" height="1053" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1392" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1392" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Database Console" order="0" weight="0.32936078" />
@@ -407,7 +362,7 @@
       <window_info anchor="bottom" id="调试" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="运行" order="10" />
-      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.14115092" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.14115092" />
       <window_info anchor="bottom" id="找到" order="12" weight="0.32936078" />
       <window_info anchor="bottom" id="Event Log" order="13" side_tool="true" />
       <window_info anchor="bottom" id="Docker" order="14" show_stripe_button="false" />
@@ -538,9 +493,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/index/view/index/layout.html" />
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/static/.gitignore" />
     <entry file="file://$PROJECT_DIR$/application/admin/model/User.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -692,10 +644,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/admin/view/user/show.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="577">
-          <caret line="35" column="41" selection-start-line="35" selection-start-column="41" selection-end-line="35" selection-end-column="41" />
+        <state relative-caret-position="602">
+          <caret line="36" column="16" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="16" />
         </state>
       </provider>
     </entry>
