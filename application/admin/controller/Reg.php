@@ -26,6 +26,7 @@ class Reg extends Controller
             $condition['username'] = $username;
             $condition['password'] = Md5($password);
             $condition['user_account'] = 2;
+            $condition['terminal'] = 1;
             $data = model("User")->add($condition);
             if(!empty($data)){
                 $this->success("用户名添加成功",url("Login/index"));
