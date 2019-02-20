@@ -1,1 +1,4 @@
-
+runtime/cache/
+runtime/log/
+runtime/temp/
+.idea/
