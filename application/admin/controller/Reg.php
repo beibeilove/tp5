@@ -42,6 +42,7 @@ class Reg extends Controller
         $username = $request->post("username");
         if(!empty($username)){
             $condition['username'] = $username;
+            $condition['terminal'] = 1;
             $data=model('User')->show($condition);
             if(!empty($data)){
                 return 'succ';
