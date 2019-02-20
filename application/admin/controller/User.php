@@ -27,8 +27,8 @@ class User extends Controller
         }else{
             $condition['password'] = Md5($password);
         }
-//        $terminal = 1;
-        $user = $this->userRepeat($condition['username'], $terminal);
+        $condition['terminal'] = 1;
+        $user = $this->userRepeat($condition);
         if(!$user){
             $this->error("用户已存在",'User/add');
         }else {
@@ -41,10 +41,10 @@ class User extends Controller
         }
     }
     // 查看用户名是否重复
-    public function userRepeat($username, $terminal)
+    public function userRepeat($cond)
     {
-        $condition['username'] = $username;
-        $condition['terminal'] = $terminal;
+        $condition['username'] = $cond['username'];
+        $condition['terminal'] = $cond['terminal'];
         $data = model("User")->show($condition);
         if($data){
             return false;

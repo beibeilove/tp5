@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:67:"D:\wamp\www\tp5\public/../application/admin\view\index\welcome.html";i:1514276284;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:67:"D:\wamp\www\tp5\public/../application/admin\view\index\welcome.html";i:1550665846;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -24,7 +24,7 @@
 </head>
 <body>
     <div class="middle">
-        欢迎来到我的地盘！！！
+        欢迎来到小俊影院预售系统！
     </div>
 </body>
 </html>

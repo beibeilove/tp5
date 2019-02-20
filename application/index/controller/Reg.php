@@ -1,5 +1,5 @@
 <?php
-namespace app\admin\controller;
+namespace app\index\controller;
 
 use \think\Controller;
 use think\helper\hash\Md5;
@@ -25,7 +25,8 @@ class Reg extends Controller
         }else{
             $condition['username'] = $username;
             $condition['password'] = Md5($password);
-            $condition['user_account'] = 2;
+            $condition['terminal'] = 0;
+            $condition['user_account'] = 3;
             $data = model("User")->add($condition);
             if(!empty($data)){
                 $this->success("用户名添加成功",url("Login/index"));
@@ -42,6 +43,7 @@ class Reg extends Controller
         $username = $request->post("username");
         if(!empty($username)){
             $condition['username'] = $username;
+            $condition['terminal'] = 0;
             $data=model('User')->show($condition);
             if(!empty($data)){
                 return 'succ';

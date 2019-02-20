@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:65:"D:\wamp\www\tp5\public/../application/index\view\index\index.html";i:1548557281;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:65:"D:\wamp\www\tp5\public/../application/index\view\index\index.html";i:1550658566;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -11,7 +11,7 @@
 <body>
     <div class="header">
         <div class="top_header">
-            
+            我是首页
         </div>
         <ul class="type_header">
             <li></li>

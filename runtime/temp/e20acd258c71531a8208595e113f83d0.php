@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:65:"D:\wamp\www\tp5\public/../application/admin\view\login\login.html";i:1550657970;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:61:"D:\wamp\www\tp5\public/../application/index\view\reg\reg.html";i:1550658365;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -68,18 +68,35 @@
     </style>
 </head>
 <body>
-<form action="<?php echo url('login/relogin'); ?>" method="post">
-    <h4>登录页面</h4>
+<form action="<?php echo url('reg/reg'); ?>" method="post">
+    <h4>注册页面</h4>
     <label for="">
         <span>用户名：</span>
-        <input type="text" name="username" placeholder="用户名">
+        <input type="text" name="username" placeholder="用户名" oninput="reguser(this)">
     </label>
     <label for="">
         <span>密&nbsp;&nbsp;&nbsp;码：</span>
         <input type="password" name="password" placeholder="密码">
     </label>
-    <button type="submit">登录</button>
-    <a href="<?php echo url('reg/index'); ?>">请注册 ></a>
+    <button type="submit">注册</button>
+    <a href="<?php echo url('login/index'); ?>">请登录 ></a>
 </form>
+<script type="text/javascript" src="/tp5/public/static/js/jquery.js"></script>
+<script type="text/javascript" src="/tp5/public/static/js/bootstrap.min.js"></script>
+
+<script>
+    function reguser(obj){
+        $.ajax({
+            url:"<?php echo url('Reg/regUser'); ?>",
+            sync:true,
+            data:{
+                'username':$(obj).val()
+            },
+            success:function(e){
+                console.log(e);
+            }
+        })
+    }
+</script>
 </body>
 </html>

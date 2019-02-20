@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:65:"D:\wamp\www\tp5\public/../application/index\view\login\login.html";i:1520215714;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:65:"D:\wamp\www\tp5\public/../application/index\view\login\login.html";i:1550657356;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -24,7 +24,7 @@
             box-shadow: 1px 1px 10px rgba(45,45,45,0.6);
             padding:30px 10px;
             box-sizing: border-box;
-            background:#cc99aa;
+            background:rgba(200,200,200,0.7);
         }
         form h4{
             font-size: 30px;
@@ -52,9 +52,14 @@
             width:40%;
             font-size: 24px;
             line-height:40px;
+            text-align: center;
             margin:20px auto 10px;
             display: block;
             border-radius: 10px;
+            background: #1890ff;
+            outline: none;
+            border: 0;
+            color: #fff;
         }
         form a{
             float: right;

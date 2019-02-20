@@ -17,6 +17,8 @@
             <th>id</th>
             <th>用户名</th>
             <th>密码</th>
+            <th>角色</th>
+            <th>终端</th>
             <th>操作</th>
         </tr>
         {volist name="data" id="value"}
@@ -24,7 +26,14 @@
             <td>{$value['id']}</td>
             <td>{$value['username']}</td>
             <td>{$value['password']}</td>
-            <td><a class="btn btn-success marginRight" href="{:url('User/selectUser')}?id={$value['id']}">查看</a><a class="btn btn-danger" href="{:url('User/delete')}?id={$value['id']}">删除</a></td>
+            <td>{if condition="$value['user_account'] == 1"}超级管理员{elseif condition="$value['user_account'] == 2" /}管理员{elseif condition="$value['user_account'] == 3" /}普通用户{elseif condition="$value['user_account'] == 4" /}会员{/if}</td>
+            <td>{if condition="$value['terminal'] == 0"}前端{elseif condition="$value['terminal'] == 1" /}后台{/if}</td>
+            <td>
+                <a class="btn btn-success marginRight" href="{:url('User/selectUser')}?id={$value['id']}">查看</a>
+                {if condition="$value['user_account'] != 1 "}
+                <a class="btn btn-danger" href="{:url('User/delete')}?id={$value['id']}">删除</a>
+                {else/}
+                <a class="btn btn-danger" href="javascript:void(0);" disabled>删除</a>{/if}</td>
         </tr>
         {/volist}
     </table>

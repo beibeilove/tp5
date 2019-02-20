@@ -17,7 +17,7 @@ class Index extends Controller
         if(!$user_id){
             $this->redirect("login/index");
         }else{
-            $this->assign("menulist",$menulist);
+//            $this->assign("menulist",$menulist);
             $this->assign("username",$username);
         }
         return view("index");

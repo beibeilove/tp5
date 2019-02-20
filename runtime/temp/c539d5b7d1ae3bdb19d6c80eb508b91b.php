@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:66:"D:\wamp\www\tp5\public/../application/admin\view\index\layout.html";i:1514280664;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:66:"D:\wamp\www\tp5\public/../application/admin\view\index\layout.html";i:1550665846;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -6,7 +6,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>小俊影院预售系统</title>
     <link rel="stylesheet" type="text/css" href="/tp5/public/static/css/base.css" />
     <link rel="stylesheet" type="text/css" href="/tp5/public/static/css/index.css" />
     <style>
