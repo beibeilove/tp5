@@ -29,19 +29,19 @@ class Article extends Controller
         }
         // 文章描述
         if(empty($requestData['desc'])){
-//            $this->error("文章描述不能为空","Article/add");
+            $this->error("文章描述不能为空","Article/add");
         }else{
             $condition['desc'] = $requestData['desc'];
         }
         // 文章作者
         if(empty($requestData['author'])){
-//            $this->error("文章描述不能为空","Article/add");
+            $this->error("文章描述不能为空","Article/add");
         }else{
             $condition['author'] = $requestData['author'];
         }
         // 文章来源
         if(empty($requestData['copyfrom'])){
-//            $this->error("文章描述不能为空","Article/add");
+            $this->error("文章描述不能为空","Article/add");
         }else{
             $condition['copyfrom'] = $requestData['copyfrom'];
         }
@@ -53,7 +53,7 @@ class Article extends Controller
         }
         // 文章图片
         if(empty($requestData['imgurl'])){
-//            $this->error("文章图片不能为空","Article/add");
+            $this->error("文章图片不能为空","Article/add");
         }else{
             $condition['imgurl'] = $requestData['imgurl'];
         }
@@ -69,18 +69,18 @@ class Article extends Controller
         }
         // 文章外链
         if(empty($requestData['linkurl'])){
-//            $this->error("文章外链不能为空","Article/add");
+            $this->error("文章外链不能为空","Article/add");
         }else{
-            $condition['position'] = $requestData['position'];
+            $condition['linkurl'] = $requestData['linkurl'];
         }
-        $condition['inputttime'] = time();
+        $condition['inputtime'] = time();
         $condition['updatetime'] = time();
 
         $data = model("Article")->add($condition);
         if(empty($data)){
             $this->error("新增文章失败","Article/add");
         }else{
-            $this->success("新增文章成功","Article/add");
+            $this->success("新增文章成功","Article/show");
         }
     }
 
@@ -128,14 +128,14 @@ class Article extends Controller
     {
         $where = [];
         $type = [];
-        $data = model("Position")->show();
+        $data = model("Position")->showList();
         $request=Request::instance()->get();
         if(empty($request['id'])){
             $this->error("参数错误","Article/show");
         }else{
             $where['id'] = $request['id'];
         }
-        $content = model("Article")->showList($where);
+        $content = model("Article")->show($where);
         if(empty($content)){
             $this->error("内容有误","Article/show");
         }
@@ -169,19 +169,19 @@ class Article extends Controller
         }
         // 文章作者
         if(empty($requestData['author'])){
-//            $this->error("文章描述不能为空","Article/add");
+            $this->error("文章描述不能为空","Article/add");
         }else{
             $condition['author'] = $requestData['author'];
         }
         // 文章来源
         if(empty($requestData['copyfrom'])){
-//            $this->error("文章描述不能为空","Article/add");
+            $this->error("文章描述不能为空","Article/add");
         }else{
             $condition['copyfrom'] = $requestData['copyfrom'];
         }
         // 文章描述
         if(empty($requestData['desc'])){
-//            $this->error("文章描述不能为空","Article/add");
+            $this->error("文章描述不能为空","Article/add");
         }else{
             $condition['desc'] = $requestData['desc'];
         }
@@ -193,7 +193,7 @@ class Article extends Controller
         }
         // 文章图片
         if(empty($requestData['imgurl'])){
-//            $this->error("文章图片不能为空","Article/add");
+            $this->error("文章图片不能为空","Article/add");
         }else{
             $condition['imgurl'] = $requestData['imgurl'];
         }
@@ -209,7 +209,7 @@ class Article extends Controller
         }
         // 文章外链
         if(empty($requestData['linkurl'])){
-//            $this->error("文章外链不能为空","Article/add");
+            $this->error("文章外链不能为空","Article/add");
         }else{
             $condition['linkurl'] = $requestData['linkurl'];
         }
