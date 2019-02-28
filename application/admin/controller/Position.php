@@ -20,9 +20,9 @@ class Position extends Controller
             $condition['posname'] = $posname;
             $data = model("Position")->add($condition);
             if($data){
-                $this->success("推荐位添加成功","Position/add");
+                $this->success("推荐位添加成功","Position/show");
             }else{
-                $this->error("推荐位添加失败","Position/add");
+                $this->error("推荐位添加失败","Position/show");
             }
         }
     }
@@ -30,13 +30,11 @@ class Position extends Controller
     public function show()
     {
         $where = '';
-//        $where = [];
         $searcharr = [];
         $request = Request::instance();
         $posname = $request->post("posname");
         if(!empty($posname)){
             $where.= "posname like '%$posname%'";
-//            $where['posname'] = $posname;
             $searcharr['posname'] = $posname;
         }else{
             $searcharr['posname'] = "";
@@ -48,7 +46,7 @@ class Position extends Controller
     }
 
     // 推荐位详情
-    public function showposition()
+    public function showPosition()
     {
         $request = Request::instance();
         $posid = $request->get("posid");
@@ -56,7 +54,7 @@ class Position extends Controller
             $this->error("参数错误","Position/show");
         }else{
             $where['posid'] =$posid;
-            $data = model("Position")->show();
+            $data = model("Position")->show($where);
             if(empty($data)){
                 $this->error("参数错误","Position/show");
             }else{

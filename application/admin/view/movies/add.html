@@ -13,30 +13,36 @@
 </head>
 <body>
     <div class="page">
-        <form action="{:url('Article/addArticle')}" id="form" method="post">
+        <form action="{:url('Movies/addArticle')}" id="form" method="post">
             <div class="form-group">
                 <label for="title">标题：</label>
                 <input type="text" class="form-control form-control-big" name="title" id="title" placeholder="标题">
             </div>
             <div class="form-group">
-                <label for="author">作者：</label>
-                <input type="text" class="form-control form-control-big" name="author" id="author" placeholder="作者">
+                <label for="copyfrom">产地：</label>
+                <input type="text" class="form-control form-control-big" name="copyfrom" id="copyfrom" placeholder="产地">
             </div>
             <div class="form-group">
-                <label for="copyfrom">来源：</label>
-                <input type="text" class="form-control form-control-big" name="copyfrom" id="copyfrom" placeholder="来源">
+                <label for="director">导演：</label>
+                <input type="text" class="form-control form-control-big" name="director" id="director" placeholder="导演">
             </div>
             <div class="form-group">
-                <label for="linkurl">跳转链接：</label>
-                <input type="text" class="form-control form-control-big" name="linkurl" id="linkurl" placeholder="跳转链接">
+                <label for="actor">演员：</label>
+                <input type="text" class="form-control form-control-big" name="actor" id="actor" placeholder="演员">
             </div>
             <div class="form-group">
-                <label for="desc">描述：</label>
-                <textarea class="form-control form-control-big vertical" name="desc" id="desc" cols="30" rows="3"></textarea>
+                <label for="linkurl">视频：</label>
+                <input type="text" class="form-control form-control-big" name="linkurl" id="linkurl" placeholder="演示链接">
             </div>
             <div class="form-group">
-                <label for="content">内容：</label>
-                <textarea class="form-control form-control-big vertical" name="content" id="content" style="width:800px;height:400px;visibility:hidden;display: block;"></textarea>
+                <label for="desc">影片关键字：</label>
+                <input type="text" class="form-control form-control-big" name="desc" id="desc" placeholder="影片关键字">
+                <!--<textarea class="form-control form-control-big vertical" name="desc" id="desc" cols="30" rows="3"></textarea>-->
+            </div>
+            <div class="form-group">
+                <label for="content">影片描述：</label>
+                <textarea class="form-control form-control-big vertical" name="desc" id="content" cols="30" rows="3" placeholder="影片描述"></textarea>
+                <!--<textarea class="form-control form-control-big vertical" name="content" id="content" style="width:800px;height:400px;visibility:hidden;display: block;"></textarea>-->
             </div>
             <div class="form-group">
                 <label for="imgurl">上传图片：</label>
@@ -67,7 +73,7 @@
 <script>
     var editor;
     KindEditor.ready(function(K) {
-        editor = K.create('textarea[name="content"]', {
+        editor = K.create('textarea[name="content1"]', {
             allowFileManager : true
         });
         K('input[name=getHtml]').click(function(e) {
