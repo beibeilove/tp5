@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>小俊影院</title>
+    {load href="/tp5/public/static/css/base.css"}
+    {load href="/tp5/public/static/css/index.css"}
+    <style>
+        .type_header {
+            width: 100%;
+            line-height: 65px;
+            background: #3b3a41;
+            display: flex;
+            justify-content: center;
+        }
+        .type_header ul{
+            display: flex;
+            justify-content: center;
+        }
+        .type_header ul li{
+            padding: 0 30px;
+        }
+        .type_header ul li a{
+            color: #fff;
+        }
+
+        .type_content h3{
+            margin: 15px 0 10px 10px;
+        }
+        .list_group{
+            display: flex;
+            justify-content: flex-start;
+        }
+        .list_group .list_content{
+            width: 160px;
+            padding: 10px 10px;
+            display: block;
+            border: 1px solid rgba(0,0,0,0);
+            cursor: pointer;
+        }
+        .list_group .list_content.actived{
+            border-color:#ff318c;
+        }
+        .list_group .list_content img{
+            width: 160px;
+            display: block;
+            height: 206px;
+            overflow: hidden;
+        }
+        .list_group .list_content p{
+            width: 160px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: #000;
+        }
+        .list_group .list_content a{
+            padding: 5px 10px;
+            border: 1px solid #ff318c;
+            color: #ff318c;
+            margin-top: 5px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="top_header">
+        我是电影列表页
+    </div>
+    <div class="type_header">
+        <ul>
+            <li><a href="http://localhost/tp5/public/index.php/index/index/index">首页</a></li>
+            <li><a href="http://localhost/tp5/public/index.php/index/movies/index">影片</a></li>
+        </ul>
+    </div>
+</div>
+<div class="content" style="width: 1200px;margin: auto;">
+    <div class="type_content">
+        <h3>正在热映</h3>
+        <div class="list_group">
+            {volist name="data" id="value"}
+            <div class="list_content">
+                <img src="/tp5/public/{$value['imgurl']}" alt="" width="160">
+                <p title="{$value['title']}">{$value['title']}</p>
+                <a href="">选座购票</a>
+            </div>
+            {/volist}
+        </div>
+    </div>
+</div>
+{load href="/tp5/public/static/js/jquery.js"}
+<script>
+    $('.list_content').hover(function(){
+        $('.list_content').removeClass('actived');
+        $(this).addClass('actived');
+    }, function(){
+        $('.list_content').removeClass('actived');
+    })
+</script>
+</body>
+</html>

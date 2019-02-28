@@ -9,7 +9,7 @@ $(function() {
                 $(".input_img").css({"background":"url("+img.base64+") no-repeat center","background-size":"cover"}).html("");
                 obj.imgurl=img.base64;
                 $.ajax({
-                    url:"../Article/upload",
+                    url:"../movies/upload",
                     type:"post",
                     data:obj,
                     success:function(e){

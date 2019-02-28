@@ -3,7 +3,7 @@ namespace app\admin\controller;
 use think\Controller;
 use think\Db;
 use think\Request;
-class Article extends Controller
+class Movies extends Controller
 {
     public function __construct(Request $request = null)
     {
@@ -21,66 +21,69 @@ class Article extends Controller
         $condition = [];
         $request = Request::instance();
         $requestData = $request->post();
-        // 文章标题
+        // 影片标题
         if(empty($requestData['title'])){
-            $this->error("文章标题不能为空","Article/add");
+            $this->error("影片标题不能为空","movies/add");
         }else{
             $condition['title'] = $requestData['title'];
         }
-        // 文章描述
+        // 影片描述
         if(empty($requestData['desc'])){
-            $this->error("文章描述不能为空","Article/add");
+            $this->error("影片描述不能为空","movies/add");
         }else{
             $condition['desc'] = $requestData['desc'];
         }
-        // 文章作者
-        if(empty($requestData['author'])){
-            $this->error("文章描述不能为空","Article/add");
+        // 影片导演
+        if(empty($requestData['director'])){
+            $this->error("影片导演不能为空","movies/add");
         }else{
-            $condition['author'] = $requestData['author'];
+            $condition['director'] = $requestData['director'];
         }
-        // 文章来源
+        // 影片演员
+        if(empty($requestData['actor'])){
+            $this->error("影片演员不能为空","movies/add");
+        }else{
+            $condition['actor'] = $requestData['actor'];
+        }
+        // 影片来源
         if(empty($requestData['copyfrom'])){
-            $this->error("文章描述不能为空","Article/add");
+            $this->error("影片来源不能为空","movies/add");
         }else{
             $condition['copyfrom'] = $requestData['copyfrom'];
         }
-        // 文章内容
+        // 影片上映时间
+        if(empty($requestData['releaseTime'])){
+            $this->error("影片标题不能为空","movies/add");
+        }else{
+            $condition['releaseTime'] = $requestData['releaseTime'];
+        }
+        // 影片内容
         if(empty($requestData['content'])){
-            $this->error("文章内容不能为空","Article/add");
+            $this->error("影片内容不能为空","movies/add");
         }else{
             $condition['content'] = $requestData['content'];
         }
-        // 文章图片
+        // 影片图片
         if(empty($requestData['imgurl'])){
-            $this->error("文章图片不能为空","Article/add");
+            $this->error("影片图片不能为空","movies/add");
         }else{
             $condition['imgurl'] = $requestData['imgurl'];
         }
-        // 文章类型
-        if(empty($requestData['position'])){
-            $this->error("文章类型不能为空","Article/add");
-        }else{
-            $condition['type'] = '';
-            foreach ($requestData['position'] as $v){
-                $condition['type'].= $v.",";
-            }
-            $condition['type'] = substr($condition['type'],0,strlen($condition['type'])-1);
-        }
-        // 文章外链
+        // 影片外链
         if(empty($requestData['linkurl'])){
-            $this->error("文章外链不能为空","Article/add");
+            $this->error("影片外链不能为空","movies/add");
         }else{
             $condition['linkurl'] = $requestData['linkurl'];
         }
         $condition['inputtime'] = time();
         $condition['updatetime'] = time();
 
-        $data = model("Article")->add($condition);
+        $data = model("movies")->add($condition);
         if(empty($data)){
-            $this->error("新增文章失败","Article/add");
+            $this->error("新增影片失败","movies/add");
         }else{
-            $this->success("新增文章成功","Article/show");
+            var_dump($data);
+            $this->success("新增影片成功","movies/show");
         }
     }
 
@@ -99,28 +102,29 @@ class Article extends Controller
             $searcharr['title'] = "";
         }
         // 作者
-        if(!empty($request['author'])){
-            $author = $request['author'];
-            $searcharr['author'] = $author;
-            $where.=" and author like '%$author%'";
+        if(!empty($request['director'])){
+            $director = $request['director'];
+            $searcharr['director'] = $director;
+            $where.=" and director like '%$director%'";
         }else{
-            $searcharr['author'] = "";
+            $searcharr['director'] = "";
         }
 
-        $data = model("Article")->showList($where);
+        $data = model("movies")->showList($where);
+        var_dump($data);
 
         $obj=null;
         $obj1=null;
         foreach ($data as $k =>$v){
             $obj[]=$data[$k];
         }
-        foreach ($obj as $value){
-            $arr =explode(",",$value['type']);
-            $value['typename'] = $this->typeChange($arr);
-            $obj1[]=$value;
-        }
+//        foreach ($obj as $value){
+//            $arr =explode(",",$value['type']);
+//            $value['typename'] = $this->typeChange($arr);
+//            $obj1[]=$value;
+//        }
         $this->assign("searcharr",$searcharr);
-        $this->assign("data",$obj1);
+        $this->assign("data",$data);
         return view("show");
     }
     // 编辑
@@ -131,13 +135,13 @@ class Article extends Controller
         $data = model("Position")->showList();
         $request=Request::instance()->get();
         if(empty($request['id'])){
-            $this->error("参数错误","Article/show");
+            $this->error("参数错误","movies/show");
         }else{
             $where['id'] = $request['id'];
         }
-        $content = model("Article")->show($where);
+        $content = model("movies")->show($where);
         if(empty($content)){
-            $this->error("内容有误","Article/show");
+            $this->error("内容有误","movies/show");
         }
 
         if(!empty($content['type'])){
@@ -155,51 +159,51 @@ class Article extends Controller
         $where = [];
         $request = Request::instance();
         $requestData = $request->post();
-        // 文章id
+        // 影片id
         if(empty($requestData['id'])){
-            $this->error("参数错误","Article/edit");
+            $this->error("参数错误","movies/edit");
         }else{
             $where['id'] = $requestData['id'];
         }
-        // 文章标题
+        // 影片标题
         if(empty($requestData['title'])){
-            $this->error("文章标题不能为空","Article/edit");
+            $this->error("影片标题不能为空","movies/edit");
         }else{
             $condition['title'] = $requestData['title'];
         }
-        // 文章作者
-        if(empty($requestData['author'])){
-            $this->error("文章描述不能为空","Article/add");
+        // 影片导演
+        if(empty($requestData['director'])){
+            $this->error("影片导演不能为空","movies/add");
         }else{
-            $condition['author'] = $requestData['author'];
+            $condition['director'] = $requestData['director'];
         }
-        // 文章来源
+        // 影片来源
         if(empty($requestData['copyfrom'])){
-            $this->error("文章描述不能为空","Article/add");
+            $this->error("影片来源不能为空","movies/add");
         }else{
             $condition['copyfrom'] = $requestData['copyfrom'];
         }
-        // 文章描述
+        // 影片描述
         if(empty($requestData['desc'])){
-            $this->error("文章描述不能为空","Article/add");
+            $this->error("影片描述不能为空","movies/add");
         }else{
             $condition['desc'] = $requestData['desc'];
         }
-        // 文章内容
+        // 影片内容
         if(empty($requestData['content'])){
-            $this->error("文章内容不能为空","Article/edit");
+            $this->error("影片内容不能为空","movies/edit");
         }else{
             $condition['content'] = $requestData['content'];
         }
-        // 文章图片
+        // 影片图片
         if(empty($requestData['imgurl'])){
-            $this->error("文章图片不能为空","Article/add");
+            $this->error("影片图片不能为空","movies/add");
         }else{
             $condition['imgurl'] = $requestData['imgurl'];
         }
-        // 文章类型
+        // 影片类型
         if(empty($requestData['position'])){
-            $this->error("文章类型不能为空","Article/edit");
+            $this->error("影片类型不能为空","movies/edit");
         }else{
             $condition['type'] = '';
             foreach ($requestData['position'] as $v){
@@ -207,31 +211,31 @@ class Article extends Controller
             }
             $condition['type'] = substr($condition['type'],0,strlen($condition['type'])-1);
         }
-        // 文章外链
+        // 影片外链
         if(empty($requestData['linkurl'])){
-            $this->error("文章外链不能为空","Article/add");
+            $this->error("影片外链不能为空","movies/add");
         }else{
             $condition['linkurl'] = $requestData['linkurl'];
         }
         $condition['updatetime'] = time();
 
-        $data = model("Article")->edit($condition,$where);
+        $data = model("movies")->edit($condition,$where);
         if(empty($data)){
-            $this->error("修改文章失败","Article/show");
+            $this->error("修改影片失败","movies/show");
         }else{
-            $this->success("修改文章成功","Article/show");
+            $this->success("修改影片成功","movies/show");
         }
     }
-    //查看文章详情
+    //查看影片详情
     public function showArticle()
     {
         $where = [];
         $id = Request::instance()->get("id");
         if(empty($id)){
-            $this->error("参数错误","Article/show");
+            $this->error("参数错误","movies/show");
         }
         $where['id'] = $id;
-        $data = model("Article")->show($where);
+        $data = model("movies")->show($where);
         $this->assign("data",$data);
         return view("showDetail");
     }
@@ -240,14 +244,14 @@ class Article extends Controller
         $where = [];
         $id = Request::instance()->get("id");
         if(empty($id)){
-            $this->error("参数错误","Article/show");
+            $this->error("参数错误","movies/show");
         }
         $where['id'] = $id;
-        $data = model("Article")->delete($where);
+        $data = model("movies")->delete($where);
         if(empty($data)){
-            $this->error("删除失败","Article/show");
+            $this->error("删除失败","movies/show");
         }else{
-            $this->success("删除成功","Article/show");
+            $this->success("删除成功","movies/show");
         }
     }
 
@@ -274,7 +278,7 @@ class Article extends Controller
         }
     }
 
-    //文章类型判断
+    //影片类型判断
     public function typeChange($type)
     {
         $typename = "";

@@ -6,16 +6,39 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>小俊影院</title>
+    {load href="/tp5/public/static/css/base.css"}
+    {load href="/tp5/public/static/css/index.css"}
+    <style>
+        .type_header {
+            width: 100%;
+            line-height: 65px;
+            background: #3b3a41;
+            display: flex;
+            justify-content: center;
+        }
+        .type_header ul{
+            display: flex;
+            justify-content: center;
+        }
+        .type_header ul li{
+            padding: 0 30px;
+        }
+        .type_header ul li a{
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
     <div class="header">
         <div class="top_header">
             我是首页
         </div>
-        <ul class="type_header">
-            <li></li>
-            <li></li>
-        </ul>
+        <div class="type_header">
+            <ul>
+                <li><a href="http://localhost/tp5/public/index.php/index/index/index">首页</a></li>
+                <li><a href="http://localhost/tp5/public/index.php/index/movies/index">影片</a></li>
+            </ul>
+        </div>
     </div>
 </body>
 </html>

@@ -9,11 +9,11 @@ $menulist = [
         ]
     ],
     [
-        'act' => 'article',
+        'act' => 'movies',
         'name' => '电影管理',
         'children' => [
-            ['act' => 'article', 'op' => 'add', 'name' => '新增电影'],
-            ['act' => 'article', 'op' => 'show', 'name' => '查看电影']
+            ['act' => 'movies', 'op' => 'add', 'name' => '新增电影'],
+            ['act' => 'movies', 'op' => 'show', 'name' => '查看电影']
         ]
     ],
     [
