@@ -34,7 +34,7 @@ class User extends Controller
         }else {
             $data = model("User")->add($condition);
             if ($data) {
-                $this->success("新增用户成功", 'User/add');
+                $this->success("新增用户成功", 'User/show');
             }else{
                 $this->error("新增用户失败",'User/add');
             }
