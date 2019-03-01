@@ -16,7 +16,7 @@ class Movies extends Controller
         $this->assign("data",$data);
         return view("add");
     }
-    public function addArticle()
+    public function addMovies()
     {
         $condition = [];
         $request = Request::instance();
@@ -75,6 +75,12 @@ class Movies extends Controller
         }else{
             $condition['linkurl'] = $requestData['linkurl'];
         }
+        // 影片类型
+        if(empty($requestData['position'])){
+            $this->error("影片类型不能为空","movies/edit");
+        }else{
+            $Pos = $requestData['position'];
+        }
         $condition['inputtime'] = time();
         $condition['updatetime'] = time();
 
@@ -82,7 +88,11 @@ class Movies extends Controller
         if(empty($data)){
             $this->error("新增影片失败","movies/add");
         }else{
-            var_dump($data);
+            $wherePos['mid'] = $data;
+            foreach ($Pos as $v) {
+                $wherePos['pid'] = $v;
+                model('moviesPos')->insert($wherePos);
+            }
             $this->success("新增影片成功","movies/show");
         }
     }
@@ -110,25 +120,25 @@ class Movies extends Controller
             $searcharr['director'] = "";
         }
 
-        $data = model("movies")->showList($where);
-        var_dump($data);
+        $data = model("movies")->showList($where, 'a.*,group_concat(i.pid) as type');
 
         $obj=null;
         $obj1=null;
         foreach ($data as $k =>$v){
             $obj[]=$data[$k];
         }
-//        foreach ($obj as $value){
-//            $arr =explode(",",$value['type']);
-//            $value['typename'] = $this->typeChange($arr);
-//            $obj1[]=$value;
-//        }
+        foreach ($obj as $value){
+            $arr =explode(",",$value['type']);
+            $value['typeArr'] = $arr;
+            $value['typename'] = $this->typeChange($arr);
+            $obj1[]=$value;
+        }
         $this->assign("searcharr",$searcharr);
         $this->assign("data",$data);
         return view("show");
     }
     // 编辑
-    public function editArticle()
+    public function editMovies()
     {
         $where = [];
         $type = [];
@@ -137,9 +147,9 @@ class Movies extends Controller
         if(empty($request['id'])){
             $this->error("参数错误","movies/show");
         }else{
-            $where['id'] = $request['id'];
+            $where['a.id'] = $request['id'];
         }
-        $content = model("movies")->show($where);
+        $content = model("movies")->show($where, 'a.*,group_concat(i.pid) as type');
         if(empty($content)){
             $this->error("内容有误","movies/show");
         }
@@ -147,16 +157,18 @@ class Movies extends Controller
         if(!empty($content['type'])){
             $type = explode(",",$content['type']);
         }
+        $content['releaseTime'] = date('Y-m-d', strtotime($content['releaseTime']));
         $this->assign("data",$data);
         $this->assign("type",$type);
         $this->assign("content",$content);
         return view("edit");
     }
     // 编辑提交
-    public function updateArticle()
+    public function updateMovies()
     {
-        $condition = [];
         $where = [];
+        $condition = [];
+        $wherePos = [];
         $request = Request::instance();
         $requestData = $request->post();
         // 影片id
@@ -164,24 +176,13 @@ class Movies extends Controller
             $this->error("参数错误","movies/edit");
         }else{
             $where['id'] = $requestData['id'];
+            $wherePos['mid'] = $requestData['id'];
         }
         // 影片标题
         if(empty($requestData['title'])){
-            $this->error("影片标题不能为空","movies/edit");
+            $this->error("影片标题不能为空","movies/add");
         }else{
             $condition['title'] = $requestData['title'];
-        }
-        // 影片导演
-        if(empty($requestData['director'])){
-            $this->error("影片导演不能为空","movies/add");
-        }else{
-            $condition['director'] = $requestData['director'];
-        }
-        // 影片来源
-        if(empty($requestData['copyfrom'])){
-            $this->error("影片来源不能为空","movies/add");
-        }else{
-            $condition['copyfrom'] = $requestData['copyfrom'];
         }
         // 影片描述
         if(empty($requestData['desc'])){
@@ -189,9 +190,33 @@ class Movies extends Controller
         }else{
             $condition['desc'] = $requestData['desc'];
         }
+        // 影片导演
+        if(empty($requestData['director'])){
+            $this->error("影片导演不能为空","movies/add");
+        }else{
+            $condition['director'] = $requestData['director'];
+        }
+        // 影片演员
+        if(empty($requestData['actor'])){
+            $this->error("影片演员不能为空","movies/add");
+        }else{
+            $condition['actor'] = $requestData['actor'];
+        }
+        // 影片来源
+        if(empty($requestData['copyfrom'])){
+            $this->error("影片来源不能为空","movies/add");
+        }else{
+            $condition['copyfrom'] = $requestData['copyfrom'];
+        }
+        // 影片上映时间
+        if(empty($requestData['releaseTime'])){
+            $this->error("影片标题不能为空","movies/add");
+        }else{
+            $condition['releaseTime'] = $requestData['releaseTime'];
+        }
         // 影片内容
         if(empty($requestData['content'])){
-            $this->error("影片内容不能为空","movies/edit");
+            $this->error("影片内容不能为空","movies/add");
         }else{
             $condition['content'] = $requestData['content'];
         }
@@ -201,21 +226,17 @@ class Movies extends Controller
         }else{
             $condition['imgurl'] = $requestData['imgurl'];
         }
-        // 影片类型
-        if(empty($requestData['position'])){
-            $this->error("影片类型不能为空","movies/edit");
-        }else{
-            $condition['type'] = '';
-            foreach ($requestData['position'] as $v){
-                $condition['type'].= $v.",";
-            }
-            $condition['type'] = substr($condition['type'],0,strlen($condition['type'])-1);
-        }
         // 影片外链
         if(empty($requestData['linkurl'])){
             $this->error("影片外链不能为空","movies/add");
         }else{
             $condition['linkurl'] = $requestData['linkurl'];
+        }
+        // 影片类型
+        if(empty($requestData['position'])){
+            $this->error("影片类型不能为空","movies/edit");
+        }else{
+            $Pos = $requestData['position'];
         }
         $condition['updatetime'] = time();
 
@@ -223,19 +244,30 @@ class Movies extends Controller
         if(empty($data)){
             $this->error("修改影片失败","movies/show");
         }else{
-            $this->success("修改影片成功","movies/show");
+            $arr = [];
+            $arr['mid'] = $wherePos['mid'];
+            $delData = model('moviesPos')->delete($arr);
+            if(empty($delData)){
+                $this->error('修改影片失败','movies/show');
+            }else {
+                foreach ($Pos as $v) {
+                    $wherePos['pid'] = $v;
+                    model('moviesPos')->insert($wherePos);
+                }
+                $this->success("修改影片成功", "movies/show");
+            }
         }
     }
     //查看影片详情
-    public function showArticle()
+    public function showMovies()
     {
         $where = [];
         $id = Request::instance()->get("id");
         if(empty($id)){
             $this->error("参数错误","movies/show");
         }
-        $where['id'] = $id;
-        $data = model("movies")->show($where);
+        $where['a.id'] = $id;
+        $data = model("movies")->show($where, 'a.*,group_concat(i.pid) as type');
         $this->assign("data",$data);
         return view("showDetail");
     }

@@ -10,7 +10,27 @@ class Index extends Controller
         parent::__construct($request);
     }
 
-    public function index(){
+
+    /*
+     * 影片列表页
+     */
+    public function index() {
+        /*
+         * 正在热映
+         */
+        $condition = 'a.releaseTime < NOW()';
+        $now = model('movies')->showList($condition, '*');
+        $this->assign('now', $now);
+        /*
+         * 即将上映
+         */
+        $condition = 'a.releaseTime > NOW()';
+        $future = model('movies')->showList($condition, '*');
+        $this->assign('future', $future);
+        return view('index');
+    }
+
+    public function index1(){
         if (!@include(dirname(dirname(__FILE__)) . '/menu.php')) exit('menu.php isn\'t exists!');
         $user_id=session('frontUserId');
         $username=session("userName");

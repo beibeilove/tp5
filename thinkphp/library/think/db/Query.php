@@ -2087,6 +2087,7 @@ class Query
         $data    = array_merge($options['data'], $data);
         // 生成SQL语句
         $sql = $this->builder->insert($data, $options, $replace);
+//        print_r($sql);echo '<pre>';
         // 获取参数绑定
         $bind = $this->getBind();
         if ($options['fetch_sql']) {
