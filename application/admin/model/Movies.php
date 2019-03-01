@@ -20,18 +20,21 @@ class Movies extends Model{
             ->field($field)
             ->where($where)
             ->order($order)
+            ->group('i.mid')
             ->paginate(10);
     }
 
     /*
      * 查询单条
      * */
-    public function show($where = [], $field = "*", $order = "id desc")
+    public function show($where = [], $field = "*")
     {
         return Db::name($this->table)
+            ->alias('a')
+            ->join('movies_type i','a.id=i.mid','left')
             ->field($field)
             ->where($where)
-            ->order($order)
+            ->group('i.mid')
             ->find();
     }
 
@@ -48,7 +51,7 @@ class Movies extends Model{
      * */
     public function add($condition = [])
     {
-        return Db::name($this->table)->insert($condition);
+        return Db::name($this->table)->insertGetId($condition);
     }
 
     /*

@@ -13,8 +13,8 @@
 </head>
 <body>
     <div class="page">
-        <form action="{:url('Article/updateArticle')}" id="form" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="id" value="{$content['id']}">
+        <form action="{:url('Movies/updateMovies')}" id="form" method="post" enctype="multipart/form-data">
+            <input type="hidden" id="id" name="id" value="{$content['id']}">
             <div class="form-group">
                 <label for="title">标题：</label>
                 <input type="text" class="form-control form-control-big" name="title" id="title" placeholder="标题" value="{$content['title']}">
@@ -22,6 +22,10 @@
             <div class="form-group">
                 <label for="copyfrom">产地：</label>
                 <input type="text" class="form-control form-control-big" name="copyfrom" id="copyfrom" placeholder="产地" value="{$content['copyfrom']}">
+            </div>
+            <div class="form-group">
+                <label for="releaseTime">上映时间：</label>
+                <input type="date" class="form-control form-control-big" name="releaseTime" id="releaseTime" placeholder="上映时间" value="{$content['releaseTime']}">
             </div>
             <div class="form-group">
                 <label for="director">导演：</label>
@@ -32,16 +36,16 @@
                 <input type="text" class="form-control form-control-big" name="actor" id="actor" placeholder="演员" value="{$content['actor']}">
             </div>
             <div class="form-group">
-                <label for="linkurl">跳转链接：</label>
-                <input type="text" class="form-control form-control-big" name="linkurl" id="linkurl" placeholder="跳转链接" value="{$content['linkurl']}">
+                <label for="linkurl">视频：</label>
+                <input type="text" class="form-control form-control-big" name="linkurl" id="linkurl" placeholder="演示链接" value="{$content['linkurl']}">
             </div>
             <div class="form-group">
-                <label for="desc">描述：</label>
-                <textarea class="form-control form-control-big vertical" name="desc" id="desc" cols="30" rows="3" >{$content['desc']}</textarea>
+                <label for="desc">影片关键字：</label>
+                <input type="text" class="form-control form-control-big" name="desc" id="desc" placeholder="影片关键字" value="{$content['desc']}">
             </div>
             <div class="form-group">
-                <label for="content">内容：</label>
-                <textarea class="form-control form-control-big vertical" name="content" id="content" style="width:800px;height:400px;visibility:hidden;display: block;">{$content['content']}</textarea>
+                <label for="content">影片描述：</label>
+                <textarea class="form-control form-control-big vertical" name="content" id="content" cols="30" rows="3" placeholder="影片描述"> {$content['content']}</textarea>
             </div>
             <div class="form-group">
                 <label for="imgurl">上传图片：</label>
@@ -57,7 +61,7 @@
                 {volist name="data" id="val"}
                 <label class="checkbox-inline">
 
-                    <input type="checkbox" value="{$val['posid']}" name="position[]" {volist name="type" id="v"}{if condition="$v==$val['posid']"} checked{/if}{/volist}>{$val['posname']}
+                    <input type="checkbox" value="{$val['posid']}" name="position[]" {volist name="type" id="v"}{if condition="$v==$val['posid']"} checked{/if} {$v} {$val['posid']}{/volist}>{$val['posname']}
 
                 </label>
                 {/volist}
@@ -74,7 +78,7 @@
 <script>
     var editor;
     KindEditor.ready(function(K) {
-        editor = K.create('textarea[name="content"]', {
+        editor = K.create('textarea[name="content1"]', {
             allowFileManager : true
         });
         K('input[name=getHtml]').click(function(e) {

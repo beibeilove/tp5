@@ -9,9 +9,16 @@ class Movies extends Controller
     {
         parent::__construct($request);
     }
+
+    /*
+     * 影片列表页
+     */
     public function index() {
-        $condition['type'] = 3;
-        $data = model('movies')->showList($condition);
+        /*
+         * 正在热映
+         */
+        $condition = 'a.releaseTime > NOW()';
+        $data = model('movies')->showList($condition, '*');
         $this->assign('data', $data);
         return view('index');
     }
