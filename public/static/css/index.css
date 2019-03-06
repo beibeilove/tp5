@@ -1,3 +1,13 @@
+@font-face {
+    font-family: 'iconfont';  /* project id 654898 */
+    src: url('//at.alicdn.com/t/font_654898_dw84o93qfmh.eot');
+    src: url('//at.alicdn.com/t/font_654898_dw84o93qfmh.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_654898_dw84o93qfmh.woff2') format('woff2'),
+    url('//at.alicdn.com/t/font_654898_dw84o93qfmh.woff') format('woff'),
+    url('//at.alicdn.com/t/font_654898_dw84o93qfmh.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_654898_dw84o93qfmh.svg#iconfont') format('svg');
+}
+
 /*公共头部，侧边栏*/
 .top{
     width:100%;
@@ -184,4 +194,69 @@ table.table tr,table.table tr th,table.table tr td{
 }
 .page .copyfrom span{
     padding-right: 20px;
+}
+
+
+.type_header {
+    width: 100%;
+    line-height: 65px;
+    background: #3b3a41;
+}
+.type_header .type_header_box{
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.type_header ul{
+    display: flex;
+    justify-content: center;
+}
+.type_header ul li{
+    padding: 0 30px;
+}
+.type_header ul li a{
+    color: #fff;
+}
+.type_header ul li.selected{
+    background: #000000;
+}
+.type_header ul li:hover{
+    background: #000000;
+}
+
+.type_header .type_header_box .front_login{
+    position: absolute;
+    right: 30px;
+}
+.type_header .type_header_box .front_login a{
+    color: #fff;
+    font-size: 14px;
+    display: block;
+    min-width: 100px;
+    text-align: center;
+}
+
+.type_header .type_header_box .front_login .loginInfoList{
+    position: absolute;
+    top: 65px;
+    left: 0;
+    background: #3b3a41;
+    z-index: 999;
+    display: none;
+}
+
+.type_header .type_header_box .front_login .loginInfo a span{
+    font-family: 'iconfont';
+    color: #fff;
+}
+.type_header .type_header_box .front_login .loginInfoList .loginInfoListSon{
+    line-height: 45px;
+}
+.type_header .type_header_box .front_login .loginInfoList .loginInfoListSon.selected{
+    background: #000000;
+}
+.type_header .type_header_box .front_login .loginInfoList .loginInfoListSon:hover{
+    background: #000000;
 }

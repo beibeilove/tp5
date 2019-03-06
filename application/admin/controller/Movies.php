@@ -214,6 +214,18 @@ class Movies extends Controller
         }else{
             $condition['releaseTime'] = $requestData['releaseTime'];
         }
+        // 影片评分
+        if(empty($requestData['score'])){
+            $this->error("影片评分不能为空","movies/add");
+        }else{
+            $condition['score'] = $requestData['score'];
+        }
+        // 影片时长
+        if(empty($requestData['duration'])){
+            $this->error("影片时长不能为空","movies/add");
+        }else{
+            $condition['duration'] = $requestData['duration'];
+        }
         // 影片内容
         if(empty($requestData['content'])){
             $this->error("影片内容不能为空","movies/add");

@@ -13,25 +13,33 @@
         .type_list_content{
             display: flex;
             justify-content: flex-start;
-            padding-top: 40px;
+            margin-top: 40px;
+            padding: 30px;
+            box-sizing: content-box;
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+            font-size: 14px;
         }
         .type_list_content .left_con{
             margin-right: 20px;
         }
+        .type_list_content .right_con{
+            width: calc(100% - 200px);
+            position: relative;
+        }
         .type_list_content .right_con h4{
             font-size: 20px;
-            margin-bottom: 16px;
+            margin-bottom: 6px;
             cursor: pointer;
             font-weight: 400;
-            color: #000;
         }
         .type_list_content .right_con>span{
-            font-size: 16px;
+            font-size: 14px;
             line-height: 22px;
-            color: #999;
+            color: #fff;
         }
         .type_list_content .right_con .score{
-            margin-bottom: 38px;
+            margin-bottom: 6px;
         }
         .type_list_content .right_con .score .star{
             display: inline-block;
@@ -46,16 +54,41 @@
             height: 100%;
             background: url("https://dianying.nuomi.com/static/movie/widget/movielist/img/star-red_ac0b999.png") 0 0 repeat-x;
         }
-        .type_list_content .right_con .right_con_detail{
-            margin-top: 16px;
+        .type_list_content .right_con p{
+            margin-bottom: 16px;
+            vertical-align: middle;
         }
-        .type_list_content .right_con .right_con_detail span{
-            padding-right: 48px;
-            font-size: 16px;
-            color: rgb(51, 51, 51);
+        .type_list_content .right_con p.story{
+            overflow: hidden;
+            height: 16px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            vertical-align: middle;
         }
-        .nuomi-red{
-            color: #fc4984;
+        .type_list_content .right_con p.story.story_detail{
+            overflow: unset;
+            height: auto;
+            white-space: normal;
+            text-overflow: unset;
+        }
+        #more_btn{
+            position: absolute;
+            right: -40px;
+            bottom: 15px;
+            width: 40px;
+            height: 16px;
+            cursor: pointer;
+            line-height: 16px;
+            vertical-align: middle;
+            color: #ccc;
+        }
+        #close_btn{
+            cursor: pointer;
+            color: #ccc;
+            display: none;
+        }
+        #more_btn:hover,#close_btn:hover{
+            color: #fff;
         }
     </style>
 </head>
@@ -89,30 +122,32 @@
 </div>
 <div class="content" style="width: 1200px;margin: auto;">
     <div class="type_content">
-        <div class="type_content_list">
-            {volist name="data" id="value"}
-            <a href="{:url('movies/detail')}?id={$value['id']}" class="type_list_content">
+        <div class="type_content_list" style="background: url(/tp5/public/{$data['imgurl']}) no-repeat center top;background-size: 100% auto">
+            <div class="type_list_content">
                 <div class="left_con">
-                    <img src="/tp5/public/{$value['imgurl']}" alt="" width="130">
+                    <img src="/tp5/public/{$data['imgurl']}" alt="" width="130">
                 </div>
                 <div class="right_con">
-                    <h4>{$value['title']}</h4>
+                    <h4>{$data['title']}</h4>
                     <div class="score">
-                        <span class="star"><em style="width:{$value['score']*10}%"></em></span>
-                        <span class="num nuomi-red">{$value['score']}</span>
+                        <span class="star"><em style="width:{$data['score']*10}%"></em></span>
+                        <span class="num nuomi-red">{$data['score']}</span>
                     </div>
-                    <span>{$value['desc']}</span>
-                    <p class="right_con_detail">
-                        <span>类型：{$value['typename']}</span>
-                        <span>时长：{$value['duration']}分钟</span>
-                        <span>上映时间：{$value['releaseTime']|substr=0,10}</span>
+                    <p>{$data['desc']}</p>
+                    <p>
+                        <span>导演：{$data['director']}</span>
+                        <span>主演：{$data['actor']}</span>
                     </p>
+                    <p>
+                        <span style="padding-right: 20px;">{$data['copyfrom']}  |  {$data['duration']}分钟</span>
+                        <span>{$data['releaseTime']|substr=0,10}  上映</span>
+                    </p>
+                    <p class="story">剧情：{$data['content']} <span id="close_btn">收起</span></p>
+                    <span id="more_btn">详情</span>
                 </div>
-            </a>
-            {/volist}
+            </div>
         </div>
     </div>
-    {$data->render()}
 </div>
 {load href="/tp5/public/static/js/jquery.js"}
 {load href="/tp5/public/static/js/swiper.min.js"}
@@ -123,6 +158,16 @@
         $(this).addClass('actived');
     }, function(){
         $('.list_content').removeClass('actived');
+    })
+    $('#more_btn').click(function(){
+        $('.story').addClass('story_detail')
+        $(this).hide()
+        $('#close_btn').show()
+    })
+    $('#close_btn').click(function(){
+        $('.story').removeClass('story_detail')
+        $(this).hide()
+        $('#more_btn').show()
     })
     var swiper = new Swiper('.swiper-container', {
         slidesPerView: 7,
