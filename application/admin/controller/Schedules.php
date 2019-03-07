@@ -13,7 +13,7 @@ class Schedules extends Controller
     /*
      * 影片排期列表
      */
-    public function index(){
+    public function show(){
         $where = [];
         $request=Request::instance()->get();
         if(empty($request['id'])){
@@ -24,7 +24,7 @@ class Schedules extends Controller
         $data = model('Schedules')->showList($where);
         $this->assign('id', $where['mid']);
         $this->assign('data',$data);
-        return view('index');
+        return view('show');
     }
 
     /*
