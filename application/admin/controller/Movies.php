@@ -57,6 +57,13 @@ class Movies extends Controller
         }else{
             $condition['releaseTime'] = $requestData['releaseTime'];
         }
+
+        // 影片价格
+        if(empty($requestData['price'])){
+            $this->error("影片价格不能为空","movies/add");
+        }else{
+            $condition['price'] = $requestData['price'];
+        }
         // 影片内容
         if(empty($requestData['content'])){
             $this->error("影片内容不能为空","movies/add");
@@ -225,6 +232,12 @@ class Movies extends Controller
             $this->error("影片时长不能为空","movies/add");
         }else{
             $condition['duration'] = $requestData['duration'];
+        }
+        // 影片价格
+        if(empty($requestData['price'])){
+            $this->error("影片价格不能为空","movies/add");
+        }else{
+            $condition['price'] = $requestData['price'];
         }
         // 影片内容
         if(empty($requestData['content'])){

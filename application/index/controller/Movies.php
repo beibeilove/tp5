@@ -29,14 +29,18 @@ class Movies extends Controller
      */
     public function detail() {
         $where = [];
+        $condition = [];
         $request=Request::instance()->get();
         if(empty($request['id'])){
             $this->error("参数错误","movies/index");
         }else{
             $where['a.id'] = $request['id'];
+            $condition['mid'] = $request['id'];
         }
-        $data = model('movies')->showListDetail($where, '*');
+        $data = model('Movies')->showListDetail($where, '*');
+        $schedules = model('Schedules')->showList($condition);
         $this->assign('data', $data);
+        $this->assign('schedules', $schedules);
         return view('detail');
     }
 }

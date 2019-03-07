@@ -90,6 +90,50 @@
         #more_btn:hover,#close_btn:hover{
             color: #fff;
         }
+        .date_list{
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-start;
+        }
+        .date_list li{
+            padding: 5px 15px;
+            margin-right: 30px;
+            font-size: 14px;
+            color: #333;
+            cursor: pointer;
+        }
+        .date_list li.selected{
+            color: #fff;
+            background: #fc4984;
+        }
+
+        /*排期信息*/
+        .schedules_list li{
+            display: flex;
+            height: 100px;
+            border-bottom: 1px dashed #e2e2e2;
+        }
+        .schedules_list li:last-of-type{
+            border: 0;
+        }
+        .schedules_list li p{
+            flex: 1;
+            line-height: 100px;
+            /*display: flex;*/
+            /*flex-direction: column;*/
+            /*justify-content: center;*/
+        }
+        .schedules_list li p span{
+            font-size: 20px;
+            color: #fc4984;
+            padding-right: 15px;
+        }
+        .schedules_list li p.selectSeat span{
+            padding: 5px 10px;
+            border: 1px solid #fc4984;
+            cursor: pointer;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
@@ -148,6 +192,25 @@
             </div>
         </div>
     </div>
+    <ul class="step_list">
+        <li></li>
+    </ul>
+    <div class="schedules">
+        <h3 style="font-weight: 400;font-size: 20px;padding: 30px 0 10px;border-bottom: 1px solid #e2e2e2;">选座购票</h3>
+        <ul class="date_list"></ul>
+        <ul class="schedules_list">
+            {volist name="schedules" id="item"}
+            <li>
+                <p>{$item['time']}开场</p>
+                <p>时长{$data['duration']}分钟</p>
+                <p><span>￥{$data['price']*$item['discount']/10}</span><s>{$data['price']}</s></p>
+                <p>余位{$item['available']*100/$item['allNum']}%</p>
+                <p class="selectSeat"><a href="{:url('order/index')}">选座购票</a></p>
+            </li>
+            {/volist}
+        </ul>
+    </div>
+    <div class=""></div>
 </div>
 {load href="/tp5/public/static/js/jquery.js"}
 {load href="/tp5/public/static/js/swiper.min.js"}
@@ -177,6 +240,39 @@
             clickable: true,
         },
     });
+
+    $('.date_list').on('click','li',function(){
+        $('.date_list li').removeClass('selected');
+        $(this).addClass('selected');
+    })
+
+    // 日期安排
+    var str = '';
+    var arr = ['日', '一', '二', '三', '四', '五', '六']
+
+    for (var i = 0; i < 7; i++) {
+        var date = dateFormate(new Date(new Date().getTime() + i*24*3600*1000));
+        if (i === 0) {
+            str+='<li class="selected">周'+arr[date.days]+date.month+'月'+date.day+'日</li>'
+        } else {
+            str += '<li>周' + arr[date.days] + date.month + '月' + date.day + '日</li>'
+        }
+    }
+    $('.date_list').html(str);
+
+    function dateFormate(dates){
+        var dateAll = new Date(dates);
+        var dateObj = {
+            year: dateAll.getFullYear(),
+            month: dateAll.getMonth() + 1,
+            day: dateAll.getDate(),
+            hour: dateAll.getHours(),
+            minutes: dateAll.getMinutes(),
+            second: dateAll.getSeconds(),
+            days: dateAll.getDay(),
+        }
+        return dateObj
+    }
 </script>
 </body>
 </html>

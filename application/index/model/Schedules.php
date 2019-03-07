@@ -1,5 +1,5 @@
 <?php
-namespace app\admin\model;
+namespace app\index\model;
 use think\Db;
 use think\Model;
 class Schedules extends Model{
@@ -12,22 +12,25 @@ class Schedules extends Model{
     /*
      * 查询电影排期列表
      * */
-    public function showList($where = [], $order = "time and date desc")
+    public function showList($where = [], $order = "id desc")
     {
         return Db::name($this->table)
             ->where($where)
             ->order($order)
-            ->paginate(10);
+            ->select();
     }
 
     /*
      * 查询单条电影排期
      * */
-    public function show($where = [], $order = "time and date desc")
+    public function show($where = [], $field = "*")
     {
-        return Db::name($this->table)
+        return Db::name('movies')
+            ->alias('a')
+            ->join($this->table.' i','a.id=i.mid','inner')
+            ->field($field)
             ->where($where)
-            ->order($order)
+            ->group('i.mid')
             ->find();
     }
 

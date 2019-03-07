@@ -52,14 +52,14 @@
     color: #333;
 }
 
-.bottom{
+.layout_bottom{
     width:100%;
     height:100%;
     padding-top: 150px;
     box-sizing: border-box;
     position: relative;
 }
-.bottom .left{
+.layout_bottom .left{
     width:200px;
     height:100%;
     border-right:1px solid #ccc;
@@ -71,7 +71,7 @@
     background:url("http://localhost/tp5/public/static/img/bg_top1.jpg") no-repeat;
     background-size:cover;
 }
-.bottom .right{
+.layout_bottom .right{
     padding-left: 200px;
     width:100%;
     height:100%;
@@ -96,7 +96,7 @@
 .left .son_menu>li.on a{
     color:#E64759;
 }
-.bottom .right iframe{
+.layout_bottom .right iframe{
     width:100%;
     height:100%;
 }
