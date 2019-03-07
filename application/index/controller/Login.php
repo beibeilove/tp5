@@ -10,6 +10,11 @@ class Login extends Controller
 {
     public function index()
     {
+        $request = Request::instance();
+        if (!empty($redirectUrl['referer'])) {
+            $redirectUrl = $request->header();
+            Session::set('redirectUrl', $redirectUrl['referer']);
+        }
         return view("login");
     }
 
@@ -34,9 +39,11 @@ class Login extends Controller
         if(empty($data)){
             return $this->error('用户名或密码不正确', url('Login/index'));
         }else{
-            session::set("frontUserId","1");
-            session::set('userName',$condition['username']);
-            return $this->success('登录成功', url('index/index'));
+            Session::set("frontUserId","1");
+            Session::set('frontUsername',$condition['username']);
+            Session::set('frontId',$data['id']);
+            $redirectUrl = Session::get('redirectUrl');
+            return $this->success('登录成功', $redirectUrl);
         }
     }
 

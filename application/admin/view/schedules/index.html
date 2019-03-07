@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    {load href="/tp5/public/static/css/base.css"}
+    {load href="/tp5/public/static/css/index.css"}
+    {load href="/tp5/public/static/css/bootstrap.min.css"}
+</head>
+<body>
+<div class="page page2 table-responsive">
+    <a class="btn btn-primary" href="{:url('Schedules/add')}?id={$id}">新增</a>
+    <table class="table table-striped">
+        <tr>
+            <th>id</th>
+            <th>排期日期</th>
+            <th>排期时间</th>
+            <th>票价折扣</th>
+            <th>总座位数</th>
+            <th>剩余座位数</th>
+            <th>上传时间</th>
+            <th>更新时间</th>
+            <th>操作</th>
+        </tr>
+        {if condition="!empty($data)"}
+        {volist name="data" id="value"}
+        <tr>
+            <td>{$value['id']}</td>
+            <td>{$value['date']}</td>
+            <td>{$value['time']}</td>
+            <td>{$value['discount']}</td>
+            <td>{$value['allNum']}</td>
+            <td width="300">{$value['available']}</td>
+            <td width="150">{$value['inputtime']|date="Y-m-d H:i:s",###}</td>
+            <td width="150">{$value['updatetime']|date="Y-m-d H:i:s",###}</td>
+            <td width="150">
+                <a class="btn" href="{:url('Schedules/edit')}?id={$value['id']}">编辑</a>
+                <a class="btn" href="{:url('Schedules/delete')}?id={$value['id']}">删除</a>
+            </td>
+        </tr>
+        {/volist}
+        {else /}
+        <tr>
+            <td colspan="3">暂无数据~~~~</td>
+        </tr>
+        {/if}
+    </table>
+    {$data->render()}
+</div>
+</body>
+{load href="/tp5/public/static/js/jquery.js"}
+{load href="/tp5/public/static/js/bootstrap.min.js"}
+</html>

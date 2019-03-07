@@ -25,11 +25,11 @@ $menulist = [
         ]
     ],
 //    [
-//        'act' => 'musicType',
-//        'name' => '音乐类型管理',
+//        'act' => 'schedules',
+//        'name' => '影片排期管理',
 //        'children' => [
-//            ['act' => 'musicType', 'op' => 'add', 'name' => '新增音乐类型'],
-//            ['act' => 'musicType', 'op' => 'show', 'name' => '查看音乐类型']
+//            ['act' => 'schedules', 'op' => 'add', 'name' => '新增影片排期'],
+//            ['act' => 'schedules', 'op' => 'show', 'name' => '查看影片排期']
 //        ]
 //    ]
 

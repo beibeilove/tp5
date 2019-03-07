@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>小俊影院</title>
+    {load href="/tp5/public/static/css/base.css"}
+    {load href="/tp5/public/static/css/index.css"}
+    {load href="/tp5/public/static/css/swiper.min.css"}
+    <style>
+        .type_list_content{
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 40px;
+            padding: 30px;
+            box-sizing: content-box;
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+            font-size: 14px;
+        }
+        .type_list_content .left_con{
+            margin-right: 20px;
+        }
+        .type_list_content .right_con{
+            width: calc(100% - 200px);
+            position: relative;
+        }
+        .type_list_content .right_con h4{
+            font-size: 20px;
+            margin-bottom: 6px;
+            cursor: pointer;
+            font-weight: 400;
+        }
+        .type_list_content .right_con>span{
+            font-size: 14px;
+            line-height: 22px;
+            color: #fff;
+        }
+        .type_list_content .right_con .score{
+            margin-bottom: 6px;
+        }
+        .type_list_content .right_con .score .star{
+            display: inline-block;
+            width: 105px;
+            height: 16px;
+            margin-right: 4px;
+            vertical-align: middle;
+            background: url("https://dianying.nuomi.com/static/movie/widget/movielist/img/star-gray_b59a781.png") 0 0 repeat-x;
+        }
+        .type_list_content .right_con .score .star em{
+            display: inline-block;
+            height: 100%;
+            background: url("https://dianying.nuomi.com/static/movie/widget/movielist/img/star-red_ac0b999.png") 0 0 repeat-x;
+        }
+        .type_list_content .right_con p{
+            margin-bottom: 16px;
+            vertical-align: middle;
+        }
+        .type_list_content .right_con p.story{
+            overflow: hidden;
+            height: 16px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            vertical-align: middle;
+        }
+        .type_list_content .right_con p.story.story_detail{
+            overflow: unset;
+            height: auto;
+            white-space: normal;
+            text-overflow: unset;
+        }
+        #more_btn{
+            position: absolute;
+            right: -40px;
+            bottom: 15px;
+            width: 40px;
+            height: 16px;
+            cursor: pointer;
+            line-height: 16px;
+            vertical-align: middle;
+            color: #ccc;
+        }
+        #close_btn{
+            cursor: pointer;
+            color: #ccc;
+            display: none;
+        }
+        #more_btn:hover,#close_btn:hover{
+            color: #fff;
+        }
+        .date_list{
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-start;
+        }
+        .date_list li{
+            padding: 5px 15px;
+            margin-right: 30px;
+            font-size: 14px;
+            color: #333;
+            cursor: pointer;
+        }
+        .date_list li.selected{
+            color: #fff;
+            background: #fc4984;
+        }
+
+        /*排期信息*/
+        .schedules_list li{
+            display: flex;
+            height: 100px;
+            border-bottom: 1px dashed #e2e2e2;
+        }
+        .schedules_list li:last-of-type{
+            border: 0;
+        }
+        .schedules_list li p{
+            flex: 1;
+            line-height: 100px;
+            /*display: flex;*/
+            /*flex-direction: column;*/
+            /*justify-content: center;*/
+        }
+        .schedules_list li p span{
+            font-size: 20px;
+            color: #fc4984;
+            padding-right: 15px;
+        }
+        .schedules_list li p.selectSeat span{
+            padding: 5px 10px;
+            border: 1px solid #fc4984;
+            cursor: pointer;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="top_header">
+        我是电影列表页
+    </div>
+    <div class="type_header">
+        <div class="type_header_box">
+            <ul class="type_menu">
+                <li><a href="http://localhost/tp5/public/index.php/index/index/index">首页</a></li>
+                <li class="selected"><a href="http://localhost/tp5/public/index.php/index/movies/index">影片</a></li>
+            </ul>
+            <div class="front_login">
+                {if condition="empty($Think.session.frontUsername)"}
+                <a href="{:url('login/index')}">登录</a>
+                {else/}
+                <div class="loginInfo">
+                    <a href="javascript:void(0);"><span>&#xe69d;   </span>{$Think.session.frontUsername}</a>
+                    <div class="loginInfoList">
+                        <div class="loginInfoListSon"><a href="">我的订单</a></div>
+                        <div class="loginInfoListSon"><a href="">退出</a></div>
+                        <div class="loginInfoListSon"><a href=""></a></div>
+                    </div>
+                </div>
+                {/if}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content" style="width: 1200px;margin: auto;">
+    <div class="type_content">
+        <div class="type_content_list" style="background: url(/tp5/public/{$data['imgurl']}) no-repeat center top;background-size: 100% auto">
+            <div class="type_list_content">
+                <div class="left_con">
+                    <img src="/tp5/public/{$data['imgurl']}" alt="" width="130">
+                </div>
+                <div class="right_con">
+                    <h4>{$data['title']}</h4>
+                    <div class="score">
+                        <span class="star"><em style="width:{$data['score']*10}%"></em></span>
+                        <span class="num nuomi-red">{$data['score']}</span>
+                    </div>
+                    <p>{$data['desc']}</p>
+                    <p>
+                        <span>导演：{$data['director']}</span>
+                        <span>主演：{$data['actor']}</span>
+                    </p>
+                    <p>
+                        <span style="padding-right: 20px;">{$data['copyfrom']}  |  {$data['duration']}分钟</span>
+                        <span>{$data['releaseTime']|substr=0,10}  上映</span>
+                    </p>
+                    <p class="story">剧情：{$data['content']} <span id="close_btn">收起</span></p>
+                    <span id="more_btn">详情</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="step_list">
+        <li></li>
+    </ul>
+    <div class="schedules">
+        <h3 style="font-weight: 400;font-size: 20px;padding: 30px 0 10px;border-bottom: 1px solid #e2e2e2;">选座购票</h3>
+        <ul class="date_list"></ul>
+        <ul class="schedules_list">
+            {volist name="schedules" id="item"}
+            <li>
+                <p>{$item['time']}开场</p>
+                <p>时长{$data['duration']}分钟</p>
+                <p><span>￥{$data['price']*$item['discount']/10}</span><s>{$data['price']}</s></p>
+                <p>余位{$item['available']*100/$item['allNum']}%</p>
+                <p class="selectSeat"><a href="{:url('order/index')}">选座购票</a></p>
+            </li>
+            {/volist}
+        </ul>
+    </div>
+    <div class=""></div>
+</div>
+{load href="/tp5/public/static/js/jquery.js"}
+{load href="/tp5/public/static/js/swiper.min.js"}
+{load href="/tp5/public/static/js/index.js"}
+<script>
+    $('.list_content').hover(function(){
+        $('.list_content').removeClass('actived');
+        $(this).addClass('actived');
+    }, function(){
+        $('.list_content').removeClass('actived');
+    })
+    $('#more_btn').click(function(){
+        $('.story').addClass('story_detail')
+        $(this).hide()
+        $('#close_btn').show()
+    })
+    $('#close_btn').click(function(){
+        $('.story').removeClass('story_detail')
+        $(this).hide()
+        $('#more_btn').show()
+    })
+    var swiper = new Swiper('.swiper-container', {
+        slidesPerView: 7,
+        spaceBetween: 10,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+    });
+
+    $('.date_list').on('click','li',function(){
+        $('.date_list li').removeClass('selected');
+        $(this).addClass('selected');
+    })
+
+    // 日期安排
+    var str = '';
+    var arr = ['日', '一', '二', '三', '四', '五', '六']
+
+    for (var i = 0; i < 7; i++) {
+        var date = dateFormate(new Date(new Date().getTime() + i*24*3600*1000));
+        if (i === 0) {
+            str+='<li class="selected">周'+arr[date.days]+date.month+'月'+date.day+'日</li>'
+        } else {
+            str += '<li>周' + arr[date.days] + date.month + '月' + date.day + '日</li>'
+        }
+    }
+    $('.date_list').html(str);
+
+    function dateFormate(dates){
+        var dateAll = new Date(dates);
+        var dateObj = {
+            year: dateAll.getFullYear(),
+            month: dateAll.getMonth() + 1,
+            day: dateAll.getDate(),
+            hour: dateAll.getHours(),
+            minutes: dateAll.getMinutes(),
+            second: dateAll.getSeconds(),
+            days: dateAll.getDay(),
+        }
+        return dateObj
+    }
+</script>
+</body>
+</html>

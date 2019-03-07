@@ -2,6 +2,7 @@
 namespace app\index\controller;
 use think\Controller;
 use think\Request;
+use think\Session;
 
 class Index extends Controller
 {
@@ -30,18 +31,8 @@ class Index extends Controller
         return view('index');
     }
 
-    public function index1(){
-        if (!@include(dirname(dirname(__FILE__)) . '/menu.php')) exit('menu.php isn\'t exists!');
-        $user_id=session('frontUserId');
-        $username=session("userName");
-        if(!$user_id){
-            $this->redirect("login/index");
-        }else{
-//            $this->assign("menulist",$menulist);
-            $this->assign("username",$username);
-        }
-        return view("index");
-    }
+
+
 
 }
 ?>
