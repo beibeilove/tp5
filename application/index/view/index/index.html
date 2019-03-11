@@ -120,11 +120,11 @@
         <div class="swiper-container">
             <div class="swiper-wrapper">
                 {volist name="now" id="value"}
-                <div class="swiper-slide">
+                <div class="swiper-slide" onclick="turnTo(`{:url('movies/detail')}?id={$value['mid']}`)">
                     <div class="list_content">
                         <img src="/tp5/public/{$value['imgurl']}" alt="" width="160">
                         <p title="{$value['title']}">{$value['title']}</p>
-                        <div><a href="">选座购票</a></div>
+                        <div><a href="{:url('movies/detail')}?id={$value['mid']}">选座购票</a></div>
                     </div>
                 </div>
                 {/volist}
@@ -142,11 +142,11 @@
         <div class="swiper-container">
             <div class="swiper-wrapper">
                 {volist name="future" id="value"}
-                <div class="swiper-slide">
+                <div class="swiper-slide" onclick="turnTo(`{:url('movies/detail')}?id={$value['mid']}`)">
                     <div class="list_content">
                         <img src="/tp5/public/{$value['imgurl']}" alt="" width="160">
                         <p title="{$value['title']}">{$value['title']}</p>
-                        <div><a href="">查看详情</a></div>
+                        <div><a href="{:url('movies/detail')}?id={$value['mid']}">查看详情</a></div>
                     </div>
                 </div>
                 {/volist}
@@ -193,6 +193,10 @@
             prevEl: '.swiper-button-prev',
         },
     });
+
+    function turnTo(url) {
+        window.location.href=url
+    }
 </script>
 </body>
 </html>

@@ -56,8 +56,8 @@
     console.log(moment(data))
     $('#date').daterangepicker({
         singleDatePicker: true,
-        startDate: moment(data).subtract(15, 'days'),
-        minDate: moment(data).subtract(15, 'days'),
+        startDate: moment().subtract(0, 'days') > moment(data).subtract(15, 'days') ? moment().subtract(0, 'days') : moment(data).subtract(15, 'days'),
+        minDate: moment().subtract(0, 'days') > moment(data).subtract(15, 'days') ? moment().subtract(0, 'days') : moment(data).subtract(15, 'days'),
     }, function(start, end, label) {
         console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
     });

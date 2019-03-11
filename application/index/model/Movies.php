@@ -36,7 +36,7 @@ class Movies extends Model
             ->where($where)
             ->order($order)
             ->group('i.mid')
-            ->paginate(14);
+            ->paginate(10);
     }
 
     /*

@@ -8,8 +8,13 @@
     <title>小俊影院</title>
     {load href="/tp5/public/static/css/base.css"}
     {load href="/tp5/public/static/css/index.css"}
+    {load href="/tp5/public/static/css/bootstrap.min.css"}
     {load href="/tp5/public/static/css/swiper.min.css"}
     <style>
+        ul,li,p{
+            margin: 0;
+            padding: 0;
+        }
         .type_list_content{
             display: flex;
             justify-content: flex-start;
@@ -128,11 +133,131 @@
             color: #fc4984;
             padding-right: 15px;
         }
-        .schedules_list li p.selectSeat span{
+        .schedules_list li p.selectSeat a{
             padding: 5px 10px;
             border: 1px solid #fc4984;
             cursor: pointer;
             font-size: 14px;
+            color: #fc4984;
+        }
+    </style>
+    <style>
+        .step_list{
+            margin: 30px 0 10px;
+            display: flex;
+            background: #e5e5e5;
+        }
+        .step_list li{
+            line-height: 40px;
+            text-align: center;
+            font-size: 14px;
+            flex: 1;
+            position: relative;
+        }
+        .step_list li.selected{
+            color: #fc4984;
+        }
+        .step_list li:after{
+            line-height: 40px;
+            content: '>';
+            color: #333;
+            font-family: cursive;
+            font-size: 18px;
+            font-weight: 600;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+        .step_list li:last-of-type:after{
+            content: '';
+        }
+    </style>
+    <style>
+        .seat_list_box{
+            display: none;
+            position: relative;
+        }
+        .seat_list_box .seat_list{
+            float: left;
+            padding: 30px 50px 30px 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            width: 630px;
+            height: 230px;
+            background: #fafafa;
+            box-sizing: content-box;
+        }
+        .seat_list_box .seat_list li {
+            height: 28px;
+            line-height: 28px;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: flex-start;
+        }
+        .seat_list_box .seat_list li span{
+            width: 28px;
+            height: 28px;
+            margin-right: 14px;
+            background: url('https://dianying.nuomi.com/static/buy/widget/seat/select/img/seats_982f0fc.png') 0 0 no-repeat;
+            background-position: left -1px;
+            cursor: pointer;
+        }
+        .seat_list_box .seat_list li span.selected{
+            background-position: left -66px;
+            cursor: default;
+        }
+        .seat_list_box .seat_list li span.selecting{
+            background-position: left -33px;
+        }
+
+        .seat_list_box .seat_list_row{
+            box-sizing: content-box;
+            position: absolute;
+            top: 10px;
+            left: 30px;
+            width: 20px;
+            padding: 20px 0;
+            height: 210px;
+            background: #999999;
+            border-radius: 10px;
+            color: #fff;
+        }
+        .seat_list_box .seat_list_row li{
+            width: 20px;
+            height: 28px;
+            line-height: 28px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .seat_list_box .order_detail{
+            float: left;
+            padding: 20px;
+        }
+        .seat_list_box .order_detail li{
+            line-height: 28px;
+            font-size: 14px;
+            color: #999;
+        }
+        .seat_list_box .order_detail li:nth-of-type(1) span:nth-of-type(2){
+            font-size: 12px;
+            color: #333;
+        }
+        .seat_list_box .order_detail li span:nth-of-type(2){
+            color: #fc4984;
+        }
+        .seat_list_box .order_detail li a.submit{
+            color: #fff;
+            background: #b7b7b7;
+        }
+        .seat_list_box .order_detail li a.submit.disabled{
+            background: #ff318c;
+        }
+    </style>
+    <style>
+        .order_create{
+            display: none;
         }
     </style>
 </head>
@@ -193,29 +318,53 @@
         </div>
     </div>
     <ul class="step_list">
-        <li></li>
+        <li class="selected">1.选择影片场次</li>
+        <li>2.选定座位</li>
+        <li>3.支付订单</li>
     </ul>
     <div class="schedules">
-        <h3 style="font-weight: 400;font-size: 20px;padding: 30px 0 10px;border-bottom: 1px solid #e2e2e2;">选座购票</h3>
-        <ul class="date_list"></ul>
-        <ul class="schedules_list">
-            {volist name="schedules" id="item"}
-            <li>
-                <p>{$item['time']}开场</p>
-                <p>时长{$data['duration']}分钟</p>
-                <p><span>￥{$data['price']*$item['discount']/10}</span><s>{$data['price']}</s></p>
-                <p>余位{$item['available']*100/$item['allNum']}%</p>
-                <p class="selectSeat"><a href="{:url('order/index')}">选座购票</a></p>
-            </li>
-            {/volist}
-        </ul>
+        <div class="schedules_list_box">
+            <h3 style="font-weight: 400;font-size: 20px;padding: 30px 0 10px;border-bottom: 1px solid #e2e2e2;">选座购票</h3>
+            <ul class="date_list"></ul>
+            <ul class="schedules_list"></ul>
+        </div>
+        <div class="seat_list_box">
+            <ul class="seat_list_row"></ul>
+            <ul class="seat_list"></ul>
+            <ul class="order_detail">
+                <li>
+                    <span>座位：</span><br/>
+                    <span class="seat_num_list">未选择座位</span>
+                </li>
+                <li>
+                    <span>票数：</span>
+                    <span class="ticket_num">0</span>张
+                </li>
+                <li>
+                    <span>总价：</span>
+                    <span class="ticket_price">0</span>元
+                </li>
+                <li style="cursor: pointer;" onclick="submitForm()">
+                    <a class="btn btn-default submit">确认提交</a>
+                </li>
+            </ul>
+        </div>
+
     </div>
-    <div class=""></div>
+    <div class="order_create">
+        <h3><span>确认订单信息</span><span class="order_id"></span></h3>
+        <div class="order_list_box"></div>
+    </div>
 </div>
 {load href="/tp5/public/static/js/jquery.js"}
 {load href="/tp5/public/static/js/swiper.min.js"}
 {load href="/tp5/public/static/js/index.js"}
 <script>
+    var seat_list = [];
+    var priceSelected = '';
+    var nowPage = 0;
+    var sid = 0;
+
     $('.list_content').hover(function(){
         $('.list_content').removeClass('actived');
         $(this).addClass('actived');
@@ -241,24 +390,184 @@
         },
     });
 
-    $('.date_list').on('click','li',function(){
-        $('.date_list li').removeClass('selected');
-        $(this).addClass('selected');
-    })
-
     // 日期安排
     var str = '';
     var arr = ['日', '一', '二', '三', '四', '五', '六']
-
     for (var i = 0; i < 7; i++) {
         var date = dateFormate(new Date(new Date().getTime() + i*24*3600*1000));
         if (i === 0) {
-            str+='<li class="selected">周'+arr[date.days]+date.month+'月'+date.day+'日</li>'
+            str+='<li class="selected" data-data="'+date.all+'">周'+arr[date.days]+date.month+'月'+date.day+'日</li>'
         } else {
-            str += '<li>周' + arr[date.days] + date.month + '月' + date.day + '日</li>'
+            str += '<li data-data="'+date.all+'">周' + arr[date.days] + date.month + '月' + date.day + '日</li>'
         }
     }
     $('.date_list').html(str);
+
+    // 排期场次列表
+    getData(dateFormate(new Date().getTime()).all)
+    $('.date_list').on('click','li',function(){
+        $('.date_list li').removeClass('selected');
+        $(this).addClass('selected');
+        getData($(this).data('data'))
+    })
+    function getData(date) {
+        var data = {
+            id: "{$data['mid']}",
+            date: date
+        }
+        $.ajax({
+            url: "{:url('movies/getSchedulesList')}",
+            type: 'get',
+            data: data,
+            success: function(res){
+                if (res.code === 200) {
+                    var str = '';
+                    res.data.map(function(item){
+                        var price = "{$data['price']}"*item.discount/10
+                        str+=`<li>
+                                <p>`+item.time+`开场</p>
+                                <p>时长{$data['duration']}分钟</p>
+                                <p><span>￥`+price+`</span><s>{$data['price']}</s></p>
+                                <p>余位`+(item.available*100/item.allNum)+`%</p>
+                                <p class="selectSeat"><a href="javascript:void(0);" onclick="order(`+item.id+`,`+price+`)">选座购票</a></p>
+                                </li>`
+                    })
+                    $('.schedules_list').html(str)
+                } else {
+                    $('.schedules_list').html('<li style="margin-top: 40px;height: 40px;"><p style="width: 100%;line-height: 40px;border:1px solid #e5e5e5;text-align: center;">暂无场次</p></li>')
+                }
+            }
+        })
+    }
+
+    function order(id,price){
+        $('.seat_list_box').show();
+        $('.schedules_list_box').hide();
+        $('.order_create').hide();
+        nowPage = 1; // 购票进度
+        $('.step_list li').removeClass('selected');
+        $('.step_list li:eq('+nowPage+')').addClass('selected');
+        // console.log(id, price)
+        priceSelected = price
+        sid = id
+        getSeat(id);
+    }
+    function getSeat(id){
+        $.ajax({
+            url: "{:url('order/show')}",
+            type: 'get',
+            data: {sid: id},
+            success:function(res){
+                var arr=[]
+                res.data.map(function(item){
+                    if(item.seatNum.indexOf(',')){
+                        arr = arr.concat(item.seatNum.split(','))
+                    }else{
+                        arr.push(item.seatNum)
+                    }
+                })
+                var str = ''
+                var str1 = ''
+                for (var i=0; i< 5; i++) {
+                    str+='<li>'
+                    str1+='<li>'+(i+1)+'</li>'
+                    for (var j=0; j<15; j++) {
+                        if (arr.some(function(item){
+                            return ((i + 1) + '-' + (j + 1)) === item
+                        })) {
+                            console.log((i + 1) + '-' + (j + 1))
+                            str += '<span class="selected" data-row="' + i + '" data-column="' + j + '" onclick="selectSeat(this)"></span>'
+                        } else {
+                            str += '<span class="unselect" data-row="' + i + '" data-column="' + j + '" onclick="selectSeat(this)"></span>'
+                        }
+                    }
+                    str+='</li>'
+                }
+                $('.seat_list').html(str);
+                $('.seat_list_row').html(str1);
+            }
+        })
+
+    }
+
+    function selectSeat(obj){
+        if ($(obj).attr('class') === 'unselect') {
+            $(obj).addClass('selecting').removeClass('unselect')
+        } else if ($(obj).attr('class') === 'selecting'){
+            $(obj).addClass('unselect').removeClass('selecting')
+        }
+        var list = selected();
+        $('.ticket_num').html(list.length)
+        $('.ticket_price').html(list.length*priceSelected)
+        var str='';
+        if (list.length>0) {
+            list.map(function (item) {
+                str += '<a>' + item.all + '</a><br/>'
+            })
+            $('.submit').addClass('disabled')
+        }else{
+            str='未选择座位'
+            $('.submit').removeClass('disabled')
+        }
+        $('.seat_num_list').html(str)
+    }
+    function selected() {
+        seat_list = [];
+        $('.seat_list li span').map(function(item) {
+            var obj = $('.seat_list li span:eq('+item+')');
+            var order = {
+                row: 0,
+                column: 0,
+                all: ''
+            }
+            if($(obj).attr('class') === 'selecting') {
+                order.row = obj.data('row')
+                order.column = obj.data('column')
+                order.all = '第'+(order.row+1)+'排'+(order.column+1)+'座'
+                seat_list.push(order)
+            }
+        })
+        return seat_list;
+    }
+
+
+    function submitForm() {
+        var data = {
+            sid: sid,
+            mName: "{$data['title']}",
+            seat: '',
+            ticketNum: seat_list.length,
+            price: $('.ticket_price').html()
+        }
+        var str=''
+        seat_list.map(function(item){
+            str+=(item.row+1)+'-'+(item.column+1)+','
+        })
+        data.seat=str.substr(0, str.length-1)
+        $('.seat_num_list').html('未选择座位');
+        $('.ticket_num').html('');
+        $('.ticket_price').html('');
+        $('.submit').addClass('disabled');
+        $.ajax({
+            url: "{:url('order/add')}",
+            type: 'post',
+            data: data,
+            success:function(res){
+                if(res.code === 200){
+                    $('.seat_list_box').hide();
+                    $('.schedules_list_box').hide();
+                    $('.order_create').show();
+                    nowPage = 2;
+                    $('.step_list li').removeClass('selected');
+                    $('.step_list li:eq('+nowPage+')').addClass('selected');
+
+                    $('.order_id').html(res.data.id)
+                    var str='<p>'+res.data.mName+'</p><p>'+res.data.seatNum+'</p><p>'+res.data.ticketNum+'</p><p>'+res.data.price+'</p>'
+                    $('.order_list_box').html(str)
+                }
+            }
+        })
+    }
 
     function dateFormate(dates){
         var dateAll = new Date(dates);
@@ -271,8 +580,10 @@
             second: dateAll.getSeconds(),
             days: dateAll.getDay(),
         }
+        dateObj.all = dateObj.year+'-'+(dateObj.month>9?dateObj.month:'0'+dateObj.month)+'-'+(dateObj.day>9?dateObj.day:'0'+dateObj.day)
         return dateObj
     }
+
 </script>
 </body>
 </html>
