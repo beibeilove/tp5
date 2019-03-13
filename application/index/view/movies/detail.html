@@ -259,6 +259,25 @@
         .order_create{
             display: none;
         }
+        .order_create h3 span{
+            line-height: 35px;
+        }
+        .order_list_box p:nth-of-type(1){
+            font-size: 20px;
+            line-height: 35px;
+        }
+        .order_list_box p:nth-of-type(2){
+            font-size: 14px;
+            line-height: 35px;
+        }
+        .order_list_box p:nth-of-type(3){
+            font-size: 14px;
+            line-height: 35px;
+        }
+        .order_list_box p:nth-of-type(4){
+            font-size: 14px;
+            line-height: 35px;
+        }
     </style>
 </head>
 <body>
@@ -280,7 +299,7 @@
                     <a href="javascript:void(0);"><span>&#xe69d;   </span>{$Think.session.frontUsername}</a>
                     <div class="loginInfoList">
                         <div class="loginInfoListSon"><a href="">我的订单</a></div>
-                        <div class="loginInfoListSon"><a href="">退出</a></div>
+                        <div class="loginInfoListSon"><a href="{:url('login/logout')}">退出</a></div>
                         <div class="loginInfoListSon"><a href=""></a></div>
                     </div>
                 </div>
@@ -352,7 +371,7 @@
 
     </div>
     <div class="order_create">
-        <h3><span>确认订单信息</span><span class="order_id"></span></h3>
+        <h3><span>确认订单信息</span><span class="order_id" style="font-size: 14px;float: right;margin-right: 20px;"></span></h3>
         <div class="order_list_box"></div>
     </div>
 </div>
@@ -428,7 +447,7 @@
                                 <p>`+item.time+`开场</p>
                                 <p>时长{$data['duration']}分钟</p>
                                 <p><span>￥`+price+`</span><s>{$data['price']}</s></p>
-                                <p>余位`+(item.available*100/item.allNum)+`%</p>
+                                <p>余位`+Math.round(item.available*100/item.allNum)+`%</p>
                                 <p class="selectSeat"><a href="javascript:void(0);" onclick="order(`+item.id+`,`+price+`)">选座购票</a></p>
                                 </li>`
                     })
@@ -475,7 +494,7 @@
                         if (arr.some(function(item){
                             return ((i + 1) + '-' + (j + 1)) === item
                         })) {
-                            console.log((i + 1) + '-' + (j + 1))
+                            // console.log((i + 1) + '-' + (j + 1))
                             str += '<span class="selected" data-row="' + i + '" data-column="' + j + '" onclick="selectSeat(this)"></span>'
                         } else {
                             str += '<span class="unselect" data-row="' + i + '" data-column="' + j + '" onclick="selectSeat(this)"></span>'
@@ -530,7 +549,9 @@
         return seat_list;
     }
 
-
+    /**
+     * 确定并生成订单
+     * */
     function submitForm() {
         var data = {
             sid: sid,
@@ -561,9 +582,43 @@
                     $('.step_list li').removeClass('selected');
                     $('.step_list li:eq('+nowPage+')').addClass('selected');
 
-                    $('.order_id').html(res.data.id)
-                    var str='<p>'+res.data.mName+'</p><p>'+res.data.seatNum+'</p><p>'+res.data.ticketNum+'</p><p>'+res.data.price+'</p>'
-                    $('.order_list_box').html(str)
+                    $('.order_id').html('订单号：'+res.data.id)
+                    var seatNum = res.data.seatNum.indexOf(',') ? res.data.seatNum.split(',') : [res.data.seatNum];
+                    var seatStr = ''
+                    seatNum.map(function(item){
+                        var seatArr = item.indexOf('-') ? item.split('-') : item;
+                        seatStr += '第'+ seatArr[0]+'列'+seatArr[1]+'排,'
+                    })
+                    var nowSeatNum = seatStr.substr(0, seatStr.length-1);
+                    var str='<p>'+res.data.mName+'</p><p>'+nowSeatNum+'</p><p>共'+res.data.ticketNum+'张</p><p>总计：'+res.data.price+'元</p><button type="button" id="deleteOrder" onclick="deleteOrder()">退票</button><span id="hiddenId" style="display: none;">'+res.data.id+'</span>'
+                    $('.order_list_box').html(str);
+                } else if(res.code === 401) {
+                    alert(res.data)
+                    setTimeout(function(){
+                        window.location.href="{:url('login/index')}";
+                    }, 2000)
+                }
+            }
+        })
+    }
+
+    /**
+     * 退票
+     */
+    function deleteOrder(obj){
+        console.log($('#hiddenId').html())
+        var data={
+            id: $('#hiddenId').html()
+        }
+        $.ajax({
+            url: "{:url('order/delete')}",
+            type: 'get',
+            data: data,
+            success:function(res){
+                console.log(res)
+                if(res.code === 200){
+                    alert('退票成功');
+                    window.location.reload()
                 }
             }
         })

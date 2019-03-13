@@ -1,5 +1,5 @@
 <?php
-namespace app\index\model;
+namespace app\admin\model;
 use think\Model;
 use think\Db;
 class Order extends Model
@@ -21,7 +21,19 @@ class Order extends Model
      * 查询订单
      */
     public function showlist($where=[]){
-        return Db::name($this->table)->field('*')->where($where)->select();
+        return Db::name($this->table)->field('*')->where($where)->paginate(10);
+    }
+
+    /*
+     * 查询订单1
+     */
+    public function showlist1($where=[]){
+        return Db::name($this->table)
+            ->alias('a')
+            ->field('*')
+            ->join('schedules i', 'a.sid = i.id', 'left')
+            ->where($where)
+            ->paginate(10);
     }
 
     /*
