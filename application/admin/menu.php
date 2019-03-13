@@ -24,14 +24,13 @@ $menulist = [
             ['act' => 'position', 'op' => 'show', 'name' => '查看推荐位']
         ]
     ],
-//    [
-//        'act' => 'schedules',
-//        'name' => '影片排期管理',
-//        'children' => [
-//            ['act' => 'schedules', 'op' => 'add', 'name' => '新增影片排期'],
-//            ['act' => 'schedules', 'op' => 'show', 'name' => '查看影片排期']
-//        ]
-//    ]
+    [
+        'act' => 'order',
+        'name' => '订单管理',
+        'children' => [
+            ['act' => 'order', 'op' => 'show', 'name' => '查看订单管理']
+        ]
+    ]
 
 ];
 return $menulist;

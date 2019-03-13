@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    {load href="/tp5/public/static/css/base.css"}
+    {load href="/tp5/public/static/css/index.css"}
+    {load href="/tp5/public/static/css/bootstrap.min.css"}
+</head>
+<body>
+<div class="page page1">
+    <h4 class="title">{$data['title']}</h4>
+    <p class="copyfrom"><span>来源：{$data['copyfrom']}</span><span>作者：{$data['director']}</span><span>更新时间：{$data['updatetime']}</span></p>
+    <div class="content">
+        {$data['content']}
+    </div>
+</div>
+</body>
+{load href="/tp5/public/static/js/jquery.js"}
+{load href="/tp5/public/static/js/bootstrap.min.js"}
+</html>

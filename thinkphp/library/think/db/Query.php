@@ -2244,7 +2244,7 @@ class Query
 
         // 生成UPDATE SQL语句
         $sql = $this->builder->update($data, $options);
-        print_r($sql);echo '<pre>';
+//        print_r($sql);echo '<pre>';
         // 获取参数绑定
         $bind = $this->getBind();
         if ($options['fetch_sql']) {

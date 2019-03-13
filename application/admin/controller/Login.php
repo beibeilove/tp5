@@ -43,7 +43,8 @@ class Login extends Controller
     //退出登录
     public function logout()
     {
-        session::delete("userId");
+        session::delete("adminUserId");
+        session::delete('userName');
         return $this->success('退出登录成功', url('index/index'));
     }
 }

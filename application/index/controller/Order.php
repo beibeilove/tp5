@@ -1,0 +1,137 @@
+<?php
+namespace app\index\controller;
+use think\Controller;
+use think\Request;
+use think\Session;
+class Order extends Controller
+{
+    public function __construct(Request $request = null)
+    {
+        parent::__construct($request);
+    }
+
+    /*
+     * 生成订单
+     */
+    public function add()
+    {
+        $condition = [];
+        $where = [];
+        $condition1 = [];
+        $where1 = [];
+        $request = Request::instance()->post();
+        if(!Session::get('frontUserId')){
+            return json(['data'=>'未登录','code'=>401]);
+        }else{
+            $condition['uid'] = Session::get('frontId');
+        }
+//        $condition['uid'] = $request['frontId'];
+        $condition['id'] = date("Ymd") . str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT);
+        $condition['qrcode'] = 123;
+        $condition['createTime'] = time();
+
+        if(empty($request['sid'])){
+            return json(['data'=>'场次为空','code'=>20001]);
+        }else{
+            $condition['sid'] = $request['sid'];
+            $where['id'] = $request['sid'];
+            $where1['i.id'] = $request['sid'];
+        }
+        if(empty($request['mName'])){
+            return json(['data'=>'影片名称为空','code'=>20001]);
+        }else{
+            $condition['mName'] = $request['mName'];
+        }
+        if(empty($request['seat'])){
+                return json(['data'=>'未选定座位','code'=>20001]);
+        }else{
+            $condition['seatNum'] = $request['seat'];
+        }
+        if(empty($request['ticketNum'])){
+            return json(['data'=>'票数为空','code'=>20001]);
+        }else{
+            $condition['ticketNum'] = $request['ticketNum'];
+            $ticketNum=model('schedules')->show($where1,'i.available');
+            $condition1['available'] = $ticketNum['available'] - $condition['ticketNum'];
+        }
+        if(empty($request['price'])){
+            return json(['data'=>'票价为空','code'=>20001]);
+        }else{
+            $condition['price'] = $request['price'];
+        }
+        $condition['status'] = 1;
+        $data=model('Order')->add($condition);
+        if ($data) {
+            $code = 200;
+            model('schedules')->edit($condition1, $where);
+        } else {
+            $code = 20001;
+        }
+        $data = [
+            'code' => $code,
+            'data' => $condition
+        ];
+        return json($data);
+    }
+
+    /*
+     * 查询订单
+     */
+    public function show(){
+        $where = [];
+        $request = Request::instance()->get();
+        if(empty($request['sid'])){
+            return json(['data'=>'场次为空','code'=>20001]);
+        }else{
+            $where['sid'] = $request['sid'];
+        }
+        $where['status'] = 2;
+        $data = model('Order')->showList($where);
+
+        if ($data) {
+            $code = 200;
+        } else {
+            $code = 20001;
+        }
+        $data = [
+            'code' => $code,
+            'data' => $data
+        ];
+        return json($data);
+    }
+
+    /*
+     * 订单退订
+     */
+    public function delete() {
+        $where = [];
+        $where1=[];
+        $condition=[];
+        $request = Request::instance()->get();
+        if(empty($request['id'])){
+            return json(['data'=>'订单无效','code'=>20001]);
+        }else{
+            $where['id'] = $request['id'];
+        }
+        $data = model('order')->showDetail($where);
+        $where1['i.id'] = $data['sid'];
+        $ticketNum=model('schedules')->show($where1,'i.available');
+
+        $condition['available'] = $ticketNum['available']+$data['ticketNum'];
+        $update=model('schedules')->edit($condition, ['id' => $data['sid']]);
+
+        $condition1['status'] = 0;
+        $update1=model('order')->edit($condition1, $where);
+        if ($update && $update1) {
+            $code = 200;
+        } else {
+            $code = 20001;
+        }
+        $update = [
+            'code' => $code,
+            'data' => $update1
+        ];
+        return json($update);
+    }
+}
+?>

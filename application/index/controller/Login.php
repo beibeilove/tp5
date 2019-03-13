@@ -11,8 +11,9 @@ class Login extends Controller
     public function index()
     {
         $request = Request::instance();
+        $redirectUrl = $request->header();
+        var_dump($redirectUrl['referer']);
         if (!empty($redirectUrl['referer'])) {
-            $redirectUrl = $request->header();
             Session::set('redirectUrl', $redirectUrl['referer']);
         }
         return view("login");
@@ -50,7 +51,9 @@ class Login extends Controller
     //退出登录
     public function logout()
     {
-        session::delete("userId");
+        session::delete("frontUserId");
+        session::delete('frontUsername');
+        session::delete('frontId');
         return $this->success('退出登录成功', url('index/index'));
     }
 }
