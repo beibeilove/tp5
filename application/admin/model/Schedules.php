@@ -23,11 +23,14 @@ class Schedules extends Model{
     /*
      * 查询单条电影排期
      * */
-    public function show($where = [], $order = "time and date desc")
+    public function show($where = [], $field = "*")
     {
-        return Db::name($this->table)
+        return Db::name('movies')
+            ->alias('a')
+            ->join($this->table.' i','a.id=i.mid','inner')
+            ->field($field)
             ->where($where)
-            ->order($order)
+            ->group('i.mid')
             ->find();
     }
 

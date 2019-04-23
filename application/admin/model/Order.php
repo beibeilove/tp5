@@ -30,7 +30,7 @@ class Order extends Model
     public function showlist1($where=[]){
         return Db::name($this->table)
             ->alias('a')
-            ->field('*')
+            ->field('a.*,i.date,i.time')
             ->join('schedules i', 'a.sid = i.id', 'left')
             ->where($where)
             ->paginate(10);

@@ -10,6 +10,13 @@ class Order extends Controller
         parent::__construct($request);
     }
 
+    /**
+     * @return \think\response\View
+     * 首页
+     */
+    public function index(){
+        return view('index');
+    }
     /*
      * 生成订单
      */
@@ -77,21 +84,43 @@ class Order extends Controller
     /*
      * 查询订单
      */
-    public function show(){
+    public function showDetail(){
         $where = [];
         $request = Request::instance()->get();
-        if(empty($request['sid'])){
-            return json(['data'=>'场次为空','code'=>20001]);
+        if(empty($request['id'])){
+            return json(['data'=>'订单不存在','code'=>20001]);
         }else{
-            $where['sid'] = $request['sid'];
+            $where['id'] = $request['id'];
         }
-        $where['status'] = 2;
-        $data = model('Order')->showList($where);
+        $data = model('Order')->showDetail($where);
 
         if ($data) {
             $code = 200;
         } else {
             $code = 20001;
+        }
+        $data = [
+            'code' => $code,
+            'data' => $data
+        ];
+        return json($data);
+    }
+
+    /*
+     * 查询订单列表
+     */
+    public function show(){
+        $where = [];
+        $request = Request::instance()->post();
+
+        $where['uId'] = Session::get('frontId');
+        $where['status'] = $request['status'];
+        $data = model('Order')->showlist1($where);
+
+        if ($data) {
+            $code = 200;
+        } else {
+            $code = 200;
         }
         $data = [
             'code' => $code,
@@ -120,7 +149,7 @@ class Order extends Controller
         $condition['available'] = $ticketNum['available']+$data['ticketNum'];
         $update=model('schedules')->edit($condition, ['id' => $data['sid']]);
 
-        $condition1['status'] = 0;
+        $condition1['status'] = 2;
         $update1=model('order')->edit($condition1, $where);
         if ($update && $update1) {
             $code = 200;

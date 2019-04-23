@@ -1,122 +1,347 @@
-/*
-Navicat MySQL Data Transfer
+-- phpMyAdmin SQL Dump
+-- version 4.8.3
+-- https://www.phpmyadmin.net/
+--
+-- 主机： 127.0.0.1:3306
+-- 生成日期： 2019-03-13 14:17:35
+-- 服务器版本： 5.7.23
+-- PHP 版本： 7.0.32
 
-Source Server         : 本地数据库
-Source Server Version : 50612
-Source Host           : localhost:3306
-Source Database       : depot
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
 
-Target Server Type    : MYSQL
-Target Server Version : 50612
-File Encoding         : 65001
 
-Date: 2018-03-07 17:05:59
-*/
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
-SET FOREIGN_KEY_CHECKS=0;
+--
+-- 数据库： `depot`
+--
 
--- ----------------------------
--- Table structure for movies
--- ----------------------------
-DROP TABLE IF EXISTS `article`;
-CREATE TABLE `article` (
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `movies`
+--
+
+DROP TABLE IF EXISTS `movies`;
+CREATE TABLE IF NOT EXISTS `movies` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `title` varchar(200) NOT NULL COMMENT '文章标题',
-  `desc` varchar(255) NOT NULL COMMENT '文章描述',
-  `content` longtext NOT NULL COMMENT '文章内容',
-  `imgurl` varchar(200) DEFAULT NULL COMMENT '文章封面图片',
+  `title` varchar(200) NOT NULL COMMENT '影片标题',
+  `desc` varchar(255) NOT NULL COMMENT '影片描述',
+  `content` longtext NOT NULL COMMENT '影片内容',
+  `imgurl` varchar(200) DEFAULT NULL COMMENT '影片封面图片',
   `linkurl` varchar(200) DEFAULT NULL COMMENT '相关链接',
-  `type` char(50) DEFAULT NULL COMMENT '文章类型  依赖于position表 ',
-  `author` varchar(200) DEFAULT NULL COMMENT '作者',
+  `director` varchar(200) DEFAULT NULL COMMENT '影片导演',
+  `actor` text COMMENT '影片演员',
+  `score` float NOT NULL COMMENT '影片评分',
+  `duration` int(10) NOT NULL COMMENT '影片时长',
+  `price` int(10) NOT NULL COMMENT '票价',
+  `releaseTime` datetime NOT NULL COMMENT '上映时间',
   `copyfrom` varchar(255) DEFAULT NULL COMMENT '来源',
   `inputtime` int(10) DEFAULT NULL COMMENT '上传日期',
   `updatetime` int(10) DEFAULT NULL COMMENT '更新日期',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='文章表';
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COMMENT='文章表';
 
--- ----------------------------
--- Records of movies
--- ----------------------------
-INSERT INTO `article` VALUES ('1', '懂得拒绝，恰是最好的尊1', '不懂拒绝，其实是得了一种叫“不好意思”的病。过度友善的人，不忍或害怕拒绝别人，他们总是怀抱善意，宁可牺牲自己的时间、精力，也不想让别人失望。然而，害怕拒绝，害怕让别人失望，也是一种自卑。', '<p style=\"text-indent: 2em;\" font-size:14px;\"=\"\"><span style=\"font-size:16px;\">不懂拒绝，其实是得了一种叫“不好意思”的病。过度友善的人，不忍或害怕拒绝别人，他们总是怀抱善意，宁可牺牲自己的</span><a href=\"http://www.duwenzhang.com/huati/shijian/index1.html\"><span style=\"font-size:16px;\">时间</span></a><span style=\"font-size:16px;\">、精力，也不想让别人</span><a href=\"http://www.duwenzhang.com/huati/shiwang/index1.html\"><span style=\"font-size:16px;\">失望</span></a><span style=\"font-size:16px;\">。然而，害怕拒绝，害怕让别人失望，也是一种</span><a href=\"http://www.duwenzhang.com/huati/zibei/index1.html\"><span style=\"font-size:16px;\">自卑</span></a><span style=\"font-size:16px;\">。</span>\r\n	</p>\r\n<p style=\"font-family:\" font-size:14px;\"=\"\"> <a href=\"http://www.duwenzhang.com/wenzhang/shenghuosuibi/20160729/356701.html\"><img border=\"0\" alt=\"懂得拒绝，恰是最好的尊重\" align=\"right\" src=\"http://www.duwenzhang.com/upimg/160729/1_142642.jpg\" width=\"220\" height=\"165\" /></a><span style=\"font-size:16px;\">　　</span><a href=\"http://www.duwenzhang.com/wenzhang/shenghuosuibi/\"><span style=\"font-size:16px;\">生活</span></a><span style=\"font-size:16px;\">总有点欺软怕硬。一个完全不懂拒绝的人，也不可能赢得真正的尊重。</span>\r\n</p>\r\n<p style=\"text-indent: 2em;\" font-size:14px;\"=\"\"><span style=\"font-size:16px;\">不懂拒绝的人，迟早要学会狠下心肠。</span>\r\n	</p>\r\n<p style=\"text-indent: 2em;\" font-size:14px;\"=\"\"><span style=\"font-size:16px;\">1. 不懂拒绝，是一种病</span>\r\n</p>\r\n<p style=\"text-indent: 2em;\" font-size:14px;\"=\"\"><span style=\"font-size:16px;\">很多人都</span><a href=\"http://www.duwenzhang.com/huati/xihuan/index1.html\"><span style=\"font-size:16px;\">喜欢</span></a><span style=\"font-size:16px;\">《欢乐颂》里的关雎尔，因为她人长得甜美，心地也好。但她也常常为人诟病：正因为心地太好，她不懂得拒绝别人。</span>\r\n	</p>\r\n<p style=\"text-indent: 2em;\" font-size:14px;\"=\"\"><span style=\"font-size:16px;\">关雎尔很多时候加班加得晚，都是因为帮别人做事。终于有一次，同事又病了请她完成剩下的工作，最后也是她签名确认。</span>\r\n</p>\r\n<p style=\"text-indent: 2em;\" font-size:14px;\"=\"\"><span style=\"font-size:16px;\">同事做的那一部分错漏百出，经理知道后却只骂了关雎尔。因为最后签名的是她，所有</span><a href=\"http://www.duwenzhang.com/huati/zeren/index1.html\"><span style=\"font-size:16px;\">责任</span></a><span style=\"font-size:16px;\">都要她来承担。而那个同事，出事之后一句话也没替她说，也没有一句安慰。</span>\r\n	</p>\r\n<p style=\"text-indent: 2em;\" font-size:14px;\"=\"\"><span style=\"font-size:16px;\">关雎尔的傻白甜行径，其实也是今天许多人的写照：</span>\r\n</p>\r\n<p style=\"text-indent: 2em;\" font-size:14px;\"=\"\"><span style=\"font-size:16px;\">因为想塑造自己的良好形象，所以对</span><a href=\"http://www.duwenzhang.com/huati/pengyou/index1.html\"><span style=\"font-size:16px;\">朋友</span></a><span style=\"font-size:16px;\">的请求来者不拒。终于，我们</span><a href=\"http://www.duwenzhang.com/huati/wennuan/index1.html\"><span style=\"font-size:16px;\">温暖</span></a><span style=\"font-size:16px;\">了别人，却累死了自己。</span>\r\n	</p>\r\n<p style=\"text-indent: 2em;\" font-size:14px;\"=\"\"><span style=\"font-size:16px;\">2 你有多重要？</span>\r\n</p>\r\n<p style=\"text-indent: 2em;\" font-size:14px;\"=\"\"><span style=\"font-size:16px;\">“TA一定是走投无路了，才来找我……”、“要是我把TA拒绝了，我就是坏人……”这是我们在接受求助时的心理。</span>\r\n	</p>\r\n<p style=\"text-indent: 2em;\" font-size:14px;\"=\"\"><span style=\"font-size:16px;\">不懂拒绝的背后，是我们往往将自己放在太重要的位置。</span>\r\n</p>\r\n<p style=\"text-indent: 2em;\" font-size:14px;\"=\"\"><span style=\"font-size:16px;\">斗米恩升米仇的</span><a href=\"http://www.duwenzhang.com/\"><span style=\"font-size:16px;\">故事</span></a><span style=\"font-size:16px;\">，却告诉了我们一个无法违背的</span><a href=\"http://www.duwenzhang.com/huati/renxing/index1.html\"><span style=\"font-size:16px;\">人性</span></a><span style=\"font-size:16px;\">：</span>\r\n	</p>\r\n<p style=\"text-indent: 2em;\" font-size:14px;\"=\"\"><span style=\"font-size:16px;\">帮得了一次，就有第二次；帮得了第二次，就有后面无穷多次。而无休止帮助的剧情发展，往往是始于</span><a href=\"http://www.duwenzhang.com/huati/ganen/index1.html\"><span style=\"font-size:16px;\">感恩</span></a><span style=\"font-size:16px;\">，终于嫌隙。当哪一次帮不上忙，你就会变成罪人。</span>\r\n</p>\r\n<p style=\"text-indent: 2em;\" font-size:14px;\"=\"\"><span style=\"font-size:16px;\">3 你的位置，决定了你的作为</span>\r\n	</p>\r\n<p style=\"text-indent: 2em;\" font-size:14px;\"=\"\"><span style=\"font-size:16px;\">《蝙蝠侠大战超人：正义黎明》这部电影里面，从不拒绝救助任何人的超人，面临着一个巨大挑战：民众在恐慌，这么一个能力巨大的人，他为什么只是帮助人？未来会不会有一天，他用这种强大力量反过来杀人？</span>\r\n</p>\r\n<p style=\"text-indent: 2em;\" font-size:14px;\"=\"\"><span style=\"font-size:16px;\">因此在法庭上，众人拷问的是超人的这个问题：你到底是谁？</span>\r\n	</p>\r\n<p style=\"text-indent: 2em;\" font-size:14px;\"=\"\"><span style=\"font-size:16px;\">不懂拒绝别人的人，有意无意地其实是把自己当成了超人。而他们之所以不懂得拒绝，其实正是因为他们跟超人一样，根本没有弄清楚自己到底是谁。</span>\r\n</p>\r\n<p style=\"text-indent: 2em;\" font-size:14px;\"=\"\"><span style=\"font-size:16px;\">关雎尔没有弄清楚自己的身份，她只是公司的其中一个职能，在一个讲究分工协作的五百强企业，她根本不可能完成所有职能的执行。所以她累死累活，最终只能得到跟超人同样的质问。</span>\r\n	</p>\r\n<p style=\"text-indent: 2em;\" font-size:14px;\"=\"\"><span style=\"font-size:16px;\">4 拒绝！时而温柔、时而狠狠地拒绝！</span>\r\n</p>\r\n<p style=\"text-indent: 2em;\" font-size:14px;\"=\"\"><span style=\"font-size:16px;\">“有所为，有所不为”，是孔子的话。“有所不为”就是拒绝。什么样的人有所不为？君子。</span>\r\n	</p>\r\n<p style=\"text-indent: 2em;\" font-size:14px;\"=\"\"><span style=\"font-size:16px;\">君子就是一种身份地位。像君子一样，对于不同身份地位的人，就有他们该做和该拒绝做的事。</span>\r\n</p>\r\n<p style=\"text-indent: 2em;\" font-size:14px;\"=\"\"><span style=\"font-size:16px;\">三毛说： “不要害怕拒绝他人，如果自己的理由出于正当。当一个人开口提出要求的时候，他的心里根本预备好了两种答案。所以，给他任何一个其中的答案，都是意料中的。”</span>\r\n	</p>\r\n<p style=\"text-indent: 2em;\" font-size:14px;\"=\"\"><span style=\"font-size:16px;\">因此，拒绝别人，一定要先给出一个正当理由。“我要下班”、“我不喜欢这样做”都是正当理由。哪怕</span><a href=\"http://www.duwenzhang.com/huati/danchun/index1.html\"><span style=\"font-size:16px;\">单纯</span></a><span style=\"font-size:16px;\">就是不想帮，“我不想”也是最好的理由。</span>\r\n</p>\r\n<p style=\"text-indent: 2em;\" font-size:14px;\"=\"\"><span style=\"font-size:16px;\">如果不想</span><a href=\"http://www.duwenzhang.com/huati/shanghai/index1.html\"><span style=\"font-size:16px;\">伤害</span></a><span style=\"font-size:16px;\">别人的面子，话就说得圆一点。</span>\r\n	</p>\r\n<p style=\"text-indent: 2em;\" font-size:14px;\"=\"\"><span style=\"font-size:16px;\">钱锺书去世后，早年就</span><a href=\"http://www.duwenzhang.com/huati/anlian/index1.html\"><span style=\"font-size:16px;\">暗恋</span></a><span style=\"font-size:16px;\">杨绛的费孝通又再上门，临走时，杨绛送他一句话：“楼梯不好走，你以后也不要‘知难而上’了。”</span>\r\n</p>\r\n<p style=\"text-indent: 2em;\" font-size:14px;\"=\"\"><span style=\"font-size:16px;\">费孝通也是聪明人，以后也只能死了那条心。</span>\r\n	</p>\r\n<p style=\"text-indent: 2em;\" font-size:14px;\"=\"\"><span style=\"font-size:16px;\">拒绝，不是对来者的侮辱。相反，不浪费大家的时间，是对双方最大的尊重。</span>\r\n</p>\r\n<p style=\"text-indent: 2em;\" font-size:14px;\"=\"\"><span style=\"font-size:16px;\">而每一次拒绝，你都是再一次回答了一个重要的问题，也促使对方思考这一个问题：</span>\r\n	</p>\r\n<p style=\"text-indent: 2em;\" font-size:14px;\"=\"\"><span style=\"font-size:16px;\">我到底是谁。</span>\r\n</p>\r\n<p style=\"text-indent: 2em;\" font-size:14px;\"=\"\"><a href=\"http://www.duwenzhang.com/\">文章</a>来源/国馆（guoguan5000）\r\n	</p>', 'upload/active/img/20171228/1514445342.jpeg', null, '3', '张三', '中国文学网', '1514512705', '1514515819');
-INSERT INTO `article` VALUES ('3', '懂得拒绝，恰是最好的尊重', '不懂拒绝，其实是得了一种叫“不好意思”的病。过度友善的人，不忍或害怕拒绝别人，他们总是怀抱善意，宁可牺牲自己的时间、精力，也不想让别人失望。然而，害怕拒绝，害怕让别人失望，也是一种自卑。', '<p style=\"font-family:\" font-size:14px;\"=\"\">\r\n	不懂拒绝，其实是得了一种叫“不好意思”的病。过度友善的人，不忍或害怕拒绝别人，他们总是怀抱善意，宁可牺牲自己的<a href=\"http://www.duwenzhang.com/huati/shijian/index1.html\">时间</a>、精力，也不想让别人<a href=\"http://www.duwenzhang.com/huati/shiwang/index1.html\">失望</a>。然而，害怕拒绝，害怕让别人失望，也是一种<a href=\"http://www.duwenzhang.com/huati/zibei/index1.html\">自卑</a>。\r\n	</p>\r\n<p style=\"font-family:\" font-size:14px;\"=\"\"> <a href=\"http://www.duwenzhang.com/wenzhang/shenghuosuibi/20160729/356701.html\"><img border=\"0\" alt=\"懂得拒绝，恰是最好的尊重\" align=\"right\" src=\"http://www.duwenzhang.com/upimg/160729/1_142642.jpg\" width=\"220\" height=\"165\" /></a>　　<a href=\"http://www.duwenzhang.com/wenzhang/shenghuosuibi/\">生活</a>总有点欺软怕硬。一个完全不懂拒绝的人，也不可能赢得真正的尊重。\r\n</p>\r\n<p style=\"font-family:\" font-size:14px;\"=\"\">\r\n	　　不懂拒绝的人，迟早要学会狠下心肠。\r\n	</p>\r\n<p style=\"font-family:\" font-size:14px;\"=\"\">\r\n	　　1 不懂拒绝，是一种病\r\n</p>\r\n<p style=\"font-family:\" font-size:14px;\"=\"\">\r\n	　　很多人都<a href=\"http://www.duwenzhang.com/huati/xihuan/index1.html\">喜欢</a>《欢乐颂》里的关雎尔，因为她人长得甜美，心地也好。但她也常常为人诟病：正因为心地太好，她不懂得拒绝别人。\r\n	</p>\r\n<p style=\"font-family:\" font-size:14px;\"=\"\">\r\n	　　关雎尔很多时候加班加得晚，都是因为帮别人做事。终于有一次，同事又病了请她完成剩下的工作，最后也是她签名确认。\r\n</p>\r\n<p style=\"font-family:\" font-size:14px;\"=\"\">\r\n	　　同事做的那一部分错漏百出，经理知道后却只骂了关雎尔。因为最后签名的是她，所有<a href=\"http://www.duwenzhang.com/huati/zeren/index1.html\">责任</a>都要她来承担。而那个同事，出事之后一句话也没替她说，也没有一句安慰。\r\n	</p>\r\n<p style=\"font-family:\" font-size:14px;\"=\"\">\r\n	　　关雎尔的傻白甜行径，其实也是今天许多人的写照：\r\n</p>\r\n<p style=\"font-family:\" font-size:14px;\"=\"\">\r\n	　　因为想塑造自己的良好形象，所以对<a href=\"http://www.duwenzhang.com/huati/pengyou/index1.html\">朋友</a>的请求来者不拒。终于，我们<a href=\"http://www.duwenzhang.com/huati/wennuan/index1.html\">温暖</a>了别人，却累死了自己。\r\n	</p>\r\n<p style=\"font-family:\" font-size:14px;\"=\"\">\r\n	　　2 你有多重要？\r\n</p>\r\n<p style=\"font-family:\" font-size:14px;\"=\"\">\r\n	　　“TA一定是走投无路了，才来找我……”、“要是我把TA拒绝了，我就是坏人……”这是我们在接受求助时的心理。\r\n	</p>\r\n<p style=\"font-family:\" font-size:14px;\"=\"\">\r\n	　　不懂拒绝的背后，是我们往往将自己放在太重要的位置。\r\n</p>\r\n<p style=\"font-family:\" font-size:14px;\"=\"\">\r\n	　　斗米恩升米仇的<a href=\"http://www.duwenzhang.com/\">故事</a>，却告诉了我们一个无法违背的<a href=\"http://www.duwenzhang.com/huati/renxing/index1.html\">人性</a>：\r\n	</p>\r\n<p style=\"font-family:\" font-size:14px;\"=\"\">\r\n	　　帮得了一次，就有第二次；帮得了第二次，就有后面无穷多次。而无休止帮助的剧情发展，往往是始于<a href=\"http://www.duwenzhang.com/huati/ganen/index1.html\">感恩</a>，终于嫌隙。当哪一次帮不上忙，你就会变成罪人。\r\n</p>\r\n<p style=\"font-family:\" font-size:14px;\"=\"\">\r\n	　　3 你的位置，决定了你的作为\r\n	</p>\r\n<p style=\"font-family:\" font-size:14px;\"=\"\">\r\n	　　《蝙蝠侠大战超人：正义黎明》这部电影里面，从不拒绝救助任何人的超人，面临着一个巨大挑战：民众在恐慌，这么一个能力巨大的人，他为什么只是帮助人？未来会不会有一天，他用这种强大力量反过来杀人？\r\n</p>\r\n<p style=\"font-family:\" font-size:14px;\"=\"\">\r\n	　　因此在法庭上，众人拷问的是超人的这个问题：你到底是谁？\r\n	</p>\r\n<p style=\"font-family:\" font-size:14px;\"=\"\">\r\n	　　不懂拒绝别人的人，有意无意地其实是把自己当成了超人。而他们之所以不懂得拒绝，其实正是因为他们跟超人一样，根本没有弄清楚自己到底是谁。\r\n</p>\r\n<p style=\"font-family:\" font-size:14px;\"=\"\">\r\n	　　关雎尔没有弄清楚自己的身份，她只是公司的其中一个职能，在一个讲究分工协作的五百强企业，她根本不可能完成所有职能的执行。所以她累死累活，最终只能得到跟超人同样的质问。\r\n	</p>\r\n<p style=\"font-family:\" font-size:14px;\"=\"\">\r\n	　　4 拒绝！时而温柔、时而狠狠地拒绝！\r\n</p>\r\n<p style=\"font-family:\" font-size:14px;\"=\"\">\r\n	　　“有所为，有所不为”，是孔子的话。“有所不为”就是拒绝。什么样的人有所不为？君子。\r\n	</p>\r\n<p style=\"font-family:\" font-size:14px;\"=\"\">\r\n	　　君子就是一种身份地位。像君子一样，对于不同身份地位的人，就有他们该做和该拒绝做的事。\r\n</p>\r\n<p style=\"font-family:\" font-size:14px;\"=\"\">\r\n	　　三毛说： “不要害怕拒绝他人，如果自己的理由出于正当。当一个人开口提出要求的时候，他的心里根本预备好了两种答案。所以，给他任何一个其中的答案，都是意料中的。”\r\n	</p>\r\n<p style=\"font-family:\" font-size:14px;\"=\"\">\r\n	　　因此，拒绝别人，一定要先给出一个正当理由。“我要下班”、“我不喜欢这样做”都是正当理由。哪怕<a href=\"http://www.duwenzhang.com/huati/danchun/index1.html\">单纯</a>就是不想帮，“我不想”也是最好的理由。\r\n</p>\r\n<p style=\"font-family:\" font-size:14px;\"=\"\">\r\n	　　如果不想<a href=\"http://www.duwenzhang.com/huati/shanghai/index1.html\">伤害</a>别人的面子，话就说得圆一点。\r\n	</p>\r\n<p style=\"font-family:\" font-size:14px;\"=\"\">\r\n	　　钱锺书去世后，早年就<a href=\"http://www.duwenzhang.com/huati/anlian/index1.html\">暗恋</a>杨绛的费孝通又再上门，临走时，杨绛送他一句话：“楼梯不好走，你以后也不要‘知难而上’了。”\r\n</p>\r\n<p style=\"font-family:\" font-size:14px;\"=\"\">\r\n	　　费孝通也是聪明人，以后也只能死了那条心。\r\n	</p>\r\n<p style=\"font-family:\" font-size:14px;\"=\"\">\r\n	　　拒绝，不是对来者的侮辱。相反，不浪费大家的时间，是对双方最大的尊重。\r\n</p>\r\n<p style=\"font-family:\" font-size:14px;\"=\"\">\r\n	　　而每一次拒绝，你都是再一次回答了一个重要的问题，也促使对方思考这一个问题：\r\n	</p>\r\n<p style=\"font-family:\" font-size:14px;\"=\"\">\r\n	　　我到底是谁。\r\n</p>\r\n<p style=\"font-family:\" font-size:14px;\"=\"\">\r\n	　　<a href=\"http://www.duwenzhang.com/\">文章</a>来源/国馆（guoguan5000）\r\n	</p>', 'upload/active/img/20171228/1514448793.jpeg', null, '1,3,4', '李四', '中国文学网', '1514512760', '1514512760');
+--
+-- 转存表中的数据 `movies`
+--
 
--- ----------------------------
--- Table structure for music
--- ----------------------------
-DROP TABLE IF EXISTS `music`;
-CREATE TABLE `music` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `songname` varchar(200) DEFAULT NULL COMMENT '歌名',
-  `singer` varchar(100) DEFAULT NULL COMMENT '歌手',
-  `url` varchar(200) DEFAULT NULL COMMENT '歌曲链接',
-  `type` tinyint(1) DEFAULT NULL COMMENT '歌曲类型  对照song_type表',
+INSERT INTO `movies` (`id`, `title`, `desc`, `content`, `imgurl`, `linkurl`, `director`, `actor`, `score`, `duration`, `price`, `releaseTime`, `copyfrom`, `inputtime`, `updatetime`) VALUES
+(1, '阿丽塔：战斗天使', '逃离控制 拯救家人', '         未来26世纪，科技发展，人类与机械改造人共存，弱肉强食是钢铁城唯一的生存法则。依德（克里斯托夫·沃尔兹 饰）是钢铁城著名的改造人医生，他在垃圾场发现了一个半机械少女残躯，依德医生将其拯救后为她取名阿丽塔（罗莎·萨拉扎尔 饰）。阿丽塔虽然重获生命却失去了记忆，如一个新生儿一样对这个世界充满新鲜感。在依德医生与好友雨果（基恩·约翰逊 饰）的帮助下，她逐步适应着新生活和街头险恶。一次偶然的机会，阿丽塔发现自己竟有着惊人的战斗天赋。 一次次猎杀激发着她的觉醒，阿丽塔逐渐明白自己注定为战斗而生，为正义而战。一场揭开自己身世之谜，并打破宇宙旧秩序的史诗级冒险之旅就这样展开。', 'upload/active/img/20190301/1551404753.jpeg', 'http://localhost/tp5/public/index.php/admin/index/index.html', '罗伯特·罗德里格兹', '罗莎·萨拉查,克里斯托弗·沃尔兹,基恩·约翰逊,艾德·斯克林,詹妮弗·康纳利,马赫沙拉·阿里,艾莎·冈萨雷斯,米歇尔·罗德里格兹,马克·扎罗,陈东兰,杰基·厄尔·哈利,Darcel Danielle,迈克尔·洛夫·托利弗', 9.1, 122, 80, '2019-02-22 00:00:00', '美国', 1551404760, 1552010044),
+(2, '驯龙高手3', '不凡历程 史诗终章', '  统领伯克岛的酋长嗝嗝（刘昊然 配音），与阿丝翠德（亚美莉卡·费雷拉 配音）共同打造了一个奇妙而热闹的飞龙乌托邦。一只雌性光煞飞龙的意外出现，加上一个前所未有的威胁的到来，令嗝嗝和没牙仔不得不离开自己唯一的家园，前往他们本以为只存在于神话之中的隐秘之境。在发现自己真正的命运之后，飞龙与骑士将携手殊死奋战，保护他们所珍爱的一切。', 'upload/active/img/20190301/1551417820.jpeg', 'http://localhost/tp5/public/index.php/admin/index/index.html', '迪恩·德布洛斯', '杰伊·巴鲁切尔,刘昊然,亚美莉卡·费雷拉,凯特·布兰切特,基特·哈灵顿,克雷格·费格森,F·默里·亚伯拉罕,杰拉德·巴特勒,乔纳·希尔,克里斯汀·韦格', 8.6, 104, 80, '2019-03-01 00:00:00', '美国', 1551417863, 1551664925),
+(3, '绿皮书', '双影帝共谱 黑白纯友情', '  一名黑人钢琴家，为前往种族歧视严重的南方巡演，找了一个粗暴的白人混混做司机。在一路开车南下的过程里，截然不同的两人矛盾不断，引发了不少争吵和笑料。但又在彼此最需要的时候，一起共渡难关。行程临近结束，两人也慢慢放下了偏见...... 绿皮书，是一本专为黑人而设的旅行指南，标注了各城市中允许黑人进入的旅店、餐馆。电影由真实故事改编。', 'upload/active/img/20190301/1551418046.jpeg', 'http://localhost/tp5/public/index.php/admin/index/index.html', '彼得·法雷里', '维果·莫腾森,马赫沙拉·阿里,琳达·卡德里尼,塞巴斯蒂安·马尼斯科,迈克·哈顿,吉姆·克洛克,伊克博·塞巴,布赖恩·斯特帕尼克', 9.3, 130, 80, '2019-03-01 00:00:00', '美国', 1551418050, 1551664951),
+(4, '流浪地球', '拯救地球之路 青年挺身而出', '  太阳即将毁灭，人类在地球表面建造出巨大的推进器，寻找新家园。然而宇宙之路危机四伏，为了拯救地球，为了人类能在漫长的2500年后抵达新的家园，流浪地球时代的年轻人挺身而出，展开争分夺秒的生死之战。', 'upload/active/img/20190301/1551419278.jpeg', 'http://localhost/tp5/public/index.php/admin/index/index.html', '郭帆', '吴京,屈楚萧,李光洁,吴孟达,赵今麦,隋凯,屈菁菁,张亦驰,杨皓宇,李虹辰,雷佳音', 9.3, 128, 80, '2019-02-05 00:00:00', '中国大陆', 1551419282, 1551664977),
+(5, '惊奇队长', '惊奇女士 超级英雄', '  惊奇队长原名Carol Danvers，她曾是一名美国空军情报局探员，仰慕当时的惊奇队长马维尔。之后再一次意外事故中她获得了超能力，成为“惊奇女士”，在漫画中是非常典型的女性英雄人物。 她可以吸收并控制任意形态的能量，拥有众多超能力。《惊奇队长》将是漫威电影宇宙首部以女性超级英雄为主角的电影。', 'upload/active/img/20190301/1551419372.jpeg', 'http://localhost/tp5/public/index.php/admin/index/index.html', '安娜·波顿,瑞安·弗雷克', '布丽·拉尔森,塞缪尔·杰克逊,嘉玛·陈,本·门德尔森,裘德·洛,杰曼·翰苏', 7.9, 128, 80, '2019-03-08 00:00:00', '美国', 1551419383, 1551664998),
+(6, '飞驰人生', '韩寒最新力作 沈腾爆笑赛车', '  曾经在赛车界叱咤风云、如今却只能经营炒饭大排档的赛车手张驰（沈腾 饰）决定重返车坛挑战年轻一代的天才。然而没钱没车没队友，甚至驾照都得重新考，这场笑料百出不断被打脸的复出之路，还有更多哭笑不得的窘境在等待着这位过气车神……', 'upload/active/img/20190301/1551419491.jpeg', 'http://localhost/tp5/public/index.php/admin/index/index.html', '韩寒', '沈腾,黄景瑜,尹正,张本煜,尹昉,田雨,魏翔,赵文瑄,腾格尔,易小星,刘帅良,何穗,李玲玉', 9, 98, 80, '2019-02-05 00:00:00', '中国大陆', 1551419495, 1551665076),
+(7, '疯狂的外星人', '“疯狂”系列 席卷而来', '  耿浩（黄渤 饰）与一心想发大财的好兄弟大飞（沈腾 饰），经营着各自惨淡的“事业”，然而“天外来客”的意外降临，打破了二人平静又拮据的生活。神秘的西方力量也派出“哼哈二将”在全球搜查外星人行踪。啼笑皆非的跨物种对决，别开生面的“星战”，在中国某海边城市激情上演。', 'upload/active/img/20190301/1551419571.jpeg', 'http://localhost/tp5/public/index.php/admin/index/index.html', '宁浩', '黄渤,沈腾,马修·莫里森,汤姆·派福瑞,凯特·纳尔逊,徐峥,于和伟,雷佳音,刘桦,邓飞', 8.8, 116, 80, '2019-02-05 00:00:00', '中国大陆', 1551419582, 1551665106),
+(8, '夏目友人帐', '十年夏目 温暖如初', '  夏目贵志（神谷浩史 配音）从小就与众不同，可以看到常人看不到的妖怪。他从去世的奶奶玲子（小林沙苗 配音）那里继承了一本名为“友人帐”的妖怪契约书。里面是以前输给玲子的妖怪们的名字。每天游走在人与妖怪之间的夏目，和自称保镖的猫咪老师（井上和彦 配音）一起，把友人帐中的名字还给妖怪。某天，夏目偶然遇到了曾经的同学结城（村濑步 配音），想起了一段儿时的回忆。后来，夏目遇到了一位叫做津村容莉枝（岛本须美 配音）的女性，她曾与夏目的奶奶玲子是同学。容莉枝现在和自己的独生子椋雄（高良健吾 配音）一起过着平静的生活。这对母子有着一种特殊的羁绊，虽然生活平淡却能乐在其中。在和他们的交流中，夏目感到心情都平和了下来。之后，有个神秘的妖怪潜入了母子生活的城镇。猫咪老师前往调查，返回时身上沾了“妖怪的种子”，一夜之间在庭院里长成了一棵树，其果实和猫咪老师的体型非常相似。猫咪老师吃了那些果实，之后发生了不可思议的变化……', 'upload/active/img/20190301/1551419666.jpeg', 'http://localhost/tp5/public/index.php/admin/index/index.html', '大森贵弘', '神谷浩史,井上和彦,高良健吾,小林沙苗,泽城美雪,石田彰', 7.6, 124, 80, '2019-03-07 00:00:00', '日本', 1551419672, 1551665129),
+(9, '熊出没·原始时代', '自然危机战 能否回现代', '  熊大（张伟 配音）熊二（张秉君 配音）光头强（谭笑 配音）意外穿越回恢宏的石器时代，与猛犸象、剑齿虎、史前大鸟等一众奇特生物、以及原始人类开启一段眼界大开的奇幻之旅！原始时代瑰丽非常，却又危机四伏。熊强三人组磕磕绊绊，笑料百出。一只可爱狼女一路相伴，背后竟是人族与狼族的对立。面对原始人类的不断质疑、凶猛狼族的步步紧逼、自然危机的全面爆发，熊强究竟何去何从？他们又能否回归现代？一场关于守护与成长、爱与勇气的冒险，已经拉开序幕……', 'upload/active/img/20190301/1551419740.jpeg', 'http://localhost/tp5/public/index.php/admin/index/index.html', '丁亮,林汇达', '宋祖儿,谭笑,张伟,张秉君,张韶涵,刘思奇,孟雨田,刘沛', 8.6, 92, 80, '2019-02-07 00:00:00', '中国大陆', 1551419749, 1551665176),
+(10, '狂暴凶狮', '大狩猎场 全城戒备', '  在阿姆斯特丹，警方发现了被残忍杀害的一家人的尸体，警方对此案一时之间毫无头绪。但是阿姆斯特丹动物园的兽医Lizzie通过伤口怀疑这应该是一只大型的狮子所为。但最初Lizzie的猜测并没有受到警方的重视，直到越来越多的受害者以相同的方式被杀害，毫无疑问阿姆斯特丹已经成为了一位捕食者的狩猎场。警方指派猎人Jack和Lizzie一起对行凶的狮子进行追捕，而Lizzie的男友，一位电视台记者也在跟踪报道此案，Lizzie除了追查狮子的下落还担忧着男友的安全，而此时的狮子已经饥饿难忍……', 'upload/active/img/20190301/1551419829.jpeg', 'http://localhost/tp5/public/index.php/admin/index/index.html', '迪克·麦斯', '朱利安.卢曼,索菲.范.德温,艾比·侯斯,Rienus Krul,Pieter Derks', 8, 105, 80, '2019-03-22 00:00:00', '荷兰', 1551419838, 1551665194),
+(11, '古井凶灵', '千年古井 午夜尖叫', '  民国九年，父亲没有顾及女儿的反对，执意让孝芸嫁入权尊势重的童家。然而，一桩桩诡异蹊跷的怪事却接踵而至。行迹鬼魅的二太太，相继惨死的管家和家丁，不祥逐渐笼罩着这个千年的古宅大院。众人都认为是孝芸给这个家族带来不安和惶恐，童家少爷却对孝芸倾力保护。随着逐渐揭开的内幕，孝芸发现几年前多人罹难的戏班大火，和这个世代相传的家族有着悄然的联系。原来，在这个钟鸣鼎食的家族背后，隐藏着一段让人唏嘘扼腕的爱恨情仇。', 'upload/active/img/20190301/1551419947.jpeg', 'http://localhost/tp5/public/index.php/admin/index/index.html', '王辰六', '陈美林,程韦然,任笑霏,李易芸', 5.6, 88, 80, '2019-02-22 00:00:00', '中国大陆', 1551419951, 1551665220),
+(12, '娱乐追击', '生存法则 谁能不从', '  侯芳芳、包钢都是娱记。榴莲娱乐老总王明翰利用假绑架，炒热旗下艺人白傲洁！侯芳芳、包钢查白傲洁时，查到王明翰过错。白傲洁竟真被绑架失踪，王明翰在侯芳芳等帮助下，发现绑架真相终悔过。原来是为王明翰设的局。', 'upload/active/img/20190301/1551427350.jpeg', 'http://localhost/tp5/public/index.php/admin/index/index.html', '李轩', '刘艺丹,洪天明,万国鹏,姜超,齐芳,李羿瑄,臧洪娜,雪村,林雪', 6.8, 90, 80, '2019-03-08 00:00:00', '中国大陆', 1551427357, 1551665264),
+(13, '新喜剧之王', '星爷新作 再战初一', ' 一直有个明星梦的小镇大龄女青年如梦（鄂靖文 饰）跑龙套多年未果。她和父亲（张琪 饰）关系紧张，亲友都劝她放弃，只有男友查理（张全蛋 饰）还支持她。在剧组，如梦遇见了年少时启发她演戏的男演员马可（王宝强 饰）。但此时过气多年的马可却因内心自卑而性情狂躁，对如梦百般折磨。如梦仍乐观坚持演戏，然而一次比一次沉重的打击却接踵而来，最后她决定放弃梦想，回到父母身边找了份稳定工作，但却得知自己入围了知名导演新片的大型选角。如梦陷入艰难抉择。', 'upload/active/img/20190301/1551431025.jpeg', 'http://localhost/tp5/public/index.php/admin/index/index.html', '周星驰', '王宝强,鄂靖文,张全蛋,景如洋,张琪,袁兴哲,田启文,黄骁鹏,蔡哲睿,苗溢伦,David Torok', 8.4, 91, 80, '2019-02-05 00:00:00', '中国香港', 1551431039, 1551665297),
+(14, '一吻定情', '天才和学渣 插曲或命运', ' 笨蛋爱上天才，会有结果吗？平凡女孩原湘琴（林允饰）喜欢上了天才少年江直树（王大陆饰），在她表白失败准备放弃之际，爸爸居然带着自己搬进了直树家里？！一个猛追，一个猛逃，热闹欢腾的纯真高中生活就此上演。朝夕相处中，直树渐渐被湘琴乐观的无畏精神吸引，他开始怀疑：湘琴究竟是人生偏差、还是自己的命中注定?', 'upload/active/img/20190301/1551431135.jpeg', 'http://localhost/tp5/public/index.php/admin/index/index.html', '陈玉珊', '王大陆,林允', 8.2, 122, 80, '2019-02-14 00:00:00', '中国大陆,中国台湾', 1551431151, 1551665314),
+(15, '朝花夕誓-于离别之朝束起约定之花', '两个灵魂 温馨物语', ' 长生不老的“伊奥鲁夫”族人以织布为生，因远离尘世而被誉为“离别一族”。随着外界对长寿奥秘的追寻，“伊奥鲁夫”族人惨遭灭顶之灾。族中少女玛奇亚在绝望之际，意外捡到人类婴儿艾瑞尔，并决定将之抚养成人。婴儿、顽童、叛逆、成熟乃至老去，少女以“母亲”的身份陪伴着孩子长大成人，成家立业；也以长寿一族的目光注视着人类生老病死，爱恨离别。同样的季节，相异的时间；时光荏苒，两人的羁绊逐渐加深。由两个孤独灵魂相遇编织出的温馨物语，缓缓展开。', 'upload/active/img/20190301/1551431240.jpeg', 'http://localhost/tp5/public/index.php/admin/index/index.html', '筱原俊哉,冈田磨里', '石见舞菜香,入野自由,茅野爱衣,梶裕贵,细谷佳正', 8.7, 115, 80, '2019-02-22 00:00:00', '日本', 1551431246, 1551665334),
+(16, '逆罪', '拨云见日 逆者硬上', ' 颠簸的小面包车外大雪纷飞，让乘客张中庆想起了三十年前他初次来到延寿村日子。那天，是他生命中爱与罪的开始......三十年前，他与延寿村的林含雪私定终身。私奔的途中，爱人为了保全他，甘愿被抓回，成全自己的逃脱。然而，这独自离开的一幕在林世英眼中，更像是不负责任的弃逃。他将女儿与世隔绝，隔开外人的流言蜚语。终于，无止境的等待，常年的禁锢与凌辱，让林含雪陷入崩溃。三十年后，就在她结束悲惨生活后不久，这辆面包车载着素不相识、但与她有千丝万缕的数人，来到了林家大宅。这一晚，一个关于爱情、友情、亲情的纠葛往事，在父亲、朋友与情人不同的记忆拼凑下，这出陈年的真相呼之欲出......', 'upload/active/img/20190301/1551433714.jpeg', 'http://localhost/tp5/public/index.php/admin/index/index.html', '娄晶晶', '李岷城,薛祺 ,彭高唱,马晓峰,杨卿,李戈,付明哲', 6.7, 100, 80, '2019-03-01 00:00:00', '中国大陆', 1551433750, 1551665354),
+(17, '过春天', '一边有身份 一边有生活', ' 16岁单非家庭女孩“佩佩”，她的城市既是香港、也是深圳，一边有身份，一边有生活。为了和闺蜜的约定，为了自己的存在感，为了懵懂的好感，她内心的冲动被点燃、“水客”成为了她的另一个身份，一段颇有“冒险”感的青春故事就此开始……', 'upload/active/img/20190301/1551433829.jpeg', 'http://localhost/tp5/public/index.php/admin/index/index.html', '白雪', '黄尧,孙阳,汤加文,倪虹洁,江美仪,廖启智', 7, 99, 80, '2019-03-15 00:00:00', '中国大陆', 1551433830, 1551665383),
+(18, '小猪佩奇过大年', '佩奇合家欢 开心过大年', ' 汤圆、饺子和爸爸妈妈生活在一个温暖的家庭里。除夕清晨，汤圆和饺子兴高采烈地穿着好准备去爷爷奶奶家，却看到正在家里打扫的爸爸妈妈，原来爸爸妈妈忘记告诉他们一个秘密 - 姥姥姥爷从南方过来陪汤圆饺子一家过春节。为了逗孩子们开心，爸爸讲起了小猪佩奇去儿童节的故事。想念孩子们的爷爷奶奶提早结束了三亚的旅程，赶回到了北方。奶奶抵达后为孩子们讲述了小猪佩奇在儿童节的第二天遇到了意想不到的事情。爷爷奶奶的到来为家中增添了浓浓的年味并一起体验了传统的中国习俗 - 挂中国节，剪窗花，贴春联，发红包等。他们和佩奇乔治一样，每经历一件事情，就会让他们更加热爱彼此，热爱家人，热爱生活。', 'upload/active/img/20190301/1551433940.jpeg', 'http://localhost/tp5/public/index.php/admin/index/index.html', '张大鹏,内维尔·阿斯特利,马克·贝克,尤里斯·范·侯辛,莎拉·罗珀', '朱亚文,刘芸,归亚蕾,方青卓,李大光,常蓝天,王圣迪', 6.5, 81, 80, '2019-02-05 00:00:00', '中国大陆,英国', 1551433942, 1551665778),
+(19, '廉政风云', '廉政公署 风云再起', ' 廉政公署一宗经历多年调查的严重非法内销行贿案件，竟因首被告理达贸易集团负责人陈超群弃保潜逃，以及唯一重要证人兼举报者，理达的前任财务总监许植尧（张家辉 饰）缺席出庭作证，导致法庭勒令延审一星期！为了7天后案件顺利重审，ICAC展开全面行动。负责此案的队长陈敬慈（刘青云 饰）和负责寻找证人的江雪儿（林嘉欣 饰）原是廉政公署一对恩爱夫妻，如今已分居多时，为了案件不得不联手合作。在抓捕陈超群和寻找许植尧的过程中两人都意外发现他们背后隐藏的另一重身份。一个谜团的解开是另一个谜团的开启，背后的阴谋远远超出所有人的想象，烟幕笼罩下光明之路在何方？', 'upload/active/img/20190301/1551434016.jpeg', 'http://localhost/tp5/public/index.php/admin/index/index.html', '麦兆辉', '张家辉,刘青云,林嘉欣,袁咏仪,方中信,汤怡,陈家乐', 7.8, 114, 80, '2019-02-05 00:00:00', '中国香港,中国大陆', 1551434034, 1551665803),
+(20, '江海渔童之巨龟奇缘', '识破大阴谋 海上大冒险', ' 少年满江和爷爷生活在一个民风淳朴的渔村，村民们世代靠天吃饭，善良友爱。然而，这里流传着一个关于“海怪”的传说，因而无人敢靠近外海。一天，商人马老爷带着三个手下来到渔村，表面上与村民相处得其乐融融，实则打起了深海宝藏的主意。机缘巧合，少年满江发现，所谓的“海怪”竟然是一只背驼小岛的巨龟，由此展开了一段传奇的海上大冒险……', 'upload/active/img/20190301/1551434123.jpeg', 'http://localhost/tp5/public/index.php/admin/index/index.html', '张立衍', '无', 6.2, 80, 80, '2019-03-16 00:00:00', '中国大陆', 1551434141, 1551665820),
+(21, '神探蒲松龄', '东方魔幻巨制 邪萌志怪斗法', ' 一代文豪蒲松龄（成龙 饰）执阴阳判化身神探，与捕快严飞（林柏宏 饰）联手追踪金华镇少女失踪案。蒲松龄带领“猪狮虎”“屁屁”“忘忧”“千手”等一众小妖深入案情，在找寻真相的过程中，牵扯出一段旷世奇恋。', 'upload/active/img/20190301/1551434238.jpeg', 'http://localhost/tp5/public/index.php/admin/index/index.html', '严嘉', '成龙,阮经天,钟楚曦,林柏宏,林鹏,乔杉,潘长江,苑琼丹,刘智福,刘智满,刘智堂,姜嫄', 9.5, 108, 80, '2019-02-05 00:00:00', '中国大陆', 1551434239, 1551665840),
+(22, '血战敖伦布拉格', '人间真情 父爱伟大', ' 影片讲述了西部武术家朝鲁（谢苗 饰），在去往敖伦布拉格镇寻找妻子纳依拉（孙鑫 饰）途中巧遇了商业比赛失败后被迫为跨国犯罪集团的打比赛的搏击冠军尊颖，两人展开了武术与搏击的较量。此时，作为跨国集团的押运人员瑟琳娜也纠缠了进去。令人意想不到的是尊颖的“女友”李娜此时也亮出了底牌，故事变得更加扑朔迷离…… 这次意外把朝鲁和尊颖紧紧的联系在一起，让他们命运相吸。这次意外也让尊颖揭开了套在身上的阴谋，也让朝鲁更加懂得人间真情、责任，父爱的伟大……', 'upload/active/img/20190301/1551434322.jpeg', 'http://localhost/tp5/public/index.php/admin/index/index.html', '孙鑫', '谢苗,孙鑫,阿拉木斯,赵靖舒玉,谢瓦', 6.4, 85, 80, '2019-03-08 00:00:00', '中国大陆', 1551434335, 1551665860),
+(23, '今夜在浪漫剧场', '纯爱大师 浪漫经典', ' 影片讲述梦想成为导演的淳朴青年健司（坂口健太郎 饰），和从黑白电影中“穿越而出”，现身于健司面前的美雪公主（绫濑遥 饰）之间的纯情恋爱故事。', 'upload/active/img/20190301/1551434407.jpeg', 'http://localhost/tp5/public/index.php/admin/index/index.html', '武内英树', '绫濑遥,坂口健太郎,本田翼,北村一辉,中尾明庆,石桥杏奈,柄本明,加藤刚', 8.3, 108, 80, '2019-02-14 00:00:00', '日本', 1551434414, 1551665884),
+(24, '复仇者联盟4：终局之战', '超级英雄 就此集结', ' 《复仇者联盟4》（Untitled Avengers film）是未上映的美国超级英雄电影，改编自漫威漫画，也是漫威电影宇宙第22部影片。由安东尼·罗素和乔·罗素执导，小罗伯特·唐尼、乔什·布洛林、马克·鲁法洛、汤姆·希德勒斯顿、克里斯·埃文斯、汤姆·赫兰德等主演。最终定档于2019年5月3日在美国上映。', 'upload/active/img/20190301/1551434989.jpeg', 'http://localhost/tp5/public/index.php/admin/index/index.html', '乔·罗素,安东尼·罗素', '乔什·布洛林,克里斯·帕拉特,克里斯·海姆斯沃斯,伊丽莎白·奥尔森,伊万杰琳·莉莉,汤姆·赫兰德,小罗伯特·唐尼,马克·鲁法洛,格温妮丝·帕特洛,杰瑞米·雷纳,克里斯·埃文斯', 9, 164, 80, '2019-05-31 00:00:00', '美国', 1551435080, 1551665926),
+(25, '忠犬流浪记', '用尽它的一生 只为寻找最初主人', ' 讲述了一只退役后的搜救犬叮当，偷跑出疗养基地，用尽自己的一生寻找最初主人的感人故事！', 'upload/active/img/20190301/1551435206.jpeg', 'http://localhost/tp5/public/index.php/admin/index/index.html', '桑凯·维杜郎', '巴虎,乔巴,妞妞,仔仔,叮当', 7.2, 90, 80, '2019-06-21 00:00:00', '中国大陆,泰国', 1551435207, 1551665945),
+(26, '我的初恋十八岁', '初恋朦胧 铭记一生', ' 不管你是青年，中年，还是已到暮年，在你的记忆深处，一定存在着一个TA，TA被称为初恋，想到TA，也许很甜蜜，也许会扎心的疼，又或者初恋很朦胧，当时并不自知，若干年后回味起来只有无尽的惋惜，不论是哪种感受，初恋的情怀都将伴随我们一生。', 'upload/active/img/20190301/1551435300.jpeg', 'http://localhost/tp5/public/index.php/admin/index/index.html', '王择谚', '袁映玥,刘耀元,翁虹,汤镇业,刘子凯,周波', 8.3, 90, 80, '2019-06-28 00:00:00', '中国大陆', 1551435323, 1551665964),
+(27, '素人特工', '三傻废柴特工 玩转极限运动', ' 极限运动达人赵风（王大陆 饰），误打误撞闯入了一场国际犯罪交易，不得不跟随国际特工（米拉·乔沃维奇 饰）一起前往布达佩斯。在这里他与废柴刑警淼淼（张榕容 饰）、民间科学家丁山（许魏洲 饰）与待业医生LV（刘美彤 饰）组成一支素人特工小队。这四个特工小白和高级国际特攻米拉一起，与恐怖分子开启了一场又惊又喜的斗争。', 'upload/active/img/20190301/1551435407.jpeg', 'http://localhost/tp5/public/index.php/admin/index/index.html', '袁锦麟', '王大陆,张榕容,米拉·乔沃维奇,许魏洲,刘美彤,肖战,林雪,大卫·麦金尼斯,鲁诺,陈国坤,周海媚', 7.4, 90, 80, '2019-07-05 00:00:00', '中国大陆', 1551435409, 1551665996),
+(28, '诛仙', '人生遇变数 启传奇之旅', ' 草庙村被屠，少年张小凡双亲离世，被青云门大竹峰收留。机缘巧合之下，他习得佛门天音功法，又意外获得魔教法器烧火棍，踏上强者之路的同时，也让他陷入了巨大的危机。至魔法器的现世，与陆雪琪、碧瑶、田灵儿三个女生间命运的交错，都让他原本单纯的人生轨迹充满变数。一个勇者驳斥命运的传奇之旅就此展开......', 'upload/active/img/20190301/1551435487.jpeg', 'http://localhost/tp5/public/index.php/admin/index/index.html', '程小东', '肖战,李沁,孟美岐,唐艺昕', 7.4, 90, 80, '2019-08-08 00:00:00', '中国大陆', 1551435507, 1551666019);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `movies_type`
+--
+
+DROP TABLE IF EXISTS `movies_type`;
+CREATE TABLE IF NOT EXISTS `movies_type` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '电影类型和电影关联id',
+  `mid` int(10) NOT NULL COMMENT '电影id',
+  `pid` int(10) NOT NULL COMMENT '电影类型id',
+  `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  KEY `id_2` (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=164 DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `movies_type`
+--
+
+INSERT INTO `movies_type` (`id`, `mid`, `pid`, `createTime`) VALUES
+(101, 2, 6, '2019-03-04 02:02:05'),
+(163, 1, 4, '2019-03-08 01:54:04'),
+(162, 1, 5, '2019-03-08 01:54:04'),
+(100, 2, 8, '2019-03-04 02:02:05'),
+(104, 3, 6, '2019-03-04 02:02:31'),
+(107, 4, 4, '2019-03-04 02:02:57'),
+(106, 4, 9, '2019-03-04 02:02:57'),
+(110, 5, 5, '2019-03-04 02:03:18'),
+(109, 5, 9, '2019-03-04 02:03:18'),
+(108, 5, 12, '2019-03-04 02:03:18'),
+(114, 7, 4, '2019-03-04 02:05:06'),
+(111, 6, 6, '2019-03-04 02:04:36'),
+(113, 7, 6, '2019-03-04 02:05:06'),
+(112, 7, 10, '2019-03-04 02:05:06'),
+(116, 8, 9, '2019-03-04 02:05:29'),
+(119, 9, 6, '2019-03-04 02:06:16'),
+(121, 10, 5, '2019-03-04 02:06:34'),
+(120, 10, 9, '2019-03-04 02:06:34'),
+(124, 11, 1, '2019-03-04 02:07:00'),
+(127, 12, 3, '2019-03-04 02:07:44'),
+(126, 12, 5, '2019-03-04 02:07:44'),
+(125, 12, 6, '2019-03-04 02:07:44'),
+(99, 2, 9, '2019-03-04 02:02:05'),
+(161, 1, 9, '2019-03-08 01:54:04'),
+(103, 3, 10, '2019-03-04 02:02:31'),
+(102, 3, 11, '2019-03-04 02:02:31'),
+(105, 4, 10, '2019-03-04 02:02:57'),
+(115, 8, 10, '2019-03-04 02:05:29'),
+(118, 9, 8, '2019-03-04 02:06:16'),
+(117, 9, 9, '2019-03-04 02:06:16'),
+(123, 11, 3, '2019-03-04 02:07:00'),
+(122, 11, 13, '2019-03-04 02:07:00'),
+(129, 13, 6, '2019-03-04 02:08:17'),
+(128, 13, 10, '2019-03-04 02:08:17'),
+(131, 14, 3, '2019-03-04 02:08:35'),
+(130, 14, 6, '2019-03-04 02:08:35'),
+(133, 15, 8, '2019-03-04 02:08:54'),
+(132, 15, 12, '2019-03-04 02:08:54'),
+(134, 16, 13, '2019-03-04 02:09:14'),
+(137, 17, 9, '2019-03-04 02:09:43'),
+(136, 17, 10, '2019-03-04 02:09:43'),
+(135, 17, 15, '2019-03-04 02:09:43'),
+(139, 18, 6, '2019-03-04 02:16:18'),
+(138, 18, 8, '2019-03-04 02:16:18'),
+(141, 19, 1, '2019-03-04 02:16:43'),
+(140, 19, 14, '2019-03-04 02:16:43'),
+(142, 20, 8, '2019-03-04 02:17:00'),
+(146, 21, 3, '2019-03-04 02:17:20'),
+(145, 21, 5, '2019-03-04 02:17:20'),
+(144, 21, 6, '2019-03-04 02:17:20'),
+(143, 21, 12, '2019-03-04 02:17:20'),
+(149, 22, 3, '2019-03-04 02:17:40'),
+(148, 22, 5, '2019-03-04 02:17:40'),
+(147, 22, 10, '2019-03-04 02:17:40'),
+(151, 23, 3, '2019-03-04 02:18:04'),
+(150, 23, 12, '2019-03-04 02:18:04'),
+(154, 24, 4, '2019-03-04 02:18:46'),
+(153, 24, 5, '2019-03-04 02:18:46'),
+(152, 24, 9, '2019-03-04 02:18:46'),
+(155, 25, 10, '2019-03-04 02:19:05'),
+(156, 26, 3, '2019-03-04 02:19:24'),
+(159, 27, 5, '2019-03-04 02:19:56'),
+(158, 27, 6, '2019-03-04 02:19:56'),
+(157, 27, 9, '2019-03-04 02:19:56'),
+(160, 28, 10, '2019-03-04 02:20:19');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `order`
+--
+
+DROP TABLE IF EXISTS `order`;
+CREATE TABLE IF NOT EXISTS `order` (
+  `id` bigint(200) NOT NULL COMMENT '订单id',
+  `sid` int(10) DEFAULT NULL COMMENT '电影排片id',
+  `price` float DEFAULT NULL,
+  `createTime` int(10) DEFAULT NULL COMMENT '创建时间',
+  `seatNum` varchar(255) DEFAULT NULL COMMENT '座位号',
+  `qrcode` int(16) DEFAULT NULL COMMENT '验证码',
+  `mName` varchar(40) DEFAULT NULL COMMENT '电影名称',
+  `uid` int(10) DEFAULT NULL COMMENT '用户id',
+  `ticketNum` int(10) DEFAULT NULL COMMENT '票数',
+  `status` tinyint(1) DEFAULT NULL COMMENT '0 全部 2 无效订单  1 有效订单',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='音乐表';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of music
--- ----------------------------
+--
+-- 转存表中的数据 `order`
+--
 
--- ----------------------------
--- Table structure for position
--- ----------------------------
+INSERT INTO `order` (`id`, `sid`, `price`, `createTime`, `seatNum`, `qrcode`, `mName`, `uid`, `ticketNum`, `status`) VALUES
+(2019031281118, 1, 40, 1552390069, '2-4', 123, '诛仙', 7, 1, 1),
+(2019031257903, 1, 40, 1552390219, '2-5', 123, '诛仙', 7, 1, 1),
+(2019031274483, 1, 40, 1552390297, '2-6', 123, '诛仙', 7, 1, 1),
+(2019031268701, 1, 40, 1552390358, '2-7', 123, '诛仙', 7, 1, 1),
+(2019031203799, 1, 40, 1552390424, '2-8', 123, '诛仙', 7, 1, 1),
+(2019031257956, 1, 40, 1552390492, '2-9', 123, '诛仙', 7, 1, 1),
+(2019031203782, 1, 40, 1552390534, '2-10', 123, '诛仙', 7, 1, 1),
+(2019031239713, 1, 40, 1552390617, '2-11', 123, '诛仙', 7, 1, 1),
+(2019031252068, 1, 40, 1552390778, '2-12', 123, '诛仙', 7, 1, 1),
+(2019031257335, 1, 40, 1552390869, '2-13', 123, '诛仙', 7, 1, 1),
+(2019031275785, 1, 40, 1552390922, '2-14', 123, '诛仙', 7, 1, 1),
+(2019031211618, 1, 40, 1552391002, '2-15', 123, '诛仙', 7, 1, 1),
+(2019031222158, 1, 40, 1552391346, '3-1', 123, '诛仙', 7, 1, 2),
+(2019031260852, 1, 40, 1552391519, '3-2', 123, '诛仙', 7, 1, 2),
+(2019031289350, 1, 40, 1552391768, '3-1', 123, '诛仙', 7, 1, 1),
+(2019031224136, 1, 40, 1552392264, '3-2', 123, '诛仙', 7, 1, 1),
+(2019031226795, 1, 40, 1552392287, '3-3', 123, '诛仙', 7, 1, 2),
+(2019031240017, 1, 200, 1552387711, '1-1,1-2,1-3,1-4,1-5', 123, '诛仙', 7, 5, 1),
+(2019031212603, 1, 200, 1552387919, '1-6,1-7,1-8,1-9,1-10', 123, '诛仙', 7, 5, 1),
+(2019031297559, 1, 200, 1552388647, '1-11,1-12,1-13,1-14,1-15', 123, '诛仙', 7, 5, 1),
+(2019031225527, 1, 40, 1552388764, '2-1', 123, '诛仙', 7, 1, 1),
+(2019031268426, 1, 40, 1552388922, '2-2', 123, '诛仙', 7, 1, 1),
+(2019031293469, 1, 40, 1552388949, '2-3', 123, '诛仙', 7, 1, 1),
+(2019031277919, 1, 40, 1552392403, '3-3', 123, '诛仙', 7, 1, 1),
+(2019031228668, 1, 40, 1552392480, '3-4', 123, '诛仙', 7, 1, 2);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `position`
+--
+
 DROP TABLE IF EXISTS `position`;
-CREATE TABLE `position` (
+CREATE TABLE IF NOT EXISTS `position` (
   `posid` int(10) NOT NULL AUTO_INCREMENT COMMENT '推荐位id',
   `posname` varchar(255) DEFAULT NULL COMMENT '推荐位名称',
   PRIMARY KEY (`posid`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='推荐位表';
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='推荐位表';
 
--- ----------------------------
--- Records of position
--- ----------------------------
-INSERT INTO `position` VALUES ('1', '热点新闻');
-INSERT INTO `position` VALUES ('3', '今日头条');
-INSERT INTO `position` VALUES ('4', '优美文章');
+--
+-- 转存表中的数据 `position`
+--
 
--- ----------------------------
--- Table structure for song_type
--- ----------------------------
-DROP TABLE IF EXISTS `song_type`;
-CREATE TABLE `song_type` (
-  `typeid` int(10) NOT NULL,
-  `typename` varchar(200) DEFAULT NULL COMMENT '歌曲类型名',
-  PRIMARY KEY (`typeid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='歌曲类型表';
+INSERT INTO `position` (`posid`, `posname`) VALUES
+(1, '悬疑'),
+(3, '爱情'),
+(4, '科幻'),
+(5, '动作'),
+(6, '喜剧'),
+(7, '战争'),
+(8, '动画'),
+(9, '冒险'),
+(10, '剧情'),
+(11, '传记'),
+(12, '奇幻'),
+(13, '惊悚'),
+(14, '犯罪'),
+(15, '青春');
 
--- ----------------------------
--- Records of song_type
--- ----------------------------
+-- --------------------------------------------------------
 
--- ----------------------------
--- Table structure for user
--- ----------------------------
+--
+-- 表的结构 `schedules`
+--
+
+DROP TABLE IF EXISTS `schedules`;
+CREATE TABLE IF NOT EXISTS `schedules` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '排期id',
+  `date` date NOT NULL COMMENT '排期开始日期',
+  `time` text NOT NULL COMMENT '排期时间',
+  `discount` float NOT NULL COMMENT '票价折扣',
+  `allNum` int(10) NOT NULL DEFAULT '75' COMMENT '座位总数',
+  `available` int(10) NOT NULL COMMENT '剩余座位',
+  `mid` int(10) NOT NULL COMMENT '电影id',
+  `inputtime` int(10) DEFAULT NULL,
+  `updatetime` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `schedules`
+--
+
+INSERT INTO `schedules` (`id`, `date`, `time`, `discount`, `allNum`, `available`, `mid`, `inputtime`, `updatetime`) VALUES
+(1, '2019-03-12', '09:30', 5, 75, 42, 28, 1551435507, 1551435507),
+(3, '2019-07-26', '09:30', 5, 75, 75, 28, 1551435507, 1551435507),
+(4, '2019-07-24', '07:30', 5, 75, 75, 28, 1551435507, 1551435507),
+(5, '2019-07-24', '11:30', 5, 75, 75, 28, 1551435507, 1551435507),
+(6, '2019-07-24', '01:30', 5, 75, 75, 28, 1551435507, 1551435507),
+(7, '2019-07-24', '03:20', 5, 75, 75, 28, 1551435507, 1551435507),
+(2, '2019-02-14', '09:30', 5, 75, 75, 28, 1551435507, 1551435507),
+(8, '2019-03-08', '09:10', 6, 75, 75, 1, NULL, NULL),
+(9, '2019-03-08', '11:10', 7, 75, 75, 1, NULL, NULL),
+(10, '2019-03-08', '12:50', 7, 75, 75, 1, NULL, NULL),
+(11, '2019-03-08', '02:30', 3.5, 75, 75, 1, NULL, NULL),
+(12, '2019-03-08', '16:00', 6, 75, 75, 1, NULL, NULL),
+(13, '2019-03-08', '18:00', 8, 75, 75, 1, NULL, NULL),
+(14, '2019-03-08', '19:45', 10, 75, 75, 1, NULL, NULL),
+(15, '2019-03-09', '07:30', 6, 75, 75, 1, NULL, NULL),
+(16, '2019-03-09', '09:10', 6, 75, 75, 1, NULL, NULL),
+(17, '2019-03-09', '11:10', 8, 75, 75, 1, NULL, NULL),
+(18, '2019-03-09', '01:30', 8, 75, 75, 1, NULL, NULL),
+(19, '2019-03-09', '03:20', 7.5, 75, 75, 1, NULL, NULL),
+(20, '2019-03-10', '07:30', 5, 75, 75, 1, NULL, NULL),
+(21, '2019-03-08', '09:10', 8, 75, 75, 1, NULL, NULL),
+(22, '2019-03-11', '11:10', 8, 75, 75, 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `user`
+--
+
 DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user` (
+CREATE TABLE IF NOT EXISTS `user` (
   `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '用户id',
   `username` varchar(50) DEFAULT NULL COMMENT '用户名',
   `password` varchar(50) DEFAULT NULL COMMENT '密码',
   `user_account` tinyint(1) NOT NULL COMMENT '用户角色 1:超级管理员   2:管理员    3:普通用户  4:会员',
+  `terminal` tinyint(10) DEFAULT NULL COMMENT '0 前端  1后台',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
--- ----------------------------
--- Records of user
--- ----------------------------
-INSERT INTO `user` VALUES ('1', 'admin', 'e10adc3949ba59abbe56e057f20f883e', '1');
-INSERT INTO `user` VALUES ('2', 'admins', 'e10adc3949ba59abbe56e057f20f883e', '0');
-INSERT INTO `user` VALUES ('6', 'admin1', 'e10adc3949ba59abbe56e057f20f883e', '0');
+--
+-- 转存表中的数据 `user`
+--
 
--- ----------------------------
--- Table structure for user_group
--- ----------------------------
+INSERT INTO `user` (`id`, `username`, `password`, `user_account`, `terminal`) VALUES
+(1, 'admin', 'e10adc3949ba59abbe56e057f20f883e', 1, 1),
+(7, 'admin', 'e10adc3949ba59abbe56e057f20f883e', 3, 0),
+(8, 'admin1', 'e10adc3949ba59abbe56e057f20f883e', 2, 1);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `user_group`
+--
+
 DROP TABLE IF EXISTS `user_group`;
-CREATE TABLE `user_group` (
+CREATE TABLE IF NOT EXISTS `user_group` (
   `id` int(10) NOT NULL,
   `groupname` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户组表';
+COMMIT;
 
--- ----------------------------
--- Records of user_group
--- ----------------------------
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

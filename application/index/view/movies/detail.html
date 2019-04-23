@@ -298,9 +298,8 @@
                 <div class="loginInfo">
                     <a href="javascript:void(0);"><span>&#xe69d;   </span>{$Think.session.frontUsername}</a>
                     <div class="loginInfoList">
-                        <div class="loginInfoListSon"><a href="">我的订单</a></div>
+                        <div class="loginInfoListSon"><a href="{:url('order/index')}">我的订单</a></div>
                         <div class="loginInfoListSon"><a href="{:url('login/logout')}">退出</a></div>
-                        <div class="loginInfoListSon"><a href=""></a></div>
                     </div>
                 </div>
                 {/if}
@@ -310,7 +309,7 @@
 </div>
 <div class="content" style="width: 1200px;margin: auto;">
     <div class="type_content">
-        <div class="type_content_list" style="background: url(/tp5/public/{$data['imgurl']}) no-repeat center top;background-size: 100% auto">
+        <div class="type_content_list" style="background: url(tp5/public/{$data['imgurl']}) no-repeat center top;background-size: 100% auto">
             <div class="type_list_content">
                 <div class="left_con">
                     <img src="/tp5/public/{$data['imgurl']}" alt="" width="130">

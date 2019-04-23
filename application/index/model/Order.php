@@ -25,6 +25,18 @@ class Order extends Model
     }
 
     /*
+     * 查询订单1
+     */
+    public function showlist1($where=[]){
+        return Db::name($this->table)
+            ->alias('a')
+            ->field('a.*,i.date,i.time')
+            ->join('schedules i', 'a.sid = i.id', 'left')
+            ->where($where)
+            ->paginate(100);
+    }
+
+    /*
      * 查询订单详情
      */
     public function showDetail($where=[]){
