@@ -56,17 +56,13 @@ class Order extends Controller
         $update=model('schedules')->edit($condition, ['id' => $data['sid']]);
 
         $condition1['status'] = 0;
+        $condition1['updateTime'] = strtotime('now');
         $update1=model('order')->edit($condition1, $where);
-        if ($update && $update1) {
-            $code = 200;
-        } else {
-            $code = 20001;
+        if($update && $update1){
+            $this->error("退订成功","Order/show");
+        }else{
+            $this->success("退订失败","Order/show");
         }
-        $update = [
-            'code' => $code,
-            'data' => $update1
-        ];
-        return json($update);
     }
 }
 ?>

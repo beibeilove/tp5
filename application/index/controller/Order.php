@@ -36,6 +36,7 @@ class Order extends Controller
         $condition['id'] = date("Ymd") . str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT);
         $condition['qrcode'] = 123;
         $condition['createTime'] = time();
+        $condition['updateTime'] = time();
 
         if(empty($request['sid'])){
             return json(['data'=>'场次为空','code'=>20001]);
@@ -93,6 +94,31 @@ class Order extends Controller
             $where['id'] = $request['id'];
         }
         $data = model('Order')->showDetail($where);
+
+        if ($data) {
+            $code = 200;
+        } else {
+            $code = 20001;
+        }
+        $data = [
+            'code' => $code,
+            'data' => $data
+        ];
+        return json($data);
+    }
+
+    /*
+     * 查询订单2
+     */
+    public function showDetail2(){
+        $where = [];
+        $request = Request::instance()->get();
+        if(empty($request['sid'])){
+            return json(['data'=>'场次为空','code'=>20001]);
+        }else{
+            $where['sid'] = $request['sid'];
+        }
+        $data = model('Order')->showList($where);
 
         if ($data) {
             $code = 200;

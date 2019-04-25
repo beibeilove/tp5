@@ -27,12 +27,13 @@ class Order extends Model
     /*
      * 查询订单1
      */
-    public function showlist1($where=[]){
+    public function showlist1($where=[],$order="a.updateTime desc"){
         return Db::name($this->table)
             ->alias('a')
             ->field('a.*,i.date,i.time')
             ->join('schedules i', 'a.sid = i.id', 'left')
             ->where($where)
+            ->order($order)
             ->paginate(10);
     }
 

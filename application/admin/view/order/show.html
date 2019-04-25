@@ -34,7 +34,9 @@
             <th>票钱</th>
             <th>座位号</th>
             <th>排期</th>
+            <th>状态</th>
             <th>创建时间</th>
+            <th>更新时间</th>
             <th>操作</th>
         </tr>
         {if condition="!empty($data)"}
@@ -46,7 +48,9 @@
             <td>{$value['price']}</td>
             <td width="300">{$value['seatNum']}</td>
             <td>{$value['date']} {$value['time']}</td>
+            <td>{if condition="$value['status']===1"}已完成{else/}已退订{/if}</td>
             <td width="150">{$value['createTime']|date="Y-m-d H:i:s",###}</td>
+            <td width="150">{$value['updateTime']|date="Y-m-d H:i:s",###}</td>
             <td width="150">
                 {if condition="$value['status'] === 1"}
                 <a class="btn" href="{:url('Order/delete')}?id={$value['id']}">退订</a>

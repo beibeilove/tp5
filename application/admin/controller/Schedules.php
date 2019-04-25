@@ -15,8 +15,7 @@ class Schedules extends Controller
      */
     public function show(){
         $where = [];
-        $request=Request::instance()->get();
-        $request1=Request::instance()->param();
+        $request=Request::instance()->param();
         if(empty($request['id']) && !Session::get('id')){
             $this->error("参数错误","movies/show");
         }else{
@@ -53,7 +52,6 @@ class Schedules extends Controller
         $where = [];
         $condition = [];
         $request=Request::instance()->post();
-        var_dump($request);
         if(empty($request['mid'])){
             $this->error("参数错误",'schedules/show?id='.$where['a.mid']);
         }else{
@@ -90,16 +88,14 @@ class Schedules extends Controller
      */
     public function edit(){
         $where = [];
-        $condition = [];
         $request=Request::instance()->get();
-        if(empty($request['id'])){
+        if(empty($request['mid'])){
             $this->error("参数错误","movies/show");
         }else{
-            $where['a.id'] = $request['id'];
-            $condition['id'] = $request['id'];
+            $where['a.id'] = $request['mid'];
         }
         $data = model('Movies')->show($where);
-        $dataList = model('Schedules')->show($condition);
+        $dataList = model('Schedules')->show($where);
         $this->assign('data',$data);
         $this->assign('dataList',$dataList);
         return view('edit');
@@ -110,30 +106,29 @@ class Schedules extends Controller
         $condition = [];
         $whereId = [];
         $request=Request::instance()->post();
-        var_dump($request);
-        if(empty($request['id'])){
-            $this->error("参数错误",'schedules/show?id='.$where['a.mid']);
-        }else{
-            $whereId['id'] = $request['id'];
-        }
         if(empty($request['mid'])){
-            $this->error("参数错误",'schedules/show?id='.$where['a.mid']);
+            $this->error("参数错误",'schedules/show?id='.$request['mid']);
         }else{
             $where['a.mid'] = $request['mid'];
             $condition['mid'] = $request['mid'];
         }
+        if(empty($request['id'])){
+            $this->error("参数错误",'schedules/show?id='.$request['mid']);
+        }else{
+            $whereId['id'] = $request['id'];
+        }
         if(empty($request['date'])){
-            $this->error("排期日期不能为空",'schedules/show?id='.$where['a.mid']);
+            $this->error("排期日期不能为空",'schedules/show?id='.$request['mid']);
         }else{
             $condition['date'] = date('Y-m-d', strtotime($request['date']));
         }
         if(empty($request['time'])){
-            $this->error("排期时间不能为空",'schedules/show?id='.$where['a.mid']);
+            $this->error("排期时间不能为空",'schedules/show?id='.$request['mid']);
         }else{
             $condition['time'] = $request['time'];
         }
         if(empty($request['discount'])){
-            $this->error("排期时间不能为空",'schedules/show?id='.$where['a.mid']);
+            $this->error("排期时间不能为空",'schedules/show?id='.$request['mid']);
         }else{
             $condition['discount'] = $request['discount'];
         }

@@ -15,6 +15,9 @@
             margin: 0;
             padding: 0;
         }
+        a,a:hover,a:link{
+            text-decoration: none;
+        }
         .type_list_content{
             display: flex;
             justify-content: flex-start;
@@ -139,6 +142,16 @@
             cursor: pointer;
             font-size: 14px;
             color: #fc4984;
+        }
+        .schedules_list li p.selectSeat.startSeat a{
+            border: 0;
+            background: #e5e5e5;
+            color: #ffffff;
+        }
+        .schedules_list li p.selectSeat.endSeat a{
+            border: 0;
+            background: #e5e5e5;
+            color: #ffffff;
         }
     </style>
     <style>
@@ -345,6 +358,7 @@
             <h3 style="font-weight: 400;font-size: 20px;padding: 30px 0 10px;border-bottom: 1px solid #e2e2e2;">选座购票</h3>
             <ul class="date_list"></ul>
             <ul class="schedules_list"></ul>
+            <p style="color:#fc4984;">提示：开场前15分钟停止售票</p>
         </div>
         <div class="seat_list_box">
             <ul class="seat_list_row"></ul>
@@ -423,6 +437,9 @@
 
     // 排期场次列表
     getData(dateFormate(new Date().getTime()).all)
+    setInterval(function() {
+        getData(dateFormate(new Date().getTime()).all)
+    },10000)
     $('.date_list').on('click','li',function(){
         $('.date_list li').removeClass('selected');
         $(this).addClass('selected');
@@ -431,7 +448,8 @@
     function getData(date) {
         var data = {
             id: "{$data['mid']}",
-            date: date
+            date: date,
+            duration: "{$data['duration']}"
         }
         $.ajax({
             url: "{:url('movies/getSchedulesList')}",
@@ -440,14 +458,27 @@
             success: function(res){
                 if (res.code === 200) {
                     var str = '';
+                    var strs = '';
                     res.data.map(function(item){
                         var price = "{$data['price']}"*item.discount/10
+                        var arr = ['选座购票', '已开场', '已结束']
+                        switch (item.status){
+                            case 1:
+                                strs = `<p class="selectSeat"><a href="javascript:void(0);" onclick="order(`+item.id+`,`+price+`)">`+arr[item.status-1]+`</a></p>`;
+                                break;
+                            case 2:
+                                strs = `<p class="selectSeat startSeat"><a href="javascript:void(0);">`+arr[item.status-1]+`</a></p>`;
+                                break;
+                            case 3:
+                                strs = `<p class="selectSeat endSeat"><a href="javascript:void(0);">`+arr[item.status-1]+`</a></p>`;
+                                break;
+                        }
                         str+=`<li>
                                 <p>`+item.time+`开场</p>
                                 <p>时长{$data['duration']}分钟</p>
                                 <p><span>￥`+price+`</span><s>{$data['price']}</s></p>
                                 <p>余位`+Math.round(item.available*100/item.allNum)+`%</p>
-                                <p class="selectSeat"><a href="javascript:void(0);" onclick="order(`+item.id+`,`+price+`)">选座购票</a></p>
+                                `+strs+`
                                 </li>`
                     })
                     $('.schedules_list').html(str)
@@ -465,14 +496,14 @@
         nowPage = 1; // 购票进度
         $('.step_list li').removeClass('selected');
         $('.step_list li:eq('+nowPage+')').addClass('selected');
-        // console.log(id, price)
+        console.log(id, price)
         priceSelected = price
         sid = id
         getSeat(id);
     }
     function getSeat(id){
         $.ajax({
-            url: "{:url('order/show')}",
+            url: "{:url('order/showDetail2')}",
             type: 'get',
             data: {sid: id},
             success:function(res){

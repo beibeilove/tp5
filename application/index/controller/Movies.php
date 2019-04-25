@@ -59,7 +59,21 @@ class Movies extends Controller
         }else{
             $where['date'] = $request['date'];
         }
+
+        if(empty($request['duration'])){
+            $this->error("无效场次","movies/index");
+        }
         $data=model('Schedules')->showList($where, 'time asc');
+        foreach ($data as $key => &$val){
+            $dateAll = strtotime($val['date'].' '.$val['time']);
+            if (time() < ($dateAll-15*60)){
+                $val['status'] = 1; // 可选座
+            } else if(time() >= ($dateAll-15*60) && (time()) <= ($dateAll -15*60 + $request['duration']*60)) {
+                $val['status'] = 2; // 已开场
+            } else {
+                $val['status'] = 3; // 已结束
+            }
+        }
         if ($data) {
             $code = 200;
         } else {

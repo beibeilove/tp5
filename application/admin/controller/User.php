@@ -28,6 +28,7 @@ class User extends Controller
             $condition['password'] = Md5($password);
         }
         $condition['terminal'] = 1;
+        $condition['user_account'] = 2;
         $user = $this->userRepeat($condition);
         if(!$user){
             $this->error("用户已存在",'User/add');
@@ -131,10 +132,13 @@ class User extends Controller
     {
         $request = Request::instance();
         $id=$request->get("id");
+        $where=[];
         if(empty($id)){
             $this->error("参数错误","User/show");
+        }else{
+            $where['id'] = $id;
         }
-        $data = model("User")->delete($id);
+        $data = model("User")->delete($where);
         if(empty($data)){
             $this->error("删除失败","User/show");
         }else{

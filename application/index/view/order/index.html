@@ -107,6 +107,12 @@
 </div>
 {load href="/tp5/public/static/js/jquery.js"}
 <script>
+    $('.list_content').hover(function(){
+        $('.list_content').removeClass('actived');
+        $(this).addClass('actived');
+    }, function(){
+        $('.list_content').removeClass('actived');
+    })
     function changeOrderStatus(type){
         var data = {
             status: type

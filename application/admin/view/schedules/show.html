@@ -37,7 +37,7 @@
             <td width="150">{$value['inputtime']|date="Y-m-d H:i:s",###}</td>
             <td width="150">{$value['updatetime']|date="Y-m-d H:i:s",###}</td>
             <td width="150">
-                <a class="btn" href="{:url('Schedules/edit')}?id={$value['id']}">编辑</a>
+                <a class="btn" href="{:url('Schedules/edit')}?id={$value['id']}&mid={$value['mid']}">编辑</a>
                 <a class="btn" href="{:url('Schedules/delete')}?id={$value['id']}">删除</a>
             </td>
         </tr>
