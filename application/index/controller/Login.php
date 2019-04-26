@@ -12,7 +12,6 @@ class Login extends Controller
     {
         $request = Request::instance();
         $redirectUrl = $request->header();
-        var_dump($redirectUrl['referer']);
         if (!empty($redirectUrl['referer'])) {
             Session::set('redirectUrl', $redirectUrl['referer']);
         }

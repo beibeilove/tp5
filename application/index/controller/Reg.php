@@ -5,6 +5,7 @@ use \think\Controller;
 use think\helper\hash\Md5;
 use \think\Request;
 use \think\Db;
+use \think\Session;
 class Reg extends Controller
 {
     public function index()
@@ -29,7 +30,10 @@ class Reg extends Controller
             $condition['user_account'] = 3;
             $data = model("User")->add($condition);
             if(!empty($data)){
-                $this->success("用户名添加成功",url("Login/index"));
+                Session::set("frontUserId","1");
+                Session::set('frontUsername',$condition['username']);
+                Session::set('frontId',$data['id']);
+                $this->success("用户名添加成功",url("Index/index"));
             }else{
                 $this->error("用户名添加失败",url("Reg/index"));
             }
