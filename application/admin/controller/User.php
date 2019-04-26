@@ -23,7 +23,7 @@ class User extends Controller
             $condition['username'] = $username;
         }
         if(empty($password)){
-            $this->error("请输入用户名",'User/add');
+            $this->error("请输入密码",'User/add');
         }else{
             $condition['password'] = Md5($password);
         }

@@ -437,13 +437,17 @@
 
     // 排期场次列表
     getData(dateFormate(new Date().getTime()).all)
-    setInterval(function() {
+    var t = setInterval(function() {
         getData(dateFormate(new Date().getTime()).all)
     },10000)
     $('.date_list').on('click','li',function(){
+        clearInterval(t);
         $('.date_list li').removeClass('selected');
         $(this).addClass('selected');
         getData($(this).data('data'))
+        t = setInterval(function() {
+            getData(dateFormate($(this).data('data')))
+        },10000)
     })
     function getData(date) {
         var data = {

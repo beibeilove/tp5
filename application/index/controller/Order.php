@@ -118,6 +118,7 @@ class Order extends Controller
         }else{
             $where['sid'] = $request['sid'];
         }
+        $where['status'] = 1;
         $data = model('Order')->showList($where);
 
         if ($data) {
