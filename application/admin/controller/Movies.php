@@ -27,11 +27,17 @@ class Movies extends Controller
         }else{
             $condition['title'] = $requestData['title'];
         }
-        // 影片描述
-        if(empty($requestData['desc'])){
-            $this->error("影片描述不能为空","movies/add");
+        // 影片来源
+        if(empty($requestData['copyfrom'])){
+            $this->error("影片来源不能为空","movies/add");
         }else{
-            $condition['desc'] = $requestData['desc'];
+            $condition['copyfrom'] = $requestData['copyfrom'];
+        }
+        // 影片上映时间
+        if(empty($requestData['releaseTime'])){
+            $this->error("影片标题不能为空","movies/add");
+        }else{
+            $condition['releaseTime'] = $requestData['releaseTime'];
         }
         // 影片导演
         if(empty($requestData['director'])){
@@ -45,28 +51,39 @@ class Movies extends Controller
         }else{
             $condition['actor'] = $requestData['actor'];
         }
-        // 影片来源
-        if(empty($requestData['copyfrom'])){
-            $this->error("影片来源不能为空","movies/add");
+        // 影片外链
+        if(empty($requestData['linkurl'])){
+            $this->error("影片外链不能为空","movies/add");
         }else{
-            $condition['copyfrom'] = $requestData['copyfrom'];
+            $condition['linkurl'] = $requestData['linkurl'];
         }
-        // 影片上映时间
-        if(empty($requestData['releaseTime'])){
-            $this->error("影片标题不能为空","movies/add");
+        // 影片关键字
+        if(empty($requestData['desc'])){
+            $this->error("影片关键字不能为空","movies/add");
         }else{
-            $condition['releaseTime'] = $requestData['releaseTime'];
+            $condition['desc'] = $requestData['desc'];
         }
-
+        // 影片评分
+        if(empty($requestData['score'])){
+            $this->error("影片评分不能为空","movies/add");
+        }else{
+            $condition['score'] = $requestData['score'];
+        }
+        // 影片时长
+        if(empty($requestData['duration'])){
+            $this->error("影片时长不能为空","movies/add");
+        }else{
+            $condition['duration'] = $requestData['duration'];
+        }
         // 影片价格
         if(empty($requestData['price'])){
             $this->error("影片价格不能为空","movies/add");
         }else{
             $condition['price'] = $requestData['price'];
         }
-        // 影片内容
+        // 影片描述
         if(empty($requestData['content'])){
-            $this->error("影片内容不能为空","movies/add");
+            $this->error("影片描述不能为空","movies/add");
         }else{
             $condition['content'] = $requestData['content'];
         }
@@ -75,12 +92,6 @@ class Movies extends Controller
             $this->error("影片图片不能为空","movies/add");
         }else{
             $condition['imgurl'] = $requestData['imgurl'];
-        }
-        // 影片外链
-        if(empty($requestData['linkurl'])){
-            $this->error("影片外链不能为空","movies/add");
-        }else{
-            $condition['linkurl'] = $requestData['linkurl'];
         }
         // 影片类型
         if(empty($requestData['position'])){
