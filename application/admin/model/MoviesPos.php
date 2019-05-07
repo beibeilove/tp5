@@ -10,7 +10,7 @@ class MoviesPos extends Model{
     }
 
     /*
-     * 查询电影推荐位列表
+     * 查询电影类别列表
      * */
     public function showList($where = [], $field = "*", $order = "a.id desc")
     {
@@ -21,7 +21,7 @@ class MoviesPos extends Model{
     }
 
     /*
-     * 新增电影推荐位
+     * 新增电影类别
      * */
     public function add($condition = [])
     {
@@ -29,7 +29,7 @@ class MoviesPos extends Model{
     }
 
     /*
-     * 删除电影推荐位
+     * 删除电影类别
      * */
     public function delete($where = [])
     {

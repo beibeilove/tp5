@@ -291,6 +291,11 @@
             font-size: 14px;
             line-height: 35px;
         }
+
+        .btn.btn-info,.btn.btn-info:hover,.btn.btn-info:active,.btn.btn-info:link{
+            background: #fc4984;
+            border-color: #fc4984;
+        }
     </style>
 </head>
 <body>
@@ -624,7 +629,7 @@
                         seatStr += '第'+ seatArr[0]+'列'+seatArr[1]+'排,'
                     })
                     var nowSeatNum = seatStr.substr(0, seatStr.length-1);
-                    var str='<p>'+res.data.mName+'</p><p>'+nowSeatNum+'</p><p>共'+res.data.ticketNum+'张</p><p>总计：'+res.data.price+'元</p><button type="button" id="deleteOrder" onclick="deleteOrder()">退票</button><span id="hiddenId" style="display: none;">'+res.data.id+'</span>'
+                    var str='<p>'+res.data.mName+'</p><p>'+nowSeatNum+'</p><p>共'+res.data.ticketNum+'张</p><p>总计：'+res.data.price+'元</p><button type="button" class="btn btn-info" id="deleteOrder" onclick="deleteOrder()">退票</button><span id="hiddenId" style="display: none;">'+res.data.id+'</span>'
                     $('.order_list_box').html(str);
                 } else if(res.code === 401) {
                     alert(res.data)

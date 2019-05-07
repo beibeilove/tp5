@@ -14,8 +14,8 @@
 <div class="page table-responsive">
     <form action="{:url('Position/show')}" class="form-inline marginBottom" method="post" id="form">
         <div class="form-group">
-            <label for="posname">推荐位名称：</label>
-            <input type="text" class="form-control" name="posname" id="posname" placeholder="推荐位名称" value="{$searcharr['posname']}">
+            <label for="posname">类别名称：</label>
+            <input type="text" class="form-control" name="posname" id="posname" placeholder="类别名称" value="{$searcharr['posname']}">
         </div>
         {if condition="$searcharr['posname']"}
         <a href="{:url('Position/show')}" class="btn btn-default nomarginLeft">撤销</a>
@@ -25,7 +25,7 @@
     <table class="table table-striped">
         <tr>
             <th>id</th>
-            <th>推荐位名称</th>
+            <th>类别名称</th>
             <th>操作</th>
         </tr>
         {if condition="!empty($data)"}
@@ -42,6 +42,7 @@
             </tr>
         {/if}
     </table>
+    {$data->render()}
 </div>
 </body>
 </html>

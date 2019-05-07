@@ -9,20 +9,20 @@ class Position extends Controller
     {
         return view("index");
     }
-    // 添加推荐位
+    // 添加类别
     public function addPosition()
     {
         $request = Request::instance();
         $posname=$request->post("posname");
         if(empty($posname)){
-            $this->error("推荐位不能为空","Position/add");
+            $this->error("类别不能为空","Position/add");
         }else{
             $condition['posname'] = $posname;
             $data = model("Position")->add($condition);
             if($data){
-                $this->success("推荐位添加成功","Position/show");
+                $this->success("类别添加成功","Position/show");
             }else{
-                $this->error("推荐位添加失败","Position/show");
+                $this->error("类别添加失败","Position/show");
             }
         }
     }
@@ -45,7 +45,7 @@ class Position extends Controller
         return view("show");
     }
 
-    // 推荐位详情
+    // 类别详情
     public function showPosition()
     {
         $request = Request::instance();
@@ -64,7 +64,7 @@ class Position extends Controller
         }
     }
 
-    // 推荐位修改
+    // 类别修改
     public function editPosition()
     {
         $where = [];
@@ -78,13 +78,13 @@ class Position extends Controller
             $where['posid'] = $posid;
         }
         if(empty($posname)){
-            $this->error("推荐位不能为空","Position/show");
+            $this->error("类别不能为空","Position/show");
         }else{
             $condition['posname'] = $posname;
         }
         $data = model("Position")->show($condition);
         if(!empty($data)){
-            $this->error("该推荐位已存在","Position/show");
+            $this->error("该类别已存在","Position/show");
         }else{
             $datas = model("Position")->edit($condition, $where);
             if(!empty($datas)){
@@ -95,7 +95,7 @@ class Position extends Controller
         }
     }
 
-    // 推荐位删除
+    // 类别删除
     public function delete()
     {
         $where = [];

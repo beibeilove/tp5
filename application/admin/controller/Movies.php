@@ -149,6 +149,7 @@ class Movies extends Controller
             $arr =explode(",",$value['type']);
             $value['typeArr'] = $arr;
             $value['typename'] = $this->typeChange($arr);
+            $value['status'] = (strtotime($value['releaseTime']) < (time()-7*24*3600*1000)) ? 1 : 2;
             $obj1[]=$value;
         }
         $this->assign("searcharr",$searcharr);

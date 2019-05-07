@@ -7,15 +7,15 @@ class Position extends Model
     public $table="position";
 
     /*
-     * 查询推荐位列表
+     * 查询类别列表
      * */
     public function showList($where = array(), $field = "*",$order='posid desc')
     {
-        return Db::table($this->table)->field($field)->where($where)->order($order)->paginate(15);
+        return Db::table($this->table)->field($field)->where($where)->order($order)->paginate(10);
     }
 
     /*
-     * 查询单条推荐位
+     * 查询单条类别
      * */
     public function show($where = [], $field = "*")
     {
@@ -23,7 +23,7 @@ class Position extends Model
     }
 
     /*
-     * 添加推荐位
+     * 添加类别
      * */
     public function add($condition = [])
     {
@@ -31,7 +31,7 @@ class Position extends Model
     }
 
     /*
-     * 修改推荐位
+     * 修改类别
      * */
     public function edit($condition = [], $where = [])
     {
@@ -39,7 +39,7 @@ class Position extends Model
     }
 
     /*
-     * 删除推荐位
+     * 删除类别
      * */
     public function delete($where = [])
     {

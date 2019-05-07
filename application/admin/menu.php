@@ -18,10 +18,10 @@ $menulist = [
     ],
     [
         'act' => 'position',
-        'name' => '推荐位管理',
+        'name' => '类别管理',
         'children' => [
-            ['act' => 'position', 'op' => 'add', 'name' => '新增推荐位'],
-            ['act' => 'position', 'op' => 'show', 'name' => '查看推荐位']
+            ['act' => 'position', 'op' => 'add', 'name' => '新增类别'],
+            ['act' => 'position', 'op' => 'show', 'name' => '查看类别']
         ]
     ],
     [
