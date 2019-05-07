@@ -98,6 +98,7 @@
                 <li><a href="http://localhost/tp5/public/index.php/index/movies/index">影片</a></li>
             </ul>
             <div class="front_login">
+                <a href="{:url('admin/index/index')}">后台管理系统</a>
                 {if condition="empty($Think.session.frontUsername)"}
                 <a href="{:url('login/index')}">登录</a>
                 {else/}

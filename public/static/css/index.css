@@ -229,6 +229,7 @@ table.table tr,table.table tr th,table.table tr td{
 .type_header .type_header_box .front_login{
     position: absolute;
     right: 30px;
+    display: flex;
 }
 .type_header .type_header_box .front_login a{
     color: #fff;

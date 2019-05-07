@@ -121,7 +121,7 @@ class User extends Controller
                 if($data){
                     $this->success("密码修改成功","User/show");
                 }else{
-                    $this->error("密码修改失败","User/selectUser");
+                    $this->error("密码修改失败","User/selectUser","id=".$id);
                 }
             }
         }
