@@ -242,7 +242,7 @@ table.table tr,table.table tr th,table.table tr td{
 .type_header .type_header_box .front_login .loginInfoList{
     position: absolute;
     top: 65px;
-    left: 0;
+    left: 100px;
     background: #3b3a41;
     z-index: 999;
     display: none;
