@@ -46,7 +46,15 @@
 <body>
 <div class="header">
     <div class="top_header">
-        我是电影首页
+        <img src="/tp5/public/static/img/logo.png" alt="" height="40">
+        <form class="search" action="{:url('movies/index')}" method="get" id="myForm">
+            {if condition="!empty($searchData)"}
+            <input type="text" id="search" name="search" value="{$searchData}" placeholder="请搜索你感兴趣的电影">
+            {else/}
+            <input type="text" id="search1" name="search" value="" placeholder="请搜索你感兴趣的电影">
+            {/if}
+            <a>&#xe601;</a>
+        </form>
     </div>
     <div class="type_header">
         <div class="type_header_box">
@@ -60,9 +68,10 @@
                 <a href="{:url('login/index')}">登录</a>
                 {else/}
                 <div class="loginInfo">
-                    <a href="javascript:void(0);"><span>&#xe69d;   </span>{$Think.session.frontUsername}</a>
+                    <a href="javascript:void(0);"><span>&#xe69d;</span>{$Think.session.frontUsername}</a>
                     <div class="loginInfoList">
                         <div class="loginInfoListSon"><a href="{:url('order/index')}">我的订单</a></div>
+                        <div class="loginInfoListSon"><a href="{:url('user/index')}">修改密码</a></div>
                         <div class="loginInfoListSon"><a href="{:url('login/logout')}">退出</a></div>
                     </div>
                 </div>

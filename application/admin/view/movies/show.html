@@ -34,6 +34,7 @@
             <th>导演</th>
             <th>封面</th>
             <th style="width:300px;display: inline-block;">演员</th>
+            <th>上映时间</th>
             <th>上传时间</th>
             <th>更新时间</th>
             <th>操作</th>
@@ -47,6 +48,7 @@
             <td>{$value['director']}</td>
             <td><img src="/tp5/public/{$value['imgurl']}" alt="" width="100" height="60"></td>
             <td width="300">{$value['actor']}</td>
+            <td width="150">{$value['releaseTime']}</td>
             <td width="150">{$value['inputtime']|date="Y-m-d H:i:s",###}</td>
             <td width="150">{$value['updatetime']|date="Y-m-d H:i:s",###}</td>
             <td width="150">

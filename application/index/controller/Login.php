@@ -50,9 +50,9 @@ class Login extends Controller
     //退出登录
     public function logout()
     {
-        session::delete("frontUserId");
-        session::delete('frontUsername');
-        session::delete('frontId');
+        Session::delete("frontUserId");
+        Session::delete('frontUsername');
+        Session::delete('frontId');
         return $this->success('退出登录成功', url('index/index'));
     }
 }

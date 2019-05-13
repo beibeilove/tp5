@@ -18,6 +18,14 @@ class Movies extends Controller
          * 正在热映
          */
         $condition = '1=1';
+        $request=Request::instance()->get();
+        if (!empty($request['search'])){
+            $title = $request['search'];
+            $condition.=" and title like '%$title%'";
+            $this->assign('searchData',$request['search']);
+        }else{
+            $this->assign('searchData','');
+        }
         $data = model('movies')->showListName($condition, 'a.*,group_concat(j.posname) as typename');
 
         $this->assign('data', $data);

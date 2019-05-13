@@ -12,7 +12,7 @@ class Movies extends Model{
     /*
      * 查询电影列表
      * */
-    public function showList($where = [], $field = "*", $order = "a.id desc")
+    public function showList($where = [], $field = "*", $order = "a.releaseTime desc")
     {
         return Db::name($this->table)
             ->alias('a')

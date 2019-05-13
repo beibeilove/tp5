@@ -19,7 +19,7 @@ class Index extends Controller
         /*
          * 正在热映
          */
-        $condition = 'a.releaseTime < NOW()';
+        $condition = 'a.releaseTime between DATE_SUB(NOW(),INTERVAL 30 day) and now()';
         $now = model('movies')->showList($condition, '*');
         $this->assign('now', $now);
         /*
@@ -28,6 +28,12 @@ class Index extends Controller
         $condition = 'a.releaseTime > NOW()';
         $future = model('movies')->showList($condition, '*');
         $this->assign('future', $future);
+        /*
+         * 已下架
+         */
+        $condition = 'UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(a.releaseTime) >= 30*24*3600';
+        $passed = model('movies')->showList($condition, '*');
+        $this->assign('passed', $passed);
         return view('index');
     }
 

@@ -84,12 +84,21 @@
             width: 44px;
             background:url('https://dianying.nuomi.com/static/home/widget/index/img/arrow_ff8c3ca.png') no-repeat -47px 0 transparent;
         }
+
     </style>
 </head>
 <body>
 <div class="header">
     <div class="top_header">
-        我是电影首页
+        <img src="/tp5/public/static/img/logo.png" alt="" height="40">
+        <form class="search" action="{:url('movies/index')}" method="get" id="myForm">
+            {if condition="!empty($searchData)"}
+            <input type="text" id="search" name="search" value="{$searchData}" placeholder="请搜索你感兴趣的电影">
+            {else/}
+            <input type="text" id="search1" name="search" value="" placeholder="请搜索你感兴趣的电影">
+            {/if}
+            <a>&#xe601;</a>
+        </form>
     </div>
     <div class="type_header">
         <div class="type_header_box">
@@ -106,6 +115,7 @@
                     <a href="javascript:void(0);"><span>&#xe69d;   </span>{$Think.session.frontUsername}</a>
                     <div class="loginInfoList">
                         <div class="loginInfoListSon"><a href="{:url('order/index')}">我的订单</a></div>
+                        <div class="loginInfoListSon"><a href="{:url('user/index')}">修改密码</a></div>
                         <div class="loginInfoListSon"><a href="{:url('login/logout')}">退出</a></div>
                     </div>
                 </div>
@@ -142,6 +152,27 @@
         <div class="swiper-container">
             <div class="swiper-wrapper">
                 {volist name="future" id="value"}
+                <div class="swiper-slide" onclick="turnTo(`{:url('movies/detail')}?id={$value['mid']}`)">
+                    <div class="list_content">
+                        <img src="/tp5/public/{$value['imgurl']}" alt="" width="160">
+                        <p title="{$value['title']}">{$value['title']}</p>
+                        <div><a href="{:url('movies/detail')}?id={$value['mid']}">查看详情</a></div>
+                    </div>
+                </div>
+                {/volist}
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Add Arrows -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+    <div class="type_content">
+        <h3>已下架</h3>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                {volist name="passed" id="value"}
                 <div class="swiper-slide" onclick="turnTo(`{:url('movies/detail')}?id={$value['mid']}`)">
                     <div class="list_content">
                         <img src="/tp5/public/{$value['imgurl']}" alt="" width="160">
@@ -197,6 +228,10 @@
     function turnTo(url) {
         window.location.href=url
     }
+
+    $('.search').on('click', 'a',function(){
+        $('#myForm').submit()
+    })
 </script>
 </body>
 </html>

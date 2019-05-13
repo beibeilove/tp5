@@ -212,6 +212,7 @@ table.table tr,table.table tr th,table.table tr td{
 .type_header ul{
     display: flex;
     justify-content: center;
+    margin: 0;
 }
 .type_header ul li{
     padding: 0 30px;
@@ -261,3 +262,31 @@ table.table tr,table.table tr th,table.table tr td{
 .type_header .type_header_box .front_login .loginInfoList .loginInfoListSon:hover{
     background: #000000;
 }
+
+
+.top_header{
+    width: 1200px;
+    margin:15px auto;
+    display: flex;
+    justify-content: space-between;
+}
+.search{
+    width: 335px;
+    height: 40px;
+    position: relative;
+}
+.search input{
+    width: 300px;
+    height: 30px;
+    margin-top: 5px;
+    padding: 0 25px 0 10px;
+}
+.search a{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-family: 'iconfont';
+    font-size: 20px;
+    cursor: pointer;
+}
+
