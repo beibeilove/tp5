@@ -325,6 +325,12 @@
             background: #ffffff;
             border-radius: 5px;
         }
+        .qrcode #qrcodeImg .closeIcon{
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -392,6 +398,7 @@
             </div>
         </div>
     </div>
+    {if condition="$type == 1"}
     <ul class="step_list">
         <li class="selected">1.选择影片场次</li>
         <li>2.选定座位</li>
@@ -402,7 +409,7 @@
             <h3 style="font-weight: 400;font-size: 20px;padding: 30px 0 10px;border-bottom: 1px solid #e2e2e2;">选座购票</h3>
             <ul class="date_list"></ul>
             <ul class="schedules_list"></ul>
-            <p style="color:#fc4984;">提示：开场前15分钟停止售票</p>
+            <p style="color:#fc4984;margin: 20px auto;">提示：开场前15分钟停止售票</p>
         </div>
         <div class="seat_list_box">
             <ul class="seat_list_row"></ul>
@@ -428,14 +435,25 @@
     </div>
     <div class="qrcode">
         <div id="qrcodeImg">
+            <div class="closeIcon" onclick="closeIcon()">
+                <img src="/tp5/public/static/img/delete.png" alt="" height="40">
+            </div>
             <div class="orderId"></div>
             <div id="qrcode"></div>
+            <div class="order_desc"></div>
         </div>
     </div>
     <div class="order_create">
         <h3><span>确认订单信息</span><span class="order_id" style="font-size: 14px;float: right;margin-right: 20px;"></span></h3>
         <div class="order_list_box"></div>
     </div>
+    {else/}
+    <div class="schedules">
+        <div class="schedules_list_box">
+            <p style="color:#fc4984;margin: 20px auto;">提示：当前影片已停止放映</p>
+        </div>
+    </div>
+    {/if}
 </div>
 {load href="/tp5/public/static/js/jquery.js"}
 {load href="/tp5/public/static/js/swiper.min.js"}
@@ -446,6 +464,9 @@
     var priceSelected = '';
     var nowPage = 0;
     var sid = 0;
+    var nowDate = '';
+    var closeFor;
+    var submitObj = {};
 
     $('.list_content').hover(function(){
         $('.list_content').removeClass('actived');
@@ -486,17 +507,19 @@
     $('.date_list').html(str);
 
     // 排期场次列表
-    getData(dateFormate(new Date().getTime()).all)
+    nowDate = dateFormate(new Date().getTime()).all
+    getData(nowDate)
     var t = setInterval(function() {
-        getData(dateFormate(new Date().getTime()).all)
+        getData(nowDate)
     },10000)
     $('.date_list').on('click','li',function(){
         clearInterval(t);
         $('.date_list li').removeClass('selected');
         $(this).addClass('selected');
-        getData($(this).data('data'))
+        nowDate = dateFormate($(this).data('data')).all
+        getData(nowDate)
         t = setInterval(function() {
-            getData(dateFormate($(this).data('data')))
+            getData(nowDate)
         },10000)
     })
     function getData(date) {
@@ -650,60 +673,70 @@
         var nowSeatNum = seatStr.substr(0, seatStr.length-1);
         var str='<p>'+res.data.mName+'</p><p>'+nowSeatNum+'</p><p>共'+res.data.ticketNum+'张</p><p>总计：'+res.data.price+'元</p><button type="button" class="btn btn-info" id="deleteOrder" onclick="deleteOrder()">退票</button><span id="hiddenId" style="display: none;">'+res.data.id+'</span>'
         $('.order_list_box').html(str);
+
+        $('.seat_num_list').html('未选择座位');
+        $('.ticket_num').html('');
+        $('.ticket_price').html('');
     }
 
     /**
      * 确定并生成订单
      * */
-    function submitForm() {
-        $('.qrcode').show()
-        var data = {
-            sid: sid,
-            mName: "{$data['title']}",
-            seat: '',
-            ticketNum: seat_list.length,
-            price: $('.ticket_price').html()
-        }
-        var str=''
-        seat_list.map(function(item){
-            str+=(item.row+1)+'-'+(item.column+1)+','
-        })
-        data.seat=str.substr(0, str.length-1)
-        $('.seat_num_list').html('未选择座位');
-        $('.ticket_num').html('');
-        $('.ticket_price').html('');
-        $('.submit').addClass('disabled');
-        $.ajax({
-            url: "{:url('order/add')}",
-            type: 'post',
-            data: data,
-            success:function(res){
-                if(res.code === 200){
-                    $('.seat_list_box').hide();
-                    $('.schedules_list_box').hide();
-                    $('.order_create').show();
-
-                    $('.orderId').html('订单号：'+res.data.id)
-
-                    $('#qrcode').qrcode({
-                        render: "canvas", //也可以替换为table
-                        width: 250,
-                        height: 250,
-                        text: "http://localhost/index/order/orderPay?id="+res.data.id
-                    });
-
-                    setTimeout(function(){
-                        $('.qrcode').hide()
-                        createQrcode(res)
-                    },50000)
-                } else if(res.code === 401) {
-                    alert(res.data)
-                    setTimeout(function(){
-                        window.location.href="{:url('login/index')}";
-                    }, 2000)
-                }
+    function submitForm(data) {
+        console.log($('.submit').attr('class'))
+        if ($('.submit').attr('class').indexOf('disabled') > -1) {
+            $('.qrcode').show()
+            var data = {
+                sid: sid,
+                mName: "{$data['title']}",
+                seat: '',
+                ticketNum: seat_list.length,
+                price: $('.ticket_price').html(),
+                status: data ? data : 1
             }
-        })
+            var str = ''
+            seat_list.map(function (item) {
+                str += (item.row + 1) + '-' + (item.column + 1) + ','
+            })
+            data.seat = str.substr(0, str.length - 1)
+            $('.submit').addClass('disabled');
+            $.ajax({
+                url: "{:url('order/add')}",
+                type: 'post',
+                data: data,
+                success: function (res) {
+                    if (res.code === 200) {
+                        $('.orderId').html('订单号：' + res.data.id)
+
+                        $('#qrcode').qrcode({
+                            render: "canvas", //也可以替换为table
+                            width: 250,
+                            height: 250,
+                            text: "http://localhost/index/order/orderPay?id=" + res.data.id
+                        });
+
+                        $('.order_desc').html('说明：该码为支付码')
+
+                        closeFor = setTimeout(function () {
+                            submitForm(2)
+                            $('.seat_list_box').hide();
+                            $('.schedules_list_box').hide();
+                            $('.order_create').show();
+
+                            $('.qrcode').hide()
+                            createQrcode(res)
+                        }, 10000)
+                    } else if (res.code === 401) {
+                        alert(res.data)
+                        setTimeout(function () {
+                            window.location.href = "{:url('login/index')}";
+                        }, 0)
+                    }
+                }
+            })
+        } else {
+
+        }
     }
 
     /**
@@ -741,6 +774,17 @@
         }
         dateObj.all = dateObj.year+'-'+(dateObj.month>9?dateObj.month:'0'+dateObj.month)+'-'+(dateObj.day>9?dateObj.day:'0'+dateObj.day)
         return dateObj
+    }
+
+    /**
+     * 关闭二维码
+     */
+    function closeIcon(){
+        console.log(submitObj)
+        clearTimeout(closeFor)
+
+        $('.qrcode').hide()
+        $('#qrcode').html('')
     }
 
 </script>

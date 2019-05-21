@@ -88,14 +88,16 @@ class Schedules extends Controller
      */
     public function edit(){
         $where = [];
+        $condition = [];
         $request=Request::instance()->get();
         if(empty($request['mid'])){
             $this->error("参数错误","movies/show");
         }else{
             $where['a.id'] = $request['mid'];
+            $condition['i.id'] = $request['id'];
         }
         $data = model('Movies')->show($where);
-        $dataList = model('Schedules')->show($where);
+        $dataList = model('Schedules')->show($condition);
         $this->assign('data',$data);
         $this->assign('dataList',$dataList);
         return view('edit');

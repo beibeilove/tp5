@@ -130,11 +130,11 @@
         <div class="swiper-container">
             <div class="swiper-wrapper">
                 {volist name="now" id="value"}
-                <div class="swiper-slide" onclick="turnTo(`{:url('movies/detail')}?id={$value['mid']}`)">
+                <div class="swiper-slide" onclick="turnTo(`{:url('movies/detail')}?type=1&id={$value['mid']}`)">
                     <div class="list_content">
                         <img src="/tp5/public/{$value['imgurl']}" alt="" width="160">
                         <p title="{$value['title']}">{$value['title']}</p>
-                        <div><a href="{:url('movies/detail')}?id={$value['mid']}">选座购票</a></div>
+                        <div><a href="{:url('movies/detail')}?type=1&id={$value['mid']}">选座购票</a></div>
                     </div>
                 </div>
                 {/volist}
@@ -152,11 +152,11 @@
         <div class="swiper-container">
             <div class="swiper-wrapper">
                 {volist name="future" id="value"}
-                <div class="swiper-slide" onclick="turnTo(`{:url('movies/detail')}?id={$value['mid']}`)">
+                <div class="swiper-slide" onclick="turnTo(`{:url('movies/detail')}?type=2&id={$value['mid']}`)">
                     <div class="list_content">
                         <img src="/tp5/public/{$value['imgurl']}" alt="" width="160">
                         <p title="{$value['title']}">{$value['title']}</p>
-                        <div><a href="{:url('movies/detail')}?id={$value['mid']}">查看详情</a></div>
+                        <div><a href="{:url('movies/detail')}?type=2&id={$value['mid']}">查看详情</a></div>
                     </div>
                 </div>
                 {/volist}
@@ -169,15 +169,15 @@
         </div>
     </div>
     <div class="type_content">
-        <h3>已下架</h3>
+        <h3>经典推荐</h3>
         <div class="swiper-container">
             <div class="swiper-wrapper">
                 {volist name="passed" id="value"}
-                <div class="swiper-slide" onclick="turnTo(`{:url('movies/detail')}?id={$value['mid']}`)">
+                <div class="swiper-slide" onclick="turnTo(`{:url('movies/detail')}?type=3&id={$value['mid']}`)">
                     <div class="list_content">
                         <img src="/tp5/public/{$value['imgurl']}" alt="" width="160">
                         <p title="{$value['title']}">{$value['title']}</p>
-                        <div><a href="{:url('movies/detail')}?id={$value['mid']}">查看详情</a></div>
+                        <div><a href="{:url('movies/detail')}?type=3&id={$value['mid']}">查看详情</a></div>
                     </div>
                 </div>
                 {/volist}
@@ -201,7 +201,6 @@
         $('.list_content').removeClass('actived');
     })
     $('.swiper-container').hover(function(){
-        console.log(this)
         $(this).children('.swiper-button-next').show()
         $(this).children('.swiper-button-prev').show()
     }, function(){
@@ -226,6 +225,7 @@
     });
 
     function turnTo(url) {
+        console.log(url)
         window.location.href=url
     }
 

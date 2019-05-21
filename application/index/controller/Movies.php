@@ -11,12 +11,9 @@ class Movies extends Controller
     }
 
     /*
-     * 影片列表页
+     * 影片搜索页
      */
     public function index() {
-        /*
-         * 正在热映
-         */
         $condition = '1=1';
         $request=Request::instance()->get();
         if (!empty($request['search'])){
@@ -26,7 +23,30 @@ class Movies extends Controller
         }else{
             $this->assign('searchData','');
         }
-        $data = model('movies')->showListName($condition, 'a.*,group_concat(j.posname) as typename');
+        if (!empty($request['type'])) {
+            switch ($request['type']) {
+                case 1:
+                    $condition .= " and a.releaseTime between DATE_SUB(NOW(),INTERVAL 30 day) and now()";
+                    $this->assign('type', 1);
+                    break;
+                case 2:
+                    $condition .= " and a.releaseTime > NOW()";
+                    $this->assign('type', 2);
+                    break;
+                case 3:
+                    $condition .= " and UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(a.releaseTime) >= 30*24*3600";
+                    $this->assign('type', 3);
+                    break;
+
+            }
+        } else {
+            $this->assign('type', 0);
+        }
+        $data = model('movies')->showListName($condition, 'a.*,group_concat(j.posname) as typename,(
+	CASE WHEN a.releaseTime between DATE_SUB(NOW(),INTERVAL 30 day) and now() THEN 1
+			WHEN a.releaseTime > NOW() THEN 2
+			WHEN UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(a.releaseTime) >= 30*24*3600 THEN 3 END
+) AS type');
 
         $this->assign('data', $data);
         return view('index');
@@ -50,6 +70,7 @@ class Movies extends Controller
         $schedules = model('Schedules')->showList($condition);
         $this->assign('data', $data);
         $this->assign('schedules', $schedules);
+        $this->assign('type', $request['type']);
         return view('detail');
     }
 
