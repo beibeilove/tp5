@@ -15,7 +15,7 @@ class Movies extends Controller
      */
     public function index() {
         /*
-         * 正在热映
+         * 影片搜索页
          */
         $condition = '1=1';
         $request=Request::instance()->get();
