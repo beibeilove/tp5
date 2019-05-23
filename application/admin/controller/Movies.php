@@ -339,7 +339,7 @@ class Movies extends Controller
             }
             $new_file = $new_file . time() . ".{$type}";
             if (file_put_contents($new_file, base64_decode(str_replace($result[1], '', $base64_image_content)))) {
-                $full_file = $_SERVER['HTTP_HOST'].'/tp5/public/'.$new_file;
+                $full_file = 'http://47.105.148.121'.'/tp5/public/'.$new_file;
                 return json(['status' => 1, 'msg' => '文件上传成功', 'data' => ['imgurl' => $new_file, 'fullurl' => $full_file]]);
             } else {
                 return json(['status' => 2, 'msg' => '文件上传失败']);
