@@ -57,6 +57,24 @@
         .nuomi-red{
             color: #fc4984;
         }
+
+        .type_content_title{
+            margin: 20px auto;
+            display: flex;
+        }
+        .type_content_title li{
+            padding: 5px 10px;
+        }
+        .type_content_title li.actived{
+            background: #fc4984;
+        }
+        .type_content_title li.actived a,.type_content_title li.actived a:hover,.type_content_title li.actived a:link,.type_content_title li.actived a:active,.type_content_title li.actived a:visited{
+            color: #fff;
+        }
+        .type_content_title li a,.type_content_title li a:hover,.type_content_title li a:link,.type_content_title li a:active,.type_content_title li a:visited{
+            color: #000;
+        }
+
     </style>
 </head>
 <body>
@@ -98,9 +116,15 @@
 </div>
 <div class="content" style="width: 1200px;margin: auto;">
     <div class="type_content">
+        <ul class="type_content_title">
+            <li {if condition="empty($type)"}class="actived"{/if}><a href="{:url('movies/index')}">全部</a></li>
+            <li {if condition="$type==1"}class="actived"{/if}><a href="{:url('movies/index')}?type=1">正在热映</a></li>
+            <li {if condition="$type==2"}class="actived"{/if}><a href="{:url('movies/index')}?type=2">即将上映</a></li>
+            <li {if condition="$type==3"}class="actived"{/if}><a href="{:url('movies/index')}?type=3">经典推荐</a></li>
+        </ul>
         <div class="type_content_list">
             {volist name="data" id="value"}
-            <a href="{:url('movies/detail')}?id={$value['id']}" class="type_list_content">
+            <a href="{:url('movies/detail')}?type={$value['type']}&id={$value['id']}" class="type_list_content">
                 <div class="left_con">
                     <img src="/tp5/public/{$value['imgurl']}" alt="" width="130">
                 </div>
@@ -132,6 +156,10 @@
         $(this).addClass('actived');
     }, function(){
         $('.list_content').removeClass('actived');
+    })
+    $('.type_content_title').on('click','li',function(){
+        $('.type_content_title li').removeClass('actived')
+        $(this).addClass('actived')
     })
     var swiper = new Swiper('.swiper-container', {
         slidesPerView: 7,

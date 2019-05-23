@@ -67,7 +67,7 @@ class Order extends Controller
         }else{
             $condition['price'] = $request['price'];
         }
-        $condition['status'] = 1;
+        $condition['status'] = $request['status'];
         $data=model('Order')->add($condition);
         if ($data) {
             $code = 200;
@@ -93,6 +93,7 @@ class Order extends Controller
         }else{
             $where['id'] = $request['id'];
         }
+        $where['status'] = 2;
         $data = model('Order')->showDetail($where);
 
         if ($data) {
@@ -118,7 +119,7 @@ class Order extends Controller
         }else{
             $where['sid'] = $request['sid'];
         }
-        $where['status'] = 1;
+        $where['status'] = 2;
         $data = model('Order')->showList($where);
 
         if ($data) {
@@ -198,6 +199,7 @@ class Order extends Controller
         $where = [];
         $where1=[];
         $condition=[];
+        $condition1=[];
         $request = Request::instance()->get();
         if(empty($request['id'])){
             return json(['data'=>'订单无效','code'=>20001]);
@@ -211,9 +213,10 @@ class Order extends Controller
         $condition['available'] = $ticketNum['available']+$data['ticketNum'];
         $update=model('schedules')->edit($condition, ['id' => $data['sid']]);
 
-        $condition1['status'] = 2;
+        $condition1['status'] = 1;
+
         $update1=model('order')->edit($condition1, $where);
-        if ($update && $update1) {
+        if ($update) {
             $code = 200;
         } else {
             $code = 20001;
