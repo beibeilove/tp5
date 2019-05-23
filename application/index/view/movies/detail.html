@@ -447,6 +447,12 @@
         <h3><span>确认订单信息</span><span class="order_id" style="font-size: 14px;float: right;margin-right: 20px;"></span></h3>
         <div class="order_list_box"></div>
     </div>
+    {elseif condition="$type == 2"/}
+    <div class="schedules">
+        <div class="schedules_list_box">
+            <p style="color:#fc4984;margin: 20px auto;">提示：当前影片暂未上映</p>
+        </div>
+    </div>
     {else/}
     <div class="schedules">
         <div class="schedules_list_box">
