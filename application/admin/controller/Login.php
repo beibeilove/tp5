@@ -34,7 +34,7 @@ class Login extends Controller
         if(empty($data)){
             return $this->error('用户名或密码不正确', url('Login/index'));
         }else{
-            session::set("adminUserId","1");
+            session::set("adminUserId",$data['id']);
             session::set('userName',$condition['username']);
             return $this->success('登录成功', url('index/index'));
         }

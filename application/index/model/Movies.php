@@ -7,7 +7,7 @@ class Movies extends Model
     protected $table = "movies";
 
     /*
-     * 查询电影列表
+     * 查询首页电影列表
      * type 9 即将上线  8 正在热映
      */
     public function showList($where = [], $field = "*", $order = "a.id desc")
