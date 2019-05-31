@@ -11,7 +11,7 @@ class Position extends Model
      * */
     public function showList($where = array(), $field = "*",$order='posid desc')
     {
-        return Db::table($this->table)->field($field)->where($where)->order($order)->paginate(10);
+        return Db::table($this->table)->field($field)->where($where)->order($order)->select();
     }
 
     /*

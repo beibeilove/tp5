@@ -398,7 +398,7 @@
             </div>
         </div>
     </div>
-    {if condition="$type == 1"}
+    {if condition="$type != 3"}
     <ul class="step_list">
         <li class="selected">1.选择影片场次</li>
         <li>2.选定座位</li>
@@ -447,12 +447,11 @@
         <h3><span>确认订单信息</span><span class="order_id" style="font-size: 14px;float: right;margin-right: 20px;"></span></h3>
         <div class="order_list_box"></div>
     </div>
-    {elseif condition="$type == 2"/}
-    <div class="schedules">
-        <div class="schedules_list_box">
-            <p style="color:#fc4984;margin: 20px auto;">提示：当前影片暂未上映</p>
-        </div>
-    </div>
+    <!--<div class="schedules">-->
+        <!--<div class="schedules_list_box">-->
+            <!--<p style="color:#fc4984;margin: 20px auto;">提示：当前影片暂未上映</p>-->
+        <!--</div>-->
+    <!--</div>-->
     {else/}
     <div class="schedules">
         <div class="schedules_list_box">
@@ -731,7 +730,7 @@
 
                             $('.qrcode').hide()
                             createQrcode(res)
-                        }, 10000)
+                        }, 5000)
                     } else if (res.code === 401) {
                         alert(res.data)
                         setTimeout(function () {
