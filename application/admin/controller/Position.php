@@ -39,7 +39,7 @@ class Position extends Controller
         }else{
             $searcharr['posname'] = "";
         }
-        $data = model("Position")->showList($where);
+        $data = model("Position")->showList1($where);
         $this->assign("searcharr",$searcharr);
         $this->assign("data",$data);
         return view("show");

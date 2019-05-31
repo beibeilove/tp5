@@ -15,6 +15,14 @@ class Position extends Model
     }
 
     /*
+     * 查询类别列表
+     * */
+    public function showList1($where = array(), $field = "*",$order='posid desc')
+    {
+        return Db::table($this->table)->field($field)->where($where)->order($order)->paginate(10);
+    }
+
+    /*
      * 查询单条类别
      * */
     public function show($where = [], $field = "*")
