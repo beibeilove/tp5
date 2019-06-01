@@ -27,9 +27,6 @@ class Order extends Controller
         }else{
             $searcharr['status'] = 0;
         }
-        var_dump(Session::get('adminUserId'));
-
-        $where['uid'] = Session::get('adminUserId');
 
         $data = model("order")->showList1($where);
 
