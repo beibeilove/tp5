@@ -32,7 +32,7 @@ class Reg extends Controller
             if(!empty($data)){
                 Session::set("frontUserId","1");
                 Session::set('frontUsername',$condition['username']);
-                Session::set('frontId',$data['id']);
+                Session::set('frontId',$data);
                 $this->success("用户名添加成功",url("Index/index"));
             }else{
                 $this->error("用户名添加失败",url("Reg/index"));

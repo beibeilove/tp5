@@ -59,8 +59,6 @@ class Order extends Controller
             return json(['data'=>'票数为空','code'=>20001]);
         }else{
             $condition['ticketNum'] = $request['ticketNum'];
-            $ticketNum=model('schedules')->show($where1,'i.available');
-            $condition1['available'] = $ticketNum['available'] - $condition['ticketNum'];
         }
         if(empty($request['price'])){
             return json(['data'=>'票价为空','code'=>20001]);
@@ -71,7 +69,6 @@ class Order extends Controller
         $data=model('Order')->add($condition);
         if ($data) {
             $code = 200;
-            model('schedules')->edit($condition1, $where);
         } else {
             $code = 20001;
         }
@@ -93,7 +90,7 @@ class Order extends Controller
         }else{
             $where['id'] = $request['id'];
         }
-        $where['status'] = 2;
+        $where['status'] = 1;
         $data = model('Order')->showDetail($where);
 
         if ($data) {
@@ -193,6 +190,42 @@ class Order extends Controller
     }
 
     /*
+     * 订单编辑
+     */
+    public function update() {
+        $where = [];
+        $where1=[];
+        $condition=[];
+        $condition1=[];
+        $request = Request::instance()->get();
+        if(empty($request['id'])){
+            return json(['data'=>'订单无效','code'=>20001]);
+        }else{
+            $where['id'] = $request['id'];
+        }
+        $data = model('order')->showDetail($where);
+        $where1['i.id'] = $data['sid'];
+        $ticketNum=model('schedules')->show($where1,'i.available');
+
+        $condition['available'] = $ticketNum['available']-$data['ticketNum'];
+        $update=model('schedules')->edit($condition, ['id' => $data['sid']]);
+
+        $condition1['status'] = $request['status'];
+
+        $update1=model('order')->edit($condition1, $where);
+        if ($update) {
+            $code = 200;
+        } else {
+            $code = 20001;
+        }
+        $update = [
+            'code' => $code,
+            'data' => $update1
+        ];
+        return json($update);
+    }
+
+    /*
      * 订单退订
      */
     public function delete() {
@@ -213,7 +246,7 @@ class Order extends Controller
         $condition['available'] = $ticketNum['available']+$data['ticketNum'];
         $update=model('schedules')->edit($condition, ['id' => $data['sid']]);
 
-        $condition1['status'] = 1;
+        $condition1['status'] = $request['status'];
 
         $update1=model('order')->edit($condition1, $where);
         if ($update) {
