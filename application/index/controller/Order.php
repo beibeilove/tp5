@@ -213,7 +213,7 @@ class Order extends Controller
         $condition['available'] = $ticketNum['available']+$data['ticketNum'];
         $update=model('schedules')->edit($condition, ['id' => $data['sid']]);
 
-        $condition1['status'] = 1;
+        $condition1['status'] = 2;
 
         $update1=model('order')->edit($condition1, $where);
         if ($update) {

@@ -27,7 +27,7 @@ class User extends Model
      * */
     public function add($condition = [])
     {
-        return Db::table($this->table)->insert($condition);
+        return Db::table($this->table)->insertGetId($condition);
     }
 
     /*
