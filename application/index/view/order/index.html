@@ -176,7 +176,7 @@
         $.ajax({
             url: "{:url('order/delete')}",
             type: 'get',
-            data: {id: id},
+            data: {id: id,status: 2},
             success: function(res){
                 changeOrderStatus(1)
                 console.log(res)
